@@ -1,63 +1,73 @@
-CC	=	gcc
+CC		=	gcc
 
-SHELL := /bin/bash
+SHELL	:= /bin/bash
 
-BLUE = \033[1;34m
-CYAN = \033[1;36m
-ORANGE = \033[38;5;214m
-GREEN = \033[1;32m
-RESET = \033[0m
-UP1 = \033[1F
-BEGIN = \033[0G
-SAVE = \0337
-RESTORE = \0338
-INSET = $(BEGIN)$(GREEN)+ $(BLUE)
+RED		= \033[1;31m
+BLUE	= \033[1;34m
+CYAN	= \033[1;36m
+ORANGE	= \033[1;38;5;214m
+GREEN	= \033[1;32m
+RESET	= \033[0m
+UP1		= \033[1F
+BEGIN	= \033[0G
+SAVE	= \0337
+RESTORE	= \0338
+INSET	= $(BEGIN)$(GREEN)+ $(BLUE)
 
-SRCS =
+SRCS	=	main.c
 
-INC	=	-I ./include
+INC		= -I ./include
+
+LIBFT	= libft/libft.a
+
+MLX		= MLX42/libmlx42.a
 
 ifdef $(TESTFLAGS)
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -g -fsanitize=address
 else
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror
 endif
 
-NAME = libft.a
+NAME	= fdf
 
-OBJS = $(patsubst %.c, obj/%.o, $(SRCS))
+OBJS	= $(patsubst %.c, obj/%.o, $(SRCS))
 
 all: heading comp
 
-.PHONY: heading comp compdone done clean fclean re
+.PHONY: heading comp re rere
 
-comp: $(OBJS) compdone $(NAME) done
+comp: $(NAME)
 
 heading:
-	@printf "$(CYAN)---< $(ORANGE)Duco's FdF $(CYAN)>---\n"; \
-
-compdone:
-	@printf "$(INSET)$(BLUE)Compiling - $(GREEN)%-29s $(CYAN)%-10s$(RESET)\n" "Done!" ""; \
-
-done:
-	@printf "$(BEGIN)$(CYAN)-------< $(ORANGE)Done $(CYAN)>-------\n$(RESET)"; \
+	@printf "$(CYAN)----< $(ORANGE)Duco's FdF $(CYAN)>----\n"; \
 
 obj/%.o: src/%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(INC) -c $^ -o $@
-	@printf "$(INSET)$(BLUE)Compiling - $(GREEN)%-29s $(CYAN)%-10s$(RESET)\n" "$^" ""
-	@$(eval COMP += $@)
+	@printf "$(INSET)$(BLUE)Compiling: $(GREEN)%-29s $(CYAN)%-10s$(RESET)\n" "$^" ""
 
-$(NAME): $(OBJS)
-	@printf "$(INSET)"
-	@ar rs $(NAME) $(OBJS)
+$(NAME): $(MLX) $(LIBFT) $(OBJS)
+	@$(CC) $(CFLAGS) $(INC) $(LIBFT) $(MLX) $(OBJS) -o $@
+	@printf "$(INSET)Compiling: Program $@\n"
+
+$(LIBFT):
+	@make -C libft/ SILENT=1
+
+$(MLX):
+	@make -C MLX42/
 
 clean:
 	@rm -rf obj
 	@printf "\033[1;31m- $(BLUE)Removed object files\n$(RESET)"
 
 fclean: clean
-	@rm -f libft.a
-	@printf "\033[1;31m- $(BLUE)Removed archive file\n$(RESET)"
+	@rm $(NAME)
+	@printf "\033[1;31m- $(BLUE)Removed program file\n$(RESET)"
+
+depclean:
+	@make -C libft/ fclean
+	@make -C MLX42/ fclean
 
 re: heading fclean comp
+
+rere: heading depclean fclean comp
