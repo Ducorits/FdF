@@ -46,8 +46,8 @@ obj/%.o: src/%.c
 	@$(CC) $(CFLAGS) $(INC) -c $^ -o $@
 	@printf "$(INSET)$(BLUE)Compiling: $(GREEN)%-29s $(CYAN)%-10s$(RESET)\n" "$^" ""
 
-$(NAME): $(MLX) $(LIBFT) $(OBJS)
-	@$(CC) $(CFLAGS) $(INC) $(LIBFT) $(MLX) $(OBJS) -o $@
+$(NAME): $(OBJS) $(MLX) $(LIBFT)
+	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIBFT) $(MLX) -o $@
 	@printf "$(INSET)Compiling: Program $@\n"
 
 $(LIBFT):
@@ -56,12 +56,14 @@ $(LIBFT):
 $(MLX):
 	@make -C MLX42/
 
+run_test:
+
 clean:
 	@rm -rf obj
 	@printf "\033[1;31m- $(BLUE)Removed object files\n$(RESET)"
 
 fclean: clean
-	@rm $(NAME)
+	@rm -rf $(NAME)
 	@printf "\033[1;31m- $(BLUE)Removed program file\n$(RESET)"
 
 depclean:
