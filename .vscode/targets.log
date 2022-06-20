@@ -1,0 +1,393 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 3.81
+# Copyright (C) 2006  Free Software Foundation, Inc.
+# This is free software; see the source for copying conditions.
+# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+# This program built for i386-apple-darwin11.3.0
+ 
+
+# Make data base, printed on Mon Jun 20 16:20:25 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# automatic
+@F = $(notdir $@)
+# makefile
+CURDIR := /Users/dritsema/Documents/Codam/FdF
+# makefile (from `Makefile', line 3)
+SHELL := /bin/bash
+# environment
+MANPAGER = sh -c 'col -bx | bat -l man -p'
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# makefile (from `Makefile', line 23)
+MLX = MLX42/libmlx42.a
+# environment
+BAT_PAGER = less -RF
+# environment
+_ = /usr/bin/make
+# makefile (from `Makefile', line 28)
+CFLAGS = -Wall -Wextra -Werror
+# makefile (from `Makefile', line 6)
+BLUE = \033[1;34m
+# makefile (from `Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# makefile (from `Makefile', line 17)
+SRCS = main.c parsemap.c
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# makefile (from `Makefile', line 33)
+OBJS = $(patsubst %.c, obj/%.o, $(SRCS))
+# environment
+P9K_SSH = 0
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000bh7m002w1x/T/vscode-ipc-fcdf72bf-3842-4a32-a569-494e41f2097c.sock
+# environment
+VSCODE_CWD = /
+# environment
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.2gFFQsyl1w/Render
+# environment
+PATH = /Users/dritsema/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/opt/X11/bin:/Users/dritsema/.brew/opt/fzf/bin
+# makefile (from `Makefile', line 12)
+BEGIN = \033[0G
+# environment
+LSCOLORS = Gxfxcxdxbxegedabagacad
+# makefile (from `Makefile', line 11)
+UP1 = \033[1F
+# makefile (from `Makefile', line 14)
+RESTORE = \0338
+# environment
+VSCODE_LOG_STACK = false
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# default
+.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+# makefile (from `Makefile', line 15)
+INSET = $(BEGIN)$(GREEN)+ $(BLUE)
+# environment
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.NBv1IQTkPh/Listeners
+# automatic
+%F = $(notdir $%)
+# environment
+HOMEBREW_TEMP = /tmp/dritsema/Homebrew/Temp
+# environment
+DISPLAY = /private/tmp/com.apple.launchd.N1AzWW5J2d/org.xquartz:0
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /Users/dritsema/Documents/Codam/FdF
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# makefile (from `Makefile', line 9)
+GREEN = \033[1;32m
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /Users/dritsema
+# default
+MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
+# environment
+VSCODE_CODE_CACHE_PATH = /Users/dritsema/Library/Application Support/Code/CachedData/30d9c6cd9483b2cc586687151bcbcd635f373630
+# environment
+LOGNAME = dritsema
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+ZSH = /Users/dritsema/.oh-my-zsh
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+XPC_FLAGS = 0x0
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+HOMEBREW_CACHE = /tmp/dritsema/Homebrew/Caches
+# environment
+SHLVL = 1
+# makefile (from `Makefile', line 21)
+LIBFT = libft/libft.a
+# makefile (from `Makefile', line 1)
+CC = gcc
+# default
+MAKE_VERSION := 3.81
+# environment
+USER = dritsema
+# makefile
+.DEFAULT_GOAL := all
+# makefile (from `Makefile', line 31)
+NAME = fdf
+# makefile (from `Makefile', line 8)
+ORANGE = \033[1;38;5;214m
+# environment
+LESS = -R
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# default
+MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+# makefile (from `Makefile', line 19)
+INC = -I ./include
+# default
+.VARIABLES := 
+# environment
+TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000bh7m002w1x/T/
+# automatic
+*F = $(notdir $*)
+# environment
+VSCODE_IPC_HOOK = /Users/dritsema/Library/Application Support/Code/1.68.1-main.sock
+# makefile (from `Makefile', line 5)
+RED = \033[1;31m
+# makefile
+MAKEFLAGS = Rrqp
+# environment
+MFLAGS = -Rrqp
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000003.Electron
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# makefile (from `Makefile', line 7)
+CYAN = \033[1;36m
+# automatic
++F = $(notdir $+)
+# environment
+__CF_USER_TEXT_ENCODING = 0x1703D:0x0:0x0
+# environment
+COMMAND_MODE = unix2003
+# default
+MAKEFILES := 
+# automatic
+<F = $(notdir $<)
+# environment
+PAGER = less
+# environment
+LC_ALL = C
+# makefile (from `Makefile', line 10)
+RESET = \033[0m
+# environment
+SECURITYSESSIONID = 186a8
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# default
+.INCLUDE_DIRS = /usr/local/include
+# environment
+MAKELEVEL := 0
+# makefile (from `Makefile', line 13)
+SAVE = \0337
+# environment
+LANG = C
+# environment
+VSCODE_PID = 881
+# variable set hash-table stats:
+# Load=92/1024=9%, Rehash=0, Collisions=11/132=8%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 16777229, inode 700667): 16 files, no impossibilities.
+# src (device 16777229, inode 700918): No files, no impossibilities so far.
+
+# 16 files, no impossibilities in 2 directories.
+
+# Implicit Rules
+
+obj/%.o: src/%.c
+#  commands to execute (from `Makefile', line 45):
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) $(INC) -c $^ -o $@
+	@printf "$(INSET)$(BLUE)Compiling: $(GREEN)%-29s $(CYAN)%-10s$(RESET)\n" "$^" ""
+	
+
+# 1 implicit rules, 0 (0.0%) terminal.
+
+# Files
+
+all: heading comp
+#  Command-line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+
+.PHONY: heading comp re rere
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+comp: fdf
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+MLX42/libmlx42.a:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 57):
+	@make -C MLX42/
+	
+
+# Not a target:
+obj/main.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-20 11:21:05
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+run_test:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+libft/libft.a:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 54):
+	@make -C libft/ SILENT=1
+	
+
+fclean: clean
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 66):
+	@rm -rf $(NAME)
+	@printf "\033[1;31m- $(BLUE)Removed program file\n$(RESET)"
+	
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+rere: heading depclean fclean comp
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+re: heading fclean comp
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+clean:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 62):
+	@rm -rf obj
+	@printf "\033[1;31m- $(BLUE)Removed object files\n$(RESET)"
+	
+
+depclean:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 70):
+ 
+	@make -C libft/ fclean
+	@make -C MLX42/ fclean
+	
+
+heading:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `'
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := heading
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := 
+# automatic
+# | := 
+# automatic
+# < := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=5/13=38%
+#  commands to execute (from `Makefile', line 42):
+	@printf "$(CYAN)----< $(ORANGE)Duco's FdF $(CYAN)>----\n"; \
+	
+
+fdf: obj/main.o obj/parsemap.o MLX42/libmlx42.a libft/libft.a
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 50):
+	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIBFT) $(MLX) -o $@
+	@printf "$(INSET)Compiling: Program $@\n"
+	
+
+# Not a target:
+obj/parsemap.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=18/1024=2%, Rehash=0, Collisions=0/51=0%
+# VPATH Search Paths
+
+# No `vpath' search paths.
+
+# No general (`VPATH' variable) search path.
+
+# # of strings in strcache: 1
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
+
+# Finished Make data base on Mon Jun 20 16:20:25 2022
+
+ 

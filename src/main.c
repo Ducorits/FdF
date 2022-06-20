@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:44:57 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/06/19 22:42:09 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/06/20 16:34:35 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,17 @@
 
 int	main(int argc, char **argv)
 {
-	int		fd;
-	char	*line;
+	t_fdf	fdf;
 
 	if (argc == 2)
 	{
-		// ft_printf("Argument was given.\nNow what to do with\n%s?\n", argv[1]);
-		fd = open(argv[1], O_RDONLY);
-		line = (char *)1;
-		while (line)
+		if (check_errors(argv[1]))
 		{
-			line = get_next_line(fd);
-			if (line)
-			{
-				ft_printf("%s", line);
-				free(line);
-			}
+			ft_printf("Not a .fdf file\n");
 		}
+		parse_map(argv[1], &fdf);
 	}
 	else
-		ft_printf("No argument given. or incorrect argument count\n");
+		ft_printf("No argument given. Or incorrect argument count\n");
 	return (0);
 }
