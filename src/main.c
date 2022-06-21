@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:44:57 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/06/20 16:34:35 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/06/21 14:37:09 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		if (check_errors(argv[1]))
+		if (error_check(argv[1]))
 		{
 			ft_printf("Not a .fdf file\n");
 		}

@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   fdf.h                                              :+:    :+:            */
+/*   error_check.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/06/21 14:37:01 by dritsema      ########   odam.nl         */
+/*   Created: 2022/06/21 14:36:07 by dritsema      #+#    #+#                 */
+/*   Updated: 2022/06/21 14:39:33 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "libft.h"
 
-typedef struct s_fdf
+int	error_check(char *file_name)
 {
-	int	**map;
-}	t_fdf;
-void	parse_map(char *file_name, t_fdf *fdf);
-int		error_check(char *file_name);
+	int	i;
+	int	len;
 
-#endif // FDF_H
+	len = ft_strlen(file_name);
+	if (len < 4)
+		return (1);
+	i = len - 4;
+	if (ft_strncmp(&file_name[i], ".fdf", 4))
+		return (1);
+	return (0);
+}

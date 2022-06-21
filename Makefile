@@ -14,7 +14,9 @@ SAVE	= \0337
 RESTORE	= \0338
 INSET	= $(BEGIN)$(GREEN)+ $(BLUE)
 
-SRCS	=	main.c parsemap.c
+SRCS	=	main.c \
+			parsemap.c \
+			error_check.c
 
 INC		= -I ./include
 
