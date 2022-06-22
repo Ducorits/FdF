@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:50:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/06/21 17:25:52 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/06/22 15:13:26 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,36 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-void	fill_map(t_fdf *fdf, char **parsed_strings)
+void	fill_map(t_fdf *fdf, char ***parsed_strings)
 {
 	int	i;
 	int	j;
+	int	line_size;
 
+	i = ft_2darlen((void **)parsed_strings);
+	fdf->map = malloc(sizeof(int *) * i + 1);
+	i = 0;
+	line_size = 0;
+	while (parsed_strings[i])
+	{
+		line_size = ft_2darlen((void **)parsed_strings[i]);
+		fdf->map[i] = malloc(sizeof(int) * line_size);
+		i++;
+	}
+	fdf->map[i] = 0;
 	i = 0;
 	while (parsed_strings[i])
 	{
-
+		j = 0;
 		while (parsed_strings[i][j])
 		{
-
+			fdf->map[i][j] = ft_atoi(parsed_strings[i][j]);
+			j++;
 		}
+		fdf->map[i][j] = 0;
+		i++;
 	}
-
+	print_map(fdf);
 }
 
 void	free_2d_array(void **array)
@@ -57,12 +72,14 @@ int	**parse_line(char *to_parse, t_fdf *fdf)
 	i = 0;
 	while (first_split[i])
 		i++;
-	second_split = malloc(i + 1 * sizeof(char *));
+	second_split = malloc((i + 1) * sizeof(char *));
+	if (!second_split)
+		return (0);
+	second_split[i] = 0;
 	i = 0;
 	while (first_split[i])
 	{
 		second_split[i] = ft_split(first_split[i], ' ');
-		ft_printf("%s\n", second_split[i][0]);
 		i++;
 	}
 	fill_map(fdf, second_split);

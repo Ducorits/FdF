@@ -16,7 +16,8 @@ INSET	= $(BEGIN)$(GREEN)+ $(BLUE)
 
 SRCS	=	main.c \
 			parsemap.c \
-			error_check.c
+			error_check.c \
+			debug.c
 
 INC		= -I ./include
 
@@ -24,7 +25,7 @@ LIBFT	= libft/libft.a
 
 MLX		= MLX42/libmlx42.a
 
-ifdef $(TESTFLAGS)
+ifeq ($(TESTFLAGS), 1)
 CFLAGS	= -Wall -Wextra -Werror -g -fsanitize=address
 else
 CFLAGS	= -Wall -Wextra -Werror
@@ -54,6 +55,7 @@ $(NAME): $(OBJS) $(MLX) $(LIBFT)
 
 $(LIBFT):
 	@make -C libft/ SILENT=1
+	@cp libft/include/libft.h include/libft.h
 
 $(MLX):
 	@make -C MLX42/

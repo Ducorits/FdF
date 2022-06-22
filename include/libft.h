@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/07 12:51:11 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/06/20 16:17:26 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/06/22 14:25:02 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,21 @@
 
 # include <stdlib.h>
 
+// ############### Array ###############
+
+/**
+ * @brief Takes a NULL terminated 2d array and returns
+ * the amount of arrays in it.
+ *
+ * @param pointer The 2d array to measure.
+ * @return The total "length" of the 2d array. */
+int		ft_2darlen(void **pointer);
+
 // ############### Ascii ###############
 
 /**
- * @brief The isalnum() function tests for any character
- * for which isalpha() or isdigit() is true.
+ * @brief Tests for any character
+ * for which ft_isalpha() or ft_isdigit() is true.
  * @param c The character to test.
  * @return 1 if 'c' is an alphanumerical character, 0 otherwise. */
 int		ft_isalnum(int c);

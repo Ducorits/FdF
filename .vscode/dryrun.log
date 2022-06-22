@@ -1,6 +1,23 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/dritsema/Documents/Codam/FdF'
 printf "\033[1;36m----< \033[1;38;5;214mDuco's FdF \033[1;36m>----\n"; \
 
+mkdir -p obj
+gcc -Wall -Wextra -Werror -I ./include -c src/main.c -o obj/main.o
+printf "\033[0G\033[1;32m+ \033[1;34m\033[1;34mCompiling: \033[1;32m%-29s \033[1;36m%-10s\033[0m\n" "src/main.c" ""
+mkdir -p obj
+gcc -Wall -Wextra -Werror -I ./include -c src/parsemap.c -o obj/parsemap.o
+printf "\033[0G\033[1;32m+ \033[1;34m\033[1;34mCompiling: \033[1;32m%-29s \033[1;36m%-10s\033[0m\n" "src/parsemap.c" ""
+mkdir -p obj
+gcc -Wall -Wextra -Werror -I ./include -c src/error_check.c -o obj/error_check.o
+printf "\033[0G\033[1;32m+ \033[1;34m\033[1;34mCompiling: \033[1;32m%-29s \033[1;36m%-10s\033[0m\n" "src/error_check.c" ""
+mkdir -p obj
+gcc -Wall -Wextra -Werror -I ./include -c src/debug.c -o obj/debug.o
+printf "\033[0G\033[1;32m+ \033[1;34m\033[1;34mCompiling: \033[1;32m%-29s \033[1;36m%-10s\033[0m\n" "src/debug.c" ""
+make -C MLX42/
+make -C libft/ SILENT=1
+cp libft/include/libft.h include/libft.h
+gcc -Wall -Wextra -Werror  obj/main.o  obj/parsemap.o  obj/error_check.o  obj/debug.o -I ./include libft/libft.a MLX42/libmlx42.a -o fdf
+printf "\033[0G\033[1;32m+ \033[1;34mCompiling: Program fdf\n"
 make: Leaving directory `/Users/dritsema/Documents/Codam/FdF'
  
