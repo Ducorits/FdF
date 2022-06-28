@@ -6,28 +6,38 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:44:57 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/06/21 14:37:09 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/06/28 17:58:43 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
-#include "MLX42.h"
-#include "libft.h"
-#include "fdf.h"
+#include "../include/MLX42.h"
+#include "../include/libft.h"
+#include "../include/fdf.h"
 
 int	main(int argc, char **argv)
 {
 	t_fdf	fdf;
+	int		parse_ret;
 
 	if (argc == 2)
 	{
 		if (error_check(argv[1]))
 		{
-			ft_printf("Not a .fdf file\n");
+			error_message(-3);
+			return (0);
 		}
-		parse_map(argv[1], &fdf);
+		parse_ret = parse_map(argv[1], &fdf);
+		if (parse_ret < 0)
+		{
+			error_message(parse_ret);
+			return (0);
+		}
+		// print_map(&fdf);
+
+		free(fdf.map);
 	}
 	else
-		ft_printf("No argument given. Or incorrect argument count\n");
+		error_message(-4);
 	return (0);
 }

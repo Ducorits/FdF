@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/07 12:51:11 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/06/22 14:25:02 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/06/28 15:00:06 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,6 +234,17 @@ void	*ft_memmove(void *dst, const void *src, size_t len);
  * @param len The amount of bytes to write.
  * @return The pointer b. */
 void	*ft_memset(void *b, int c, size_t len);
+
+// ############# Miscellaneous #############
+
+/**
+ * @brief Counts the amount of decimal digits in an integer.
+ * This can be used to determine how many bytes an integer
+ * would take if you convert it to an ascii string.
+ * @param num The integer to count the digits for.
+ * @return The amount of decimal digits in the integer.
+ */
+int		ft_numlen(int num);
 
 // ############### ft_printf ###############
 

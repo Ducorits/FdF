@@ -6,108 +6,106 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:50:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/06/22 15:13:26 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/06/28 17:52:56 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include "libft.h"
+#include "../include/fdf.h"
+#include "../include/libft.h"
 #include <fcntl.h>
 #include <unistd.h>
 
-void	fill_map(t_fdf *fdf, char ***parsed_strings)
+int	skip_hex(char *str_map)
 {
 	int	i;
-	int	j;
-	int	line_size;
 
-	i = ft_2darlen((void **)parsed_strings);
-	fdf->map = malloc(sizeof(int *) * i + 1);
-	i = 0;
-	line_size = 0;
-	while (parsed_strings[i])
-	{
-		line_size = ft_2darlen((void **)parsed_strings[i]);
-		fdf->map[i] = malloc(sizeof(int) * line_size);
+	i = 1;
+	while (ft_isalnum(str_map[i]))
 		i++;
-	}
-	fdf->map[i] = 0;
+	return (i);
+}
+
+void	get_map_size(char *str_map, t_fdf *fdf)
+{
+	int	i;
+
 	i = 0;
-	while (parsed_strings[i])
+	fdf->map_height = 0;
+	fdf->map_width = 0;
+	while (str_map[i] != '\n' && str_map[i] != 0)
 	{
-		j = 0;
-		while (parsed_strings[i][j])
+		while (ft_iswhitespace(str_map[i]))
+			i++;
+		if (ft_isdigit(str_map[i]) || str_map[i] == '-' || str_map[i] == '+')
 		{
-			fdf->map[i][j] = ft_atoi(parsed_strings[i][j]);
-			j++;
+			while (ft_isdigit(str_map[i]) || str_map[i] == '-'
+				|| str_map[i] == '+')
+				i++;
+			fdf->map_width += 1;
 		}
-		fdf->map[i][j] = 0;
-		i++;
+		if (str_map[i] == ',')
+			i += skip_hex(&str_map[i]);
 	}
-	print_map(fdf);
-}
-
-void	free_2d_array(void **array)
-{
-	int		i;
-
-	i = 0;
-	while (array[i])
+	while (str_map[i])
 	{
-		free(array[i]);
+		if (str_map[i] == '\n')
+			fdf->map_height += 1;
 		i++;
 	}
-	free(array);
 }
 
-int	**parse_line(char *to_parse, t_fdf *fdf)
+void	fill_map(char *str_map, t_fdf *fdf)
 {
-	int		i;
-	char	**first_split;
-	char	***second_split;
+	int	num;
+	int	numlen;
+	int	i;
+	int	j;
+	int	str_map_len;
 
-	first_split = ft_split(to_parse, '\n');
-	if (!first_split)
-		return (0);
+	get_map_size(str_map, fdf);
+	fdf->map = malloc(sizeof(int) * (fdf->map_width * fdf->map_height));
 	i = 0;
-	while (first_split[i])
-		i++;
-	second_split = malloc((i + 1) * sizeof(char *));
-	if (!second_split)
-		return (0);
-	second_split[i] = 0;
-	i = 0;
-	while (first_split[i])
+	j = 0;
+	str_map_len = ft_strlen(str_map);
+	while (str_map[i] && j < (fdf->map_width * fdf->map_height))
 	{
-		second_split[i] = ft_split(first_split[i], ' ');
-		i++;
+		num = ft_atoi(&str_map[i]);
+		fdf->map[j] = num;
+		j++;
+		numlen = ft_numlen(num);
+		i += numlen;
+		if (str_map[i] == ',')
+			i += skip_hex(&str_map[i]);
+		while (ft_iswhitespace(str_map[i]))
+			i++;
 	}
-	fill_map(fdf, second_split);
-	free_2d_array((void *)first_split);
-	return (0);
 }
 
-void	parse_map(char *file_name, t_fdf *fdf)
+int	parse_map(char *file_name, t_fdf *fdf)
 {
 	int		fd;
-	char	*line;
-	char	*to_parse;
+	int		read_b;
+	char	buff[100001];
+	char	*str_map;
 
+	read_b = 1;
+	str_map = malloc(1);
+	*str_map = 0;
 	fd = open(file_name, O_RDONLY);
-	to_parse = malloc(1);
-	*to_parse = 0;
-	line = "";
-	while (line)
+	if (fd < 0)
+		return (-1);
+	while (read_b > 0)
 	{
-		line = get_next_line(fd);
-		if (line)
-		{
-			to_parse = ft_strjoin_free(to_parse, line);
-			free(line);
-		}
+		ft_bzero(buff, 100001);
+		read_b = read(fd, buff, 100000);
+		if (read_b < 0)
+			return (-2);
+		str_map = ft_strjoin_free(str_map, buff);
+		if (str_map == 0)
+			return (-3);
 	}
-	parse_line(to_parse, fdf);
-	free(to_parse);
+	fill_map(str_map, fdf);
+	free(str_map);
 	close(fd);
-	fdf = fdf + 1;
+	return (1);
 }

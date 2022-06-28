@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Wed Jun 22 19:50:18 2022
+# Make data base, printed on Tue Jun 28 15:39:52 2022
 
 # Variables
 
@@ -52,11 +52,11 @@ OBJS = $(patsubst %.c, obj/%.o, $(SRCS))
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000bh7m002w1x/T/vscode-ipc-8ed5ce18-aac5-455e-9da8-48eedf58f5ef.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000bh7m002w1x/T/vscode-ipc-89705907-52f1-47de-a067-1cfb965344f8.sock
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.CUTYzzA7Mn/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.0tAUvVDfie/Render
 # environment
 PATH = /Users/dritsema/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/opt/X11/bin:/Users/dritsema/.brew/opt/fzf/bin
 # makefile (from `Makefile', line 12)
@@ -76,13 +76,13 @@ ELECTRON_RUN_AS_NODE = 1
 # makefile (from `Makefile', line 15)
 INSET = $(BEGIN)$(GREEN)+ $(BLUE)
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.cjOiSa8kwH/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.1BaEaeRDnf/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
 HOMEBREW_TEMP = /tmp/dritsema/Homebrew/Temp
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.Sxo7WEpvsZ/org.xquartz:0
+DISPLAY = /private/tmp/com.apple.launchd.nQlKnEBxQe/org.xquartz:0
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
@@ -102,7 +102,7 @@ VSCODE_CODE_CACHE_PATH = /Users/dritsema/Library/Application Support/Code/Cached
 # environment
 LOGNAME = dritsema
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 ZSH = /Users/dritsema/.oh-my-zsh
 # environment
@@ -158,7 +158,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.2440
+XPC_SERVICE_NAME = com.microsoft.VSCode.2460
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # makefile (from `Makefile', line 7)
@@ -190,7 +190,7 @@ SAVE = \0337
 # environment
 LANG = C
 # environment
-VSCODE_PID = 14974
+VSCODE_PID = 30544
 # variable set hash-table stats:
 # Load=90/1024=9%, Rehash=0, Collisions=11/129=9%
 
@@ -396,6 +396,6 @@ obj/parsemap.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Wed Jun 22 19:50:18 2022
+# Finished Make data base on Tue Jun 28 15:39:52 2022
 
  
