@@ -6,12 +6,13 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/22 15:00:47 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/06/28 17:12:20 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/06/30 14:25:25 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft.h"
+#include <stdio.h>
 
 void	error_message(int id)
 {

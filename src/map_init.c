@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   parsemap.c                                         :+:    :+:            */
+/*   map_init.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/06/15 13:50:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/06/28 17:52:56 by dritsema      ########   odam.nl         */
+/*   Created: 2022/06/30 13:26:01 by dritsema      #+#    #+#                 */
+/*   Updated: 2022/06/30 15:46:19 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	fill_map(char *str_map, t_fdf *fdf)
 	}
 }
 
-int	parse_map(char *file_name, t_fdf *fdf)
+char	*read_map(char *file_name)
 {
 	int		fd;
 	int		read_b;
@@ -93,19 +93,27 @@ int	parse_map(char *file_name, t_fdf *fdf)
 	*str_map = 0;
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
-		return (-1);
+		fdf_exit("(in map_init)", 1);
 	while (read_b > 0)
 	{
 		ft_bzero(buff, 100001);
 		read_b = read(fd, buff, 100000);
 		if (read_b < 0)
-			return (-2);
+			fdf_exit("(in map_init)", 2);
 		str_map = ft_strjoin_free(str_map, buff);
 		if (str_map == 0)
-			return (-3);
+			fdf_exit("(in map_init)", 3);
 	}
+	close(fd);
+	return (str_map);
+}
+
+int	map_init(char *file_name, t_fdf *fdf)
+{
+	char	*str_map;
+
+	str_map = read_map(file_name);
 	fill_map(str_map, fdf);
 	free(str_map);
-	close(fd);
-	return (1);
+	return (0);
 }

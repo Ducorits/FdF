@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:44:57 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/06/28 17:58:43 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/06/30 16:08:37 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,18 @@
 
 int	main(int argc, char **argv)
 {
-	t_fdf	fdf;
-	int		parse_ret;
+	t_fdf	*fdf;
 
-	if (argc == 2)
-	{
-		if (error_check(argv[1]))
-		{
-			error_message(-3);
-			return (0);
-		}
-		parse_ret = parse_map(argv[1], &fdf);
-		if (parse_ret < 0)
-		{
-			error_message(parse_ret);
-			return (0);
-		}
-		// print_map(&fdf);
-
-		free(fdf.map);
-	}
+	if (argc > 2)
+		fdf_exit("main", 6);
+	else if (argc < 2)
+		fdf_exit("main", 4);
 	else
-		error_message(-4);
+	{
+		error_check(argv[1]);
+		fdf = fdf_init(argv[1]);
+		fdf_loop(fdf);
+		fdf_free(fdf);
+	}
 	return (0);
 }

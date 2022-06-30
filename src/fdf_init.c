@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   error_check.c                                      :+:    :+:            */
+/*   fdf_init.c                                         :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/06/21 14:36:07 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/06/30 15:02:07 by dritsema      ########   odam.nl         */
+/*   Created: 2022/06/30 13:35:01 by dritsema      #+#    #+#                 */
+/*   Updated: 2022/06/30 16:09:06 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "fdf.h"
+#include "../include/fdf.h"
+#include "../include/libft.h"
+#include <unistd.h>
 
-int	error_check(char *file_name)
+t_fdf	*fdf_init(char *file_name)
 {
-	int	i;
-	int	len;
+	t_fdf	*fdf;
 
-	len = ft_strlen(file_name);
-	if (len < 4)
-		fdf_exit("(in error_check)", 5);
-	i = len - 4;
-	if (ft_strncmp(&file_name[i], ".fdf", 4))
-		fdf_exit("(in error_check)", 5);
-	return (0);
+	fdf = malloc(sizeof(t_fdf));
+	map_init(file_name, fdf);
+	fdf->mlx = mlx_init(100, 100, "fdf", 1);
+	return (fdf);
 }

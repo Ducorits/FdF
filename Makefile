@@ -15,15 +15,21 @@ RESTORE	= \0338
 INSET	= $(BEGIN)$(GREEN)+ $(BLUE)
 
 SRCS	=	main.c \
-			parsemap.c \
 			error_check.c \
-			debug.c
+			debug.c \
+			fdf_init.c \
+			map_init.c \
+			fdf_exit.c \
+			fdf_loop.c \
+			fdf_free.c
 
 INC		= -I ./include
 
 LIBFT	= libft/libft.a
 
 MLX		= MLX42/libmlx42.a
+
+GLFW	= -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 
 ifeq ($(TESTFLAGS), 1)
 CFLAGS	= -Wall -Wextra -Werror -g -fsanitize=address
@@ -50,7 +56,7 @@ obj/%.o: src/%.c
 	@printf "$(INSET)$(BLUE)Compiling: $(GREEN)%-29s $(CYAN)%-10s$(RESET)\n" "$^" ""
 
 $(NAME): $(OBJS) $(MLX) $(LIBFT)
-	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIBFT) $(MLX) -o $@
+	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIBFT) $(MLX) $(GLFW) -o $@
 	@printf "$(INSET)Compiling: Program $@\n"
 
 $(LIBFT):
