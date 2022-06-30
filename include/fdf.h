@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/06/30 16:10:00 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/06/30 16:38:54 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define FDF_H
 
 # include "MLX42.h"
+
+# define WINDOW_WIDTH 1980
+# define WINDOW_HEIGHT 1080
 
 typedef struct s_fdf
 {
