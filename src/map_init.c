@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 13:26:01 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/05 18:55:46 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/06 15:14:52 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,11 @@ void	fill_map(char *str_map, t_fdf *fdf)
 	int	numlen;
 	int	i;
 	int	j;
-	int	str_map_len;
 
 	get_map_size(str_map, fdf);
 	fdf->map = malloc(sizeof(int) * (fdf->map_width * fdf->map_height));
 	i = 0;
 	j = 0;
-	str_map_len = ft_strlen(str_map);
 	while (str_map[i] && j < (fdf->map_width * fdf->map_height))
 	{
 		num = ft_atoi(&str_map[i]);
