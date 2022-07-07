@@ -21,7 +21,9 @@ SRCS	=	main.c \
 			map_init.c \
 			fdf_exit.c \
 			fdf_loop.c \
-			fdf_free.c
+			fdf_free.c \
+			fdf_keyhooks.c \
+			map_utils.c
 
 INC		= -I ./include
 
@@ -29,7 +31,7 @@ LIBFT	= libft/libft.a
 
 MLX		= MLX42/libmlx42.a
 
-GLFW	= -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
+GLFW	= libglfw3.a -framework Cocoa -framework OpenGL -framework IOKit
 
 ifeq ($(TESTFLAGS), 1)
 CFLAGS	= -Wall -Wextra -Werror -g -fsanitize=address
@@ -55,7 +57,7 @@ obj/%.o: src/%.c
 	@$(CC) $(CFLAGS) $(INC) -c $^ -o $@
 	@printf "$(INSET)$(BLUE)Compiling: $(GREEN)%-29s $(CYAN)%-10s$(RESET)\n" "$^" ""
 
-$(NAME): $(OBJS) $(MLX) $(LIBFT)
+$(NAME): $(MLX) $(LIBFT) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIBFT) $(MLX) $(GLFW) -o $@
 	@printf "$(INSET)Compiling: Program $@\n"
 
@@ -82,4 +84,4 @@ depclean:
 
 re: heading fclean comp
 
-rere: heading depclean fclean comp
+rere: heading fclean depclean comp

@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:44:57 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/06 15:10:09 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/07 22:15:05 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int argc, char **argv)
 		error_check(argv[1]);
 		fdf = fdf_init(argv[1]);
 		fdf_loop(fdf);
+		// clear_image(fdf);
 		fdf_free(fdf);
 	}
 	return (0);

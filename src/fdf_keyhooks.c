@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   fdf_free.c                                         :+:    :+:            */
+/*   fdf_keyhooks.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/06/30 16:03:36 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/07 16:32:41 by dritsema      ########   odam.nl         */
+/*   Created: 2022/07/07 15:02:05 by dritsema      #+#    #+#                 */
+/*   Updated: 2022/07/07 22:53:23 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdlib.h>
-#include "libft.h"
 
-void	fdf_free(t_fdf *fdf)
+void	fdf_keyhook(mlx_key_data_t keydata, void *param)
 {
-	if (fdf->map)
-		free(fdf->map);
-	if (fdf->vecmap)
-		free(fdf->vecmap);
-	if (fdf->render)
-		mlx_delete_image(fdf->mlx, fdf->render);
-	if (fdf->mlx)
-		mlx_terminate(fdf->mlx);
-	if (fdf)
-		free(fdf);
+	t_fdf	*fdf;
+
+	fdf = (t_fdf *)param;
+	if (keydata.key == MLX_KEY_ESCAPE)
+	{
+		fdf_free(fdf);
+		fdf_exit("fdf_keyhook", 0);
+	}
+	if (keydata.key == MLX_KEY_R)
+		reset_map(fdf);
+	if (keydata.key == MLX_KEY_EQUAL && keydata.action == 1)
+		scale_map(fdf, 2);
+	if (keydata.key == MLX_KEY_MINUS && keydata.action == 1)
+		scale_map(fdf, 0.5);
 }

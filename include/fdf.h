@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/05 19:16:09 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/07 22:10:53 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,14 @@
 
 # define WINDOW_WIDTH 1980
 # define WINDOW_HEIGHT 1080
-# define SCALE 100
+# define SCALE 20
+
+typedef struct s_3dvec
+{
+	int	x;
+	int	y;
+	int	z;
+}	t_3dvec;
 
 typedef struct s_fdf
 {
@@ -26,17 +33,26 @@ typedef struct s_fdf
 	int			*map;
 	int			map_width;
 	int			map_height;
+	t_3dvec		*vecmap;
+	int			x_offset;
+	int			y_offset;
 }	t_fdf;
 
 // fdf loop
 void	fdf_loop(t_fdf *fdf);
 
+// fdf hooks
+void	fdf_keyhook(mlx_key_data_t keydata, void *param);
+
 // Utils
+void	scale_map(t_fdf *fdf, float scale);
+void	reset_map(t_fdf *fdf);
 void	fill_map(char *str_map, t_fdf *fdf);
 t_fdf	*fdf_init(char *file_name);
 int		map_init(char *file_name, t_fdf *fdf);
 void	fdf_free(t_fdf *fdf);
 void	fdf_exit(const char *fname, int error);
+void	clear_image(t_fdf *fdf);
 
 // for debug
 int		error_check(char *file_name);

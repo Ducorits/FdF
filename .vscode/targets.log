@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Sun Jul  3 12:33:27 2022
+# Make data base, printed on Thu Jul  7 21:38:29 2022
 
 # Variables
 
@@ -25,17 +25,17 @@ VSCODE_LOG_NATIVE = false
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/coenvanvollenhoven/Documents/Codam/FdF
  
+CURDIR := /Users/dritsema/Documents/Codam/FdF
 # makefile (from `Makefile', line 3)
 SHELL := /bin/bash
 # environment
-VSCODE_NLS_CONFIG = {"locale":"nl","availableLanguages":{},"_languagePackSupport":true}
-# makefile (from `Makefile', line 30)
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# makefile (from `Makefile', line 32)
 MLX = MLX42/libmlx42.a
 # environment
 _ = /usr/bin/make
-# makefile (from `Makefile', line 37)
+# makefile (from `Makefile', line 39)
 CFLAGS = -Wall -Wextra -Werror
 # makefile (from `Makefile', line 6)
 BLUE = \033[1;34m
@@ -43,22 +43,18 @@ BLUE = \033[1;34m
 MAKEFILE_LIST :=  Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
+# makefile (from `Makefile', line 44)
+OBJS = $(patsubst %.c, obj/%.o, $(SRCS))
 # environment
-__CFBundleIdentifier = com.microsoft.VSCode
-# environment
-INFOPATH = /opt/homebrew/share/info:
-# environment
-P9K_SSH = 0
-# environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/x1/l8lq3qkx4mg14ncws9vfkgxh0000gn/T/vscode-ipc-40a33691-a33d-4c1c-91ba-df73452a659e.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000bh7m002w1x/T/vscode-ipc-a281913c-baea-4691-95ec-84ffe2ec5473.sock
 # environment
 VSCODE_CWD = /
 # environment
-PATH = /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/coenvanvollenhoven/Library/Python/3.8/bin
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.PtJESfPWt6/Render
+# environment
+PATH = /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
 # makefile (from `Makefile', line 12)
 BEGIN = \033[0G
-# environment
-LSCOLORS = Gxfxcxdxbxegedabagacad
 # makefile (from `Makefile', line 11)
 UP1 = \033[1F
 # makefile (from `Makefile', line 14)
@@ -72,37 +68,29 @@ ELECTRON_RUN_AS_NODE = 1
 # makefile (from `Makefile', line 15)
 INSET = $(BEGIN)$(GREEN)+ $(BLUE)
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.iWhjJgPh5O/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.PDsm9a47JR/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
 VSCODE_PIPE_LOGGING = true
-# makefile (from `Makefile', line 42)
-OBJS = $(patsubst %.c, obj/%.o, $(SRCS))
 # environment
-PWD = /Users/coenvanvollenhoven/Documents/Codam/FdF
-# environment
-HOMEBREW_CELLAR = /opt/homebrew/Cellar
+PWD = /Users/dritsema/Documents/Codam/FdF
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # makefile (from `Makefile', line 9)
 GREEN = \033[1;32m
 # environment
-MANPATH = /opt/homebrew/share/man::
-# environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-HOME = /Users/coenvanvollenhoven
+HOME = /Users/dritsema
 # default
-MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
+MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/coenvanvollenhoven/Library/Application Support/Code/CachedData/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
+VSCODE_CODE_CACHE_PATH = /Users/dritsema/Library/Application Support/Code/CachedData/30d9c6cd9483b2cc586687151bcbcd635f373630
 # environment
-LOGNAME = coenvanvollenhoven
+LOGNAME = dritsema
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
-# environment
-ZSH = /Users/coenvanvollenhoven/.oh-my-zsh
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -114,41 +102,39 @@ MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # makefile (from `Makefile', line 17)
-SRCS = main.c error_check.c debug.c fdf_init.c map_init.c fdf_exit.c fdf_loop.c fdf_free.c
+SRCS = main.c error_check.c debug.c fdf_init.c map_init.c fdf_exit.c fdf_loop.c fdf_free.c fdf_keyhooks.c map_utils.c
 # environment
 SHLVL = 1
-# makefile (from `Makefile', line 32)
-GLFW = -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
-# makefile (from `Makefile', line 28)
+# makefile (from `Makefile', line 34)
+GLFW = libglfw3.a -framework Cocoa -framework OpenGL -framework IOKit
+# makefile (from `Makefile', line 30)
 LIBFT = libft/libft.a
 # makefile (from `Makefile', line 1)
 CC = gcc
 # default
 MAKE_VERSION := 3.81
 # environment
-USER = coenvanvollenhoven
+USER = dritsema
 # makefile
 .DEFAULT_GOAL := all
-# makefile (from `Makefile', line 40)
+# makefile (from `Makefile', line 42)
 NAME = fdf
 # makefile (from `Makefile', line 8)
 ORANGE = \033[1;38;5;214m
-# environment
-LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
-MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
-# makefile (from `Makefile', line 26)
+MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+# makefile (from `Makefile', line 28)
 INC = -I ./include
 # default
 .VARIABLES := 
 # environment
-TMPDIR = /var/folders/x1/l8lq3qkx4mg14ncws9vfkgxh0000gn/T/
+TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000bh7m002w1x/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/coenvanvollenhoven/Library/Application Support/Code/1.67.2-main.sock
+VSCODE_IPC_HOOK = /Users/dritsema/Library/Application Support/Code/1.68.1-main.sock
 # makefile (from `Makefile', line 5)
 RED = \033[1;31m
 # makefile
@@ -158,9 +144,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.2353011.2353017
-# environment
-HOMEBREW_PREFIX = /opt/homebrew
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000003.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # makefile (from `Makefile', line 7)
@@ -168,9 +152,7 @@ CYAN = \033[1;36m
 # automatic
 +F = $(notdir $+)
 # environment
-HOMEBREW_REPOSITORY = /opt/homebrew
-# environment
-__CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x5
+__CF_USER_TEXT_ENCODING = 0x1703D:0x0:0x0
 # environment
 COMMAND_MODE = unix2003
 # default
@@ -178,15 +160,17 @@ MAKEFILES :=
 # automatic
 <F = $(notdir $<)
 # environment
-PAGER = less
-# environment
 LC_ALL = C
 # makefile (from `Makefile', line 10)
 RESET = \033[0m
+# environment
+SECURITYSESSIONID = 186a8
 # automatic
 ^F = $(notdir $^)
 # default
 SUFFIXES := 
+# default
+.INCLUDE_DIRS = /usr/local/include
 # environment
 MAKELEVEL := 0
 # makefile (from `Makefile', line 13)
@@ -194,9 +178,10 @@ SAVE = \0337
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1648
+VSCODE_PID = 1158
 # variable set hash-table stats:
-# Load=91/1024=9%, Rehash=0, Collisions=11/129=9%
+ 
+# Load=83/1024=8%, Rehash=0, Collisions=9/122=7%
 
 # Pattern-specific Variable Values
 
@@ -204,15 +189,15 @@ VSCODE_PID = 1648
 
 # Directories
 
-# . (device 16777232, inode 2451714): 17 files, no impossibilities.
-# src (device 16777232, inode 2452213): No files, no impossibilities so far.
+# . (device 16777229, inode 700667): 18 files, no impossibilities.
+# src (device 16777229, inode 700918): No files, no impossibilities so far.
 
-# 17 files, no impossibilities in 2 directories.
+# 18 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 obj/%.o: src/%.c
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(INC) -c $^ -o $@
 	@printf "$(INSET)$(BLUE)Compiling: $(GREEN)%-29s $(CYAN)%-10s$(RESET)\n" "$^" ""
@@ -252,9 +237,15 @@ MLX42/libmlx42.a:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 67):
+#  commands to execute (from `Makefile', line 69):
 	@make -C MLX42/
 	
+
+# Not a target:
+obj/fdf_keyhooks.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 obj/main.o:
@@ -271,7 +262,7 @@ obj/main.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-03 12:27:21
+#  Last modified 2022-07-07 21:38:26
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -298,7 +289,7 @@ libft/libft.a:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 63):
+#  commands to execute (from `Makefile', line 65):
 	@make -C libft/ SILENT=1
 	@cp libft/include/libft.h include/libft.h
 	
@@ -313,7 +304,7 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 76):
+#  commands to execute (from `Makefile', line 78):
 	@rm -rf $(NAME)
 	@printf "\033[1;31m- $(BLUE)Removed program file\n$(RESET)"
 	
@@ -325,12 +316,18 @@ obj/debug.o:
 #  File has not been updated.
 
 # Not a target:
+obj/map_utils.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 .DEFAULT:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-rere: heading depclean fclean comp
+rere: heading fclean depclean comp
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
@@ -338,7 +335,6 @@ rere: heading depclean fclean comp
 
 re: heading fclean comp
 #  Phony target (prerequisite of .PHONY).
- 
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
@@ -347,7 +343,7 @@ clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 72):
+#  commands to execute (from `Makefile', line 74):
 	@rm -rf obj
 	@printf "\033[1;31m- $(BLUE)Removed object files\n$(RESET)"
 	
@@ -356,7 +352,7 @@ depclean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 80):
+#  commands to execute (from `Makefile', line 82):
 	@make -C libft/ fclean
 	@make -C MLX42/ fclean
 	
@@ -386,7 +382,7 @@ heading:
 # ? := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=5/13=38%
-#  commands to execute (from `Makefile', line 51):
+#  commands to execute (from `Makefile', line 53):
 	@printf "$(CYAN)----< $(ORANGE)Duco's FdF $(CYAN)>----\n"; \
 	
 
@@ -396,11 +392,11 @@ obj/error_check.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-fdf: obj/main.o obj/error_check.o obj/debug.o obj/fdf_init.o obj/map_init.o obj/fdf_exit.o obj/fdf_loop.o obj/fdf_free.o MLX42/libmlx42.a libft/libft.a
+fdf: MLX42/libmlx42.a libft/libft.a obj/main.o obj/error_check.o obj/debug.o obj/fdf_init.o obj/map_init.o obj/fdf_exit.o obj/fdf_loop.o obj/fdf_free.o obj/fdf_keyhooks.o obj/map_utils.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 59):
+#  commands to execute (from `Makefile', line 61):
 	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIBFT) $(MLX) $(GLFW) -o $@
 	@printf "$(INSET)Compiling: Program $@\n"
 	
@@ -412,7 +408,7 @@ obj/map_init.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=24/1024=2%, Rehash=0, Collisions=0/63=0%
+# Load=26/1024=3%, Rehash=0, Collisions=0/67=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -424,6 +420,6 @@ obj/map_init.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sun Jul  3 12:33:27 2022
+# Finished Make data base on Thu Jul  7 21:38:29 2022
 
  
