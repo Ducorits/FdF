@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 15:56:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/07 22:55:17 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/08 16:50:42 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,40 +32,25 @@ void	drawline(t_fdf *fdf, t_3dvec a, t_3dvec b)
 {
 	int	dx;
 	int	dy;
-	int	x;
 	int	y;
-	int	p;
-	int	end;
+	int	x;
+	int	d;
 
-	dx = (a.x - b.x);
-	dy = (a.y - b.y);
-	p = 2 * dy - dx;
-	if (a.x > b.x)
+	x = a.x;
+	y = a.y;
+	dx = b.x - a.x;
+	dy = b.y - a.y;
+	d = 2 * dy - dx;
+	while (x < b.x)
 	{
-		x = b.x;
-		y = b.y;
-		end = a.x;
-	}
-	else
-	{
-		x = a.x;
-		y = a.y;
-		end = b.x;
-	}
-	mlx_put_pixel(fdf->render, x, y, 0xffffffff);
-	while (x < end)
-	{
-		x = x + 1;
-		if (p < 0)
-		{
-			p = p + 2 * dy;
-		}
-		else
+		mlx_put_pixel(fdf->render, x, y, 0xffffffff);
+		if (d > 0)
 		{
 			y = y + 1;
-			p = p + 2 * (dy - dx);
+			d = d - 2 * dx;
 		}
-		mlx_put_pixel(fdf->render, x, y, 0xffffffff);
+		d = d + 2 * dy;
+		x++;
 	}
 }
 
