@@ -6,13 +6,23 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 15:56:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/08 16:50:42 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/09 16:31:01 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "MLX42.h"
 #include "libft.h"
+
+int	in_window(int x, int y, t_fdf *fdf)
+{
+	if (x + fdf->x_offset < WINDOW_WIDTH
+		&& y + fdf->y_offset < WINDOW_HEIGHT
+		&& y + fdf->y_offset > 0
+		&& x + fdf->x_offset > 0)
+		return (1);
+	return (0);
+}
 
 void	clear_image(t_fdf *fdf)
 {
@@ -36,21 +46,57 @@ void	drawline(t_fdf *fdf, t_3dvec a, t_3dvec b)
 	int	x;
 	int	d;
 
-	x = a.x;
-	y = a.y;
-	dx = b.x - a.x;
-	dy = b.y - a.y;
-	d = 2 * dy - dx;
-	while (x < b.x)
+	if (b.x > a.x)
 	{
-		mlx_put_pixel(fdf->render, x, y, 0xffffffff);
-		if (d > 0)
+		x = a.x;
+		dx = b.x - a.x;
+	}
+	else
+	{
+		dx = a.x - b.x;
+		x = b.x;
+	}
+	if (b.y > a.y)
+	{
+		y = a.y - a.z;
+		dy = (b.y - b.z) - (a.y - a.z);
+	}
+	else
+	{
+		y = b.y - b.z;
+		dy = (a.y - a.z) - (b.y - b.z);
+	}
+	if (dx > dy)
+	{
+		d = (dy << 1) - dx;
+		while (x <= b.x && in_window(x, y, fdf))
 		{
-			y = y + 1;
-			d = d - 2 * dx;
+			if (in_window(x, y, fdf))
+				mlx_put_pixel(fdf->render, x + fdf->x_offset, y + fdf->y_offset, 0xffffffff);
+			if (d > 0)
+			{
+				y = y + 1;
+				d = d - 2 * dx;
+			}
+			d = d + (dy << 1);
+			x++;
 		}
-		d = d + 2 * dy;
-		x++;
+	}
+	else
+	{
+		d = 2 * dx - dy;
+		while (y <= b.y - b.z && in_window(x, y, fdf))
+		{
+			if (in_window(x, y, fdf))
+				mlx_put_pixel(fdf->render, x + fdf->x_offset, y + fdf->y_offset, 0xffffffff);
+			if (d > 0)
+			{
+				x = x + 1;
+				d = d - (dy << 1);
+			}
+			d = d + (dx << 1);
+			y++;
+		}
 	}
 }
 
@@ -117,13 +163,9 @@ void	fdf_frame(void *param)
 	t_fdf	*fdf;
 	int		x;
 	int		y;
-	int		color;
 
 	y = 0;
-	color = 0xffffffff;
 	fdf = (t_fdf *)param;
-	fdf->x_offset = (WINDOW_WIDTH / 2) - ((fdf->map_width / 2) * SCALE);
-	fdf->y_offset = (WINDOW_HEIGHT / 2) - ((fdf->map_height / 2) * SCALE);
 	clear_image(fdf);
 	while (y < fdf->map_height)
 	{
