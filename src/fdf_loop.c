@@ -6,13 +6,23 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 15:56:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/08 16:50:42 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/19 15:08:16 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "MLX42.h"
 #include "libft.h"
+
+int	in_window(int x, int y, t_fdf *fdf)
+{
+	if (x + fdf->x_offset < WINDOW_WIDTH
+		&& y + fdf->y_offset < WINDOW_HEIGHT
+		&& y + fdf->y_offset > 0
+		&& x + fdf->x_offset > 0)
+		return (1);
+	return (0);
+}
 
 void	clear_image(t_fdf *fdf)
 {
@@ -28,7 +38,7 @@ void	clear_image(t_fdf *fdf)
 	}
 }
 
-void	drawline(t_fdf *fdf, t_3dvec a, t_3dvec b)
+void	draw_horizontal(t_fdf *fdf, t_3dvec p1, t_3dvec p2)
 {
 	int	dx;
 	int	dy;
@@ -36,94 +46,91 @@ void	drawline(t_fdf *fdf, t_3dvec a, t_3dvec b)
 	int	x;
 	int	d;
 
-	x = a.x;
-	y = a.y;
-	dx = b.x - a.x;
-	dy = b.y - a.y;
-	d = 2 * dy - dx;
-	while (x < b.x)
+	x = p1.x;
+	dx = p2.x - p1.x;
+	y = p1.y - p1.z;
+	dy = (p2.y - p2.z) - (p1.y - p1.z);
+	d = (dy << 1) - dx;
+	while (x <= p2.x && in_window(x, y, fdf))
 	{
-		mlx_put_pixel(fdf->render, x, y, 0xffffffff);
+		if (in_window(x, y, fdf))
+			mlx_put_pixel(fdf->render, x + fdf->x_offset,
+				y + fdf->y_offset, 0xffffffff);
 		if (d > 0)
 		{
-			y = y + 1;
-			d = d - 2 * dx;
+			if (p1.y - p1.z < p2.y - p2.z)
+				y++;
+			else
+				y--;
+			d = d - (dx << 1);
 		}
-		d = d + 2 * dy;
+		d = d + (dy << 1);
 		x++;
 	}
 }
 
-/*
-plotLine(x0, y0, x1, y1)
-	dx = abs(x1 - x0)
-	sx = x0 < x1 ? 1 : -1
-	dy = -abs(y1 - y0)
-	sy = y0 < y1 ? 1 : -1
-	error = dx + dy
+void	draw_vertical(t_fdf *fdf, t_3dvec p1, t_3dvec p2)
+{
+	int	dx;
+	int	dy;
+	int	y;
+	int	x;
+	int	d;
 
-	while true
-		plot(x0, y0)
-		if x0 == x1 && y0 == y1 break
-		e2 = 2 * error
-		if e2 >= dy
-			if x0 == x1 break
-			error = error + dy
-			x0 = x0 + sx
-		end if
-		if e2 <= dx
-			if y0 == y1 break
-			error = error + dx
-			y0 = y0 + sy
-		end if
-	end while
-*/
-
-/*
- dx = abs(x1 - x2);
-	  dy = abs(y1 - y2);
-	  p = 2 * dy - dx;
-	  if(x1 > x2)
-	  {
-			x = x2;
-			y = y2;
-			end = x1;
-	  }
-	  else
-	  {
-			x = x1;
-			y = y1;
-			end = x2;
-	  }
-	  putpixel(x, y, 10);
-	  while(x < end)
-	  {
-			x = x + 1;
-			if(p < 0)
-			{
-				  p = p + 2 * dy;
-			}
+	x = p1.x;
+	y = p1.y - p1.z;
+	dx = p1.x - p2.x;
+	dy = (p2.y - p2.z) - (p1.y - p1.z);
+	d = (dx << 1) - dy;
+	while (y <= p2.y - p2.z && in_window(x, y, fdf))
+	{
+		if (in_window(x, y, fdf))
+			mlx_put_pixel(fdf->render, x + fdf->x_offset,
+				y + fdf->y_offset, 0xffffffff);
+		if (d > 0)
+		{
+			if (p1.x < p2.x)
+				x++;
 			else
-			{
-				  y = y + 1;
-				  p = p + 2 * (dy - dx);
-			}
-			putpixel(x, y, 10);
-	  }
-*/
+				x--;
+			d = d - (dy << 1);
+		}
+		d = d + (dx << 1);
+		y++;
+	}
+}
+
+void	drawline(t_fdf *fdf, t_3dvec a, t_3dvec b)
+{
+	int	dx;
+	int	dy;
+
+	dx = a.x - b.x;
+	dy = (a.y - a.z) - (b.y - b.z);
+	if (ft_abs(dx) > ft_abs(dy))
+	{
+		if (a.x <= b.x)
+			draw_horizontal(fdf, a, b);
+		else
+			draw_horizontal(fdf, b, a);
+	}
+	else
+	{
+		if (a.y <= b.y)
+			draw_vertical(fdf, a, b);
+		else
+			draw_vertical(fdf, b, a);
+	}
+}
 
 void	fdf_frame(void *param)
 {
 	t_fdf	*fdf;
 	int		x;
 	int		y;
-	int		color;
 
 	y = 0;
-	color = 0xffffffff;
 	fdf = (t_fdf *)param;
-	fdf->x_offset = (WINDOW_WIDTH / 2) - ((fdf->map_width / 2) * SCALE);
-	fdf->y_offset = (WINDOW_HEIGHT / 2) - ((fdf->map_height / 2) * SCALE);
 	clear_image(fdf);
 	while (y < fdf->map_height)
 	{

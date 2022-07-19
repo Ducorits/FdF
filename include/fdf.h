@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/19 13:50:20 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/19 14:00:40 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_fdf
 	int			map_width;
 	int			map_height;
 	t_3dvec		*vecmap;
-	int			x_offset;
-	int			y_offset;
+	float		x_offset;
+	float		y_offset;
 }	t_fdf;
 
 // fdf loop
@@ -45,14 +45,20 @@ void	fdf_loop(t_fdf *fdf);
 void	fdf_keyhook(mlx_key_data_t keydata, void *param);
 
 // Utils
-void	scale_map(t_fdf *fdf, float scale);
-void	reset_map(t_fdf *fdf);
-void	fill_map(char *str_map, t_fdf *fdf);
 t_fdf	*fdf_init(char *file_name);
-int		map_init(char *file_name, t_fdf *fdf);
 void	fdf_free(t_fdf *fdf);
 void	fdf_exit(const char *fname, int error);
 void	clear_image(t_fdf *fdf);
+
+// Map utils
+int		map_init(char *file_name, t_fdf *fdf);
+void	fill_map(char *str_map, t_fdf *fdf);
+void	rotate_map(t_fdf *fdf, float degrees);
+void	scale_map(t_fdf *fdf, float scale);
+void	reset_map(t_fdf *fdf);
+
+// Transforms
+t_3dvec	rotate_vec(t_3dvec a, float degrees);
 
 // for debug
 int		error_check(char *file_name);

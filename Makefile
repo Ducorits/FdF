@@ -1,6 +1,8 @@
 CC		=	gcc
 
-SHELL	:= /bin/bash
+SHELL	:=	/bin/bash
+
+UNAME	:=	$(shell uname)
 
 RED		= \033[1;31m
 BLUE	= \033[1;34m
@@ -23,7 +25,8 @@ SRCS	=	main.c \
 			fdf_loop.c \
 			fdf_free.c \
 			fdf_keyhooks.c \
-			map_utils.c
+			map_utils.c \
+			transforms.c
 
 INC		= -I ./include
 
@@ -31,7 +34,13 @@ LIBFT	= libft/libft.a
 
 MLX		= MLX42/libmlx42.a
 
+ifeq ($(UNAME),Linux)
+GLFW	= -lglfw
+else
 GLFW	= libglfw3.a -framework Cocoa -framework OpenGL -framework IOKit
+endif
+
+MATHLIB	= -lm
 
 ifeq ($(TESTFLAGS), 1)
 CFLAGS	= -Wall -Wextra -Werror -g -fsanitize=address
@@ -58,7 +67,7 @@ obj/%.o: src/%.c
 	@printf "$(INSET)$(BLUE)Compiling: $(GREEN)%-29s $(CYAN)%-10s$(RESET)\n" "$^" ""
 
 $(NAME): $(MLX) $(LIBFT) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIBFT) $(MLX) $(GLFW) -o $@
+	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIBFT) $(MLX) $(GLFW) $(MATHLIB) -o $@
 	@printf "$(INSET)Compiling: Program $@\n"
 
 $(LIBFT):
