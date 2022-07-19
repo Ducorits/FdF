@@ -29,7 +29,6 @@ printf "\033[0G\033[1;32m+ \033[1;34m\033[1;34mCompiling: \033[1;32m%-29s \033[1
 mkdir -p obj
 gcc -Wall -Wextra -Werror -I ./include -c src/fdf_free.c -o obj/fdf_free.o
 printf "\033[0G\033[1;32m+ \033[1;34m\033[1;34mCompiling: \033[1;32m%-29s \033[1;36m%-10s\033[0m\n" "src/fdf_free.c" ""
- 
 mkdir -p obj
 gcc -Wall -Wextra -Werror -I ./include -c src/fdf_keyhooks.c -o obj/fdf_keyhooks.o
 printf "\033[0G\033[1;32m+ \033[1;34m\033[1;34mCompiling: \033[1;32m%-29s \033[1;36m%-10s\033[0m\n" "src/fdf_keyhooks.c" ""
