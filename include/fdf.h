@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/20 15:59:43 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/21 01:06:17 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,13 @@ typedef struct s_fdf
 	int			map_width;
 	int			map_height;
 	t_3dvec		*vecmap;
-	float		x_offset;
-	float		y_offset;
+	int			x_offset;
+	int			y_offset;
+	int			mouse_x;
+	int			mouse_y;
+	int			last_mouse_x;
+	int			last_mouse_y;
+	float		z_scaling;
 }	t_fdf;
 
 // fdf loop
@@ -49,6 +54,7 @@ void	fdf_loop(t_fdf *fdf);
 
 // fdf hooks
 void	fdf_keyhook(mlx_key_data_t keydata, void *param);
+void	fdf_scrollhook(double xdelta, double ydelta, void *param);
 
 // Utils
 t_fdf	*fdf_init(char *file_name);
@@ -62,6 +68,7 @@ void	fill_map(char *str_map, t_fdf *fdf);
 void	rotate_map(t_fdf *fdf, float degrees);
 void	scale_map(t_fdf *fdf, float scale);
 void	reset_map(t_fdf *fdf);
+void	move_map(t_fdf *fdf, int dir);
 
 // Transforms
 t_3dvec	rotate_vec(t_3dvec a, float degrees);

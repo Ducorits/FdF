@@ -1,198 +1,271 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-# GNU Make 3.81
-# Copyright (C) 2006  Free Software Foundation, Inc.
-# This is free software; see the source for copying conditions.
-# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
-# PARTICULAR PURPOSE.
+# GNU Make 4.3
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# This program built for i386-apple-darwin11.3.0
-
-# Make data base, printed on Wed Jul 20 17:28:32 2022
+# Make data base, printed on Thu Jul 21 00:01:19 2022
 
 # Variables
 
-# automatic
-<D = $(patsubst %/,%,$(dir $<))
-# automatic
-?F = $(notdir $?)
-# automatic
-?D = $(patsubst %/,%,$(dir $?))
-# automatic
-@D = $(patsubst %/,%,$(dir $@))
-# automatic
-@F = $(notdir $@)
-# makefile
-CURDIR := /Users/dritsema/Documents/Codam/FdF
-# makefile (from `Makefile', line 3)
-SHELL := /bin/bash
 # environment
-MANPAGER = sh -c 'col -bx | bat -l man -p'
+GDK_BACKEND = x11
 # environment
-VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
-# makefile (from `Makefile', line 36)
-MLX = MLX42/libmlx42.a
+LC_ALL = C
 # environment
-BAT_PAGER = less -RF
+NO_AT_BRIDGE = 1
 # environment
-_ = /usr/bin/make
-# makefile (from `Makefile', line 49)
-CFLAGS = -Wall -Wextra -Werror
-# makefile (from `Makefile', line 8)
-BLUE = \033[1;34m
-# makefile (from `Makefile', line 1)
-MAKEFILE_LIST :=  Makefile
-# makefile (from `Makefile', line 19)
-SRCS = main.c error_check.c debug.c fdf_init.c map_init.c fdf_exit.c fdf_loop.c fdf_free.c fdf_keyhooks.c map_utils.c transforms.c drawline.c
-# makefile (from `Makefile', line 54)
-OBJS = $(patsubst %.c, obj/%.o, $(SRCS))
+GNOME_SHELL_SESSION_MODE = pop
 # environment
-P9K_SSH = 0
+SSH_AGENT_LAUNCHER = gnome-keyring
 # environment
-VSCODE_CWD = /
-# environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.Ppe31vjZt9/Render
-# environment
-PATH = /Users/dritsema/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/dritsema/.brew/opt/fzf/bin
-# makefile (from `Makefile', line 14)
-BEGIN = \033[0G
-# environment
-LSCOLORS = Gxfxcxdxbxegedabagacad
-# makefile (from `Makefile', line 52)
-NAME = fdf
-# makefile (from `Makefile', line 13)
-UP1 = \033[1F
-# makefile (from `Makefile', line 16)
-RESTORE = \0338
-# environment
-ELECTRON_RUN_AS_NODE = 1
-# default
-.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
-# makefile (from `Makefile', line 17)
-INSET = $(BEGIN)$(GREEN)+ $(BLUE)
-# environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.Pitf7YQ8nv/Listeners
-# automatic
-%F = $(notdir $%)
-# environment
-HOMEBREW_TEMP = /tmp/dritsema/Homebrew/Temp
-# environment
-PWD = /Users/dritsema/Documents/Codam/FdF
-# environment
-ORIGINAL_XDG_CURRENT_DESKTOP = undefined
-# makefile (from `Makefile', line 11)
-GREEN = \033[1;32m
-# environment
-VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
-# environment
-HOME = /Users/dritsema
-# default
-MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
-# environment
-VSCODE_CODE_CACHE_PATH = /Users/dritsema/Library/Application Support/Code/CachedData/3b889b090b5ad5793f524b5d1d39fda662b96a2a
-# environment
-LOGNAME = dritsema
-# environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
-# makefile (from `Makefile', line 44)
+GJS_DEBUG_OUTPUT = stderr
+# makefile (from 'Makefile', line 45)
 MATHLIB = -lm
 # environment
-ZSH = /Users/dritsema/.oh-my-zsh
+VSCODE_CWD = /home/ducorits/Documents/FdF
+# environment
+WINDOWPATH = 2
+# default
+MAKE_COMMAND := make
+# environment
+QT_ACCESSIBILITY = 1
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# makefile (from 'Makefile', line 16)
+RESTORE = \0338
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
-# automatic
-^D = $(patsubst %/,%,$(dir $^))
-# environment
-XPC_FLAGS = 0x0
-# default
-MAKE = $(MAKE_COMMAND)
-# default
-MAKECMDGOALS := all
-# environment
-HOMEBREW_CACHE = /tmp/dritsema/Homebrew/Caches
-# environment
-SHLVL = 1
-# makefile (from `Makefile', line 41)
-GLFW = libglfw3.a -framework Cocoa -framework OpenGL -framework IOKit
-# makefile (from `Makefile', line 34)
-LIBFT = libft/libft.a
-# makefile (from `Makefile', line 1)
-CC = gcc
-# default
-MAKE_VERSION := 3.81
-# environment
-USER = dritsema
-# makefile
-.DEFAULT_GOAL := all
-# makefile (from `Makefile', line 5)
-UNAME := Darwin
-# makefile (from `Makefile', line 10)
-ORANGE = \033[1;38;5;214m
-# environment
-LESS = -R
-# automatic
-%D = $(patsubst %/,%,$(dir $%))
-# default
-MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
-# makefile (from `Makefile', line 32)
-INC = -I ./include
 # default
 .VARIABLES := 
 # environment
-TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000bh7m002w1x/T/
+PWD = /home/ducorits/Documents/FdF
 # automatic
-*F = $(notdir $*)
+%D = $(patsubst %/,%,$(dir $%))
 # environment
-VSCODE_IPC_HOOK = /Users/dritsema/Library/Application Support/Code/1.69.2-main.sock
+XDG_DATA_DIRS = /usr/share/pop:/usr/share/gnome:/home/ducorits/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/
 # environment
-MallocNanoZone = 0
-# makefile (from `Makefile', line 7)
-RED = \033[1;31m
-# makefile
-MAKEFLAGS = Rrqp
-# environment
-MFLAGS = -Rrqp
+OLDPWD = /home/ducorits/Documents
 # automatic
-*D = $(patsubst %/,%,$(dir $*))
-# environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x1000000b.Electron
+^D = $(patsubst %/,%,$(dir $^))
 # automatic
-+D = $(patsubst %/,%,$(dir $+))
-# makefile (from `Makefile', line 9)
-CYAN = \033[1;36m
-# automatic
-+F = $(notdir $+)
+%F = $(notdir $%)
 # environment
-__CF_USER_TEXT_ENCODING = 0x1703D:0x0:0x0
-# environment
-COMMAND_MODE = unix2003
-# default
-MAKEFILES := 
-# automatic
-<F = $(notdir $<)
-# environment
-PAGER = less
-# environment
-LC_ALL = C
-# makefile (from `Makefile', line 12)
-RESET = \033[0m
-# environment
-SECURITYSESSIONID = 186c8
-# automatic
-^F = $(notdir $^)
-# default
-SUFFIXES := 
-# default
-.INCLUDE_DIRS = /usr/local/include
-# environment
-MAKELEVEL := 0
-# makefile (from `Makefile', line 15)
-SAVE = \0337
+VSCODE_CODE_CACHE_PATH = /home/ducorits/.config/Code/CachedData/b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a
+# makefile (from 'Makefile', line 35)
+LIBFT = libft/libft.a
 # environment
 LANG = C
 # environment
-VSCODE_PID = 13261
+XAUTHORITY = /run/user/1000/gdm/Xauthority
+# default
+.LOADED := 
+# default
+.INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
+# makefile (from 'Makefile', line 9)
+CYAN = \033[1;36m
+# environment
+GNOME_TERMINAL_SERVICE = :1.710
+# makefile
+MAKEFLAGS = pqrR
+# makefile (from 'Makefile', line 8)
+BLUE = \033[1;34m
+# makefile
+CURDIR := /home/ducorits/Documents/FdF
+# makefile (from 'Makefile', line 5)
+UNAME := Linux
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+LESSOPEN = | /usr/bin/lesspipe %s
+# makefile (from 'Makefile', line 19)
+SRCS = main.c error_check.c debug.c fdf_init.c map_init.c fdf_exit.c fdf_loop.c fdf_free.c fdf_keyhooks.c map_utils.c transforms.c drawline.c fdf_scrollhook.c
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+MFLAGS = -pqrR
+# environment
+SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
+# default
+.SHELLFLAGS := -c
+# environment
+XDG_CONFIG_DIRS = /etc/xdg/xdg-pop:/etc/xdg
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# makefile (from 'Makefile', line 17)
+INSET = $(BEGIN)$(GREEN)+ $(BLUE)
+# environment
+XDG_SESSION_DESKTOP = pop
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST := Makefile
+# automatic
+@F = $(notdir $@)
+# environment
+VSCODE_PID = 21470
+# environment
+XDG_SESSION_TYPE = x11
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# environment
+SESSION_MANAGER = local/pop-os:@/tmp/.ICE-unix/2267,unix/pop-os:/tmp/.ICE-unix/2267
+# automatic
+*F = $(notdir $*)
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# makefile (from 'Makefile', line 55)
+OBJS = $(patsubst %.c, obj/%.o, $(SRCS))
+# environment
+GNOME_DESKTOP_SESSION_ID = this-is-deprecated
+ 
+# makefile (from 'Makefile', line 3)
+SHELL := /bin/bash
+# default
+MAKECMDGOALS := all
+# environment
+XMODIFIERS = @im=ibus
+# makefile (from 'Makefile', line 13)
+UP1 = \033[1F
+# environment
+GJS_DEBUG_TOPICS = JS ERROR;JS LOG
+# environment
+SHLVL = 1
+# environment
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/eb7aa275_da5f_4617_8281_17abce04be3a
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+PATH = /home/ducorits/.local/bin:/home/ducorits/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+# default
+MAKEFILES := 
+# automatic
+^F = $(notdir $^)
+# makefile (from 'Makefile', line 40)
+GLFW = -lglfw
+# environment
+INVOCATION_ID = 6d4fc2c2bcb6488c87f7912c36fe4c03
+# environment
+USERNAME = ducorits
+# makefile (from 'Makefile', line 11)
+GREEN = \033[1;32m
+# makefile (from 'Makefile', line 37)
+MLX = MLX42/libmlx42.a
+# environment
+LESSCLOSE = /usr/bin/lesspipe %s %s
+# automatic
+?F = $(notdir $?)
+# makefile (from 'Makefile', line 33)
+INC = -I ./include
+# makefile (from 'Makefile', line 53)
+NAME = fdf
+# makefile (from 'Makefile', line 15)
+SAVE = \0337
+# environment
+GTK_IM_MODULE = ibus
+# environment
+XDG_CURRENT_DESKTOP = Unity
+# environment
+LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+# automatic
++F = $(notdir $+)
+# environment
+DESKTOP_SESSION = pop
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = pop:GNOME
+# 'override' directive
+GNUMAKEFLAGS := 
+# makefile (from 'Makefile', line 14)
+BEGIN = \033[0G
+# environment
+LOGNAME = ducorits
+# environment
+GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
+# makefile
+.DEFAULT_GOAL := all
+# environment
+SYSTEMD_EXEC_PID = 2286
+# makefile (from 'Makefile', line 10)
+ORANGE = \033[1;38;5;214m
+ 
+# makefile (from 'Makefile', line 7)
+RED = \033[1;31m
+# environment
+DISPLAY = :1
+# environment
+USER = ducorits
+# environment
+GTK_MODULES = gail:atk-bridge:appmenu-gtk-module
+# default
+MAKE_VERSION := 4.3
+# 'override' directive
+.SHELLSTATUS := 0
+# environment
+MANAGERPID = 2036
+# environment
+GIO_LAUNCHED_DESKTOP_FILE_PID = 21470
+# environment
+_ = /usr/bin/code
+# makefile (from 'Makefile', line 12)
+RESET = \033[0m
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# makefile (from 'Makefile', line 50)
+CFLAGS = -Wall -Wextra -Werror
+# environment
+GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
+# environment
+COLORTERM = truecolor
+# environment
+JOURNAL_STREAM = 8:34680
+ 
+# environment
+XDG_SESSION_CLASS = user
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /home/ducorits
+# environment
+QT_IM_MODULE = ibus
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+VSCODE_IPC_HOOK = /run/user/1000/vscode-77595a8e-1.69.1-main.sock
+# environment
+TERM = xterm-256color
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# default
+SUFFIXES := 
+# environment
+VSCODE_CLI = 1
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+VTE_VERSION = 6800
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
+# makefile (from 'Makefile', line 1)
+CC = gcc
+# environment
+XDG_MENU_PREFIX = gnome-
+# environment
+GDMSESSION = pop
 # variable set hash-table stats:
-# Load=90/1024=9%, Rehash=0, Collisions=14/132=11%
+# Load=125/1024=12%, Rehash=0, Collisions=15/175=9%
 
 # Pattern-specific Variable Values
 
@@ -200,60 +273,30 @@ VSCODE_PID = 13261
 
 # Directories
 
-# . (device 16777229, inode 700667): 14 files, no impossibilities.
-# src (device 16777229, inode 700918): No files, no impossibilities so far.
+# src (device 64769, inode 5648772): No files, no impossibilities so far.
+# . (device 64769, inode 5244662): 16 files, no impossibilities.
 
-# 14 files, no impossibilities in 2 directories.
+# 16 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 obj/%.o: src/%.c
-#  commands to execute (from `Makefile', line 66):
+#  recipe to execute (from 'Makefile', line 67):
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(INC) -c $^ -o $@
 	@printf "$(INSET)$(BLUE)Compiling: $(GREEN)%-29s $(CYAN)%-10s$(RESET)\n" "$^" ""
-	
 
 # 1 implicit rules, 0 (0.0%) terminal.
-
 # Files
 
-all: heading comp
-#  Command-line target.
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
-
-.PHONY: heading comp re rere
+# Not a target:
+obj/debug.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-obj/fdf_exit.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-comp: fdf
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-
-MLX42/libmlx42.a:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 79):
-	@make -C MLX42/
-	
-
-# Not a target:
-obj/fdf_keyhooks.o:
+obj/transforms.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -264,52 +307,65 @@ obj/main.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-.SUFFIXES:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-Makefile:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-20 15:55:39
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-obj/transforms.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
 run_test:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-obj/fdf_free.o:
+depclean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+#  recipe to execute (from 'Makefile', line 93):
+	@make -C libft/ fclean
+	@make -C MLX42/ fclean
 
 # Not a target:
-obj/fdf_loop.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-21 00:01:11.207197565
+#  File has been updated.
+#  Successfully updated.
 
 libft/libft.a:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 75):
+#  recipe to execute (from 'Makefile', line 76):
 	@make -C libft/ SILENT=1
 	@cp libft/include/libft.h include/libft.h
-	
+
+clean:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 85):
+	@rm -rf obj
+	@printf "\033[1;31m- $(BLUE)Removed object files\n$(RESET)"
+
+# Not a target:
+obj/fdf_scrollhook.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+rere: heading fclean depclean comp
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+obj/fdf_keyhooks.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+re: heading fclean comp
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
 
 # Not a target:
 obj/drawline.o:
@@ -317,27 +373,19 @@ obj/drawline.o:
 #  Modification time never checked.
 #  File has not been updated.
 
- 
 # Not a target:
-obj/fdf_init.o:
+obj/fdf_exit.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-fclean: clean
+fdf: MLX42/libmlx42.a libft/libft.a obj/main.o obj/error_check.o obj/debug.o obj/fdf_init.o obj/map_init.o obj/fdf_exit.o obj/fdf_loop.o obj/fdf_free.o obj/fdf_keyhooks.o obj/map_utils.o obj/transforms.o obj/drawline.o obj/fdf_scrollhook.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 88):
-	@rm -rf $(NAME)
-	@printf "\033[1;31m- $(BLUE)Removed program file\n$(RESET)"
-	
-
-# Not a target:
-obj/debug.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 72):
+	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIBFT) $(MLX) $(GLFW) $(MATHLIB) -o $@
+	@printf "$(INSET)Compiling: Program $@\n"
 
 # Not a target:
 obj/map_utils.o:
@@ -351,64 +399,69 @@ obj/map_utils.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-rere: heading fclean depclean comp
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
+all: heading comp
+#  Command line target.
+#  Implicit rule search has been done.
 #  File does not exist.
-#  File has not been updated.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/6=0%
 
-re: heading fclean comp
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-
-clean:
+# Not a target:
+obj/fdf_loop.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 84):
-	@rm -rf obj
-	@printf "\033[1;31m- $(BLUE)Removed object files\n$(RESET)"
-	
 
-depclean:
+# Not a target:
+obj/fdf_free.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 92):
-	@make -C libft/ fclean
-	@make -C MLX42/ fclean
-	
+
+fclean: clean
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 89):
+	@rm -rf $(NAME)
+	@printf "\033[1;31m- $(BLUE)Removed program file\n$(RESET)"
+
+# Not a target:
+obj/fdf_init.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 heading:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: `'
+#  Implicit/static pattern stem: ''
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # automatic
 # @ := heading
 # automatic
-# % := 
-# automatic
 # * := 
+# automatic
+# < := 
 # automatic
 # + := 
 # automatic
-# | := 
-# automatic
-# < := 
+# % := 
 # automatic
 # ^ := 
 # automatic
 # ? := 
+# automatic
+# | := 
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=5/13=38%
-#  commands to execute (from `Makefile', line 63):
+# Load=8/32=25%, Rehash=0, Collisions=1/14=7%
+#  recipe to execute (from 'Makefile', line 64):
 	@printf "$(CYAN)----< $(ORANGE)Duco's FdF $(CYAN)>----\n"; \
-	
+
 
 # Not a target:
 obj/error_check.o:
@@ -416,14 +469,29 @@ obj/error_check.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-fdf: MLX42/libmlx42.a libft/libft.a obj/main.o obj/error_check.o obj/debug.o obj/fdf_init.o obj/map_init.o obj/fdf_exit.o obj/fdf_loop.o obj/fdf_free.o obj/fdf_keyhooks.o obj/map_utils.o obj/transforms.o obj/drawline.o
+MLX42/libmlx42.a:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 71):
-	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIBFT) $(MLX) $(GLFW) $(MATHLIB) -o $@
-	@printf "$(INSET)Compiling: Program $@\n"
-	
+#  recipe to execute (from 'Makefile', line 80):
+	@make -C MLX42/
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+.PHONY: heading comp re rere
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+comp: fdf
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
 
 # Not a target:
 obj/map_init.o:
@@ -432,18 +500,19 @@ obj/map_init.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=28/1024=3%, Rehash=0, Collisions=0/71=0%
+# Load=29/1024=3%, Rehash=0, Collisions=5/78=6%
 # VPATH Search Paths
 
-# No `vpath' search paths.
+# No 'vpath' search paths.
 
-# No general (`VPATH' variable) search path.
+# No general ('VPATH' variable) search path.
 
-# # of strings in strcache: 1
-# # of strcache buffers: 1
-# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
-# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
+# strcache buffers: 1 (0) / strings = 47 / storage = 474 B / avg = 10 B
+# current buf: size = 8162 B / used = 474 B / count = 47 / avg = 10 B
 
-# Finished Make data base on Wed Jul 20 17:28:32 2022
+# strcache performance: lookups = 85 / hit rate = 44%
+# hash-table stats:
+# Load=47/8192=1%, Rehash=0, Collisions=0/85=0%
+# Finished Make data base on Thu Jul 21 00:01:19 2022
 
  

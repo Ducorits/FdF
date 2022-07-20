@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 15:02:05 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/20 17:57:37 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/21 01:12:40 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,22 @@ void	fdf_keyhook(mlx_key_data_t keydata, void *param)
 	}
 	if (keydata.key == MLX_KEY_R)
 		reset_map(fdf);
-	if (keydata.key == MLX_KEY_EQUAL && keydata.action == 1)
-		scale_map(fdf, 2);
-	if (keydata.key == MLX_KEY_MINUS && keydata.action == 1)
-		scale_map(fdf, 0.5);
+	if (keydata.key == MLX_KEY_EQUAL && (keydata.action == 1 || keydata.action == 2))
+		fdf->z_scaling -= 0.1;
+	if (keydata.key == MLX_KEY_MINUS && (keydata.action == 1 || keydata.action == 2))
+		fdf->z_scaling += 0.1;
 	if (keydata.key == MLX_KEY_Q
 		&& (keydata.action == 1 || keydata.action == 2))
 		rotate_map(fdf, -0.05);
 	if (keydata.key == MLX_KEY_E
 		&& (keydata.action == 1 || keydata.action == 2))
 		rotate_map(fdf, 0.05);
+	if (keydata.key == MLX_KEY_W)
+		move_map(fdf, 0);
+	if (keydata.key == MLX_KEY_S)
+		move_map(fdf, 1);
+	if (keydata.key == MLX_KEY_A)
+		move_map(fdf, 2);
+	if (keydata.key == MLX_KEY_D)
+		move_map(fdf, 3);
 }
