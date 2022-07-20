@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 13:26:01 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/07 16:42:05 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/20 16:30:01 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	fill_map(char *str_map, t_fdf *fdf)
 	{
 		num = ft_atoi(&str_map[i]);
 		fdf->map[j] = num;
-		fdf->vecmap[j].x = j % fdf->map_width;
-		fdf->vecmap[j].y = j / fdf->map_width;
+		fdf->vecmap[j].x = (j % fdf->map_width) - (fdf->map_width / 2);
+		fdf->vecmap[j].y = (j / fdf->map_width) - (fdf->map_height / 2);
 		fdf->vecmap[j].z = num;
 		j++;
 		numlen = ft_numlen(num);

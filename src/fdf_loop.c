@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 15:56:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/19 15:08:16 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/20 16:54:38 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,96 +38,13 @@ void	clear_image(t_fdf *fdf)
 	}
 }
 
-void	draw_horizontal(t_fdf *fdf, t_3dvec p1, t_3dvec p2)
-{
-	int	dx;
-	int	dy;
-	int	y;
-	int	x;
-	int	d;
-
-	x = p1.x;
-	dx = p2.x - p1.x;
-	y = p1.y - p1.z;
-	dy = (p2.y - p2.z) - (p1.y - p1.z);
-	d = (dy << 1) - dx;
-	while (x <= p2.x && in_window(x, y, fdf))
-	{
-		if (in_window(x, y, fdf))
-			mlx_put_pixel(fdf->render, x + fdf->x_offset,
-				y + fdf->y_offset, 0xffffffff);
-		if (d > 0)
-		{
-			if (p1.y - p1.z < p2.y - p2.z)
-				y++;
-			else
-				y--;
-			d = d - (dx << 1);
-		}
-		d = d + (dy << 1);
-		x++;
-	}
-}
-
-void	draw_vertical(t_fdf *fdf, t_3dvec p1, t_3dvec p2)
-{
-	int	dx;
-	int	dy;
-	int	y;
-	int	x;
-	int	d;
-
-	x = p1.x;
-	y = p1.y - p1.z;
-	dx = p1.x - p2.x;
-	dy = (p2.y - p2.z) - (p1.y - p1.z);
-	d = (dx << 1) - dy;
-	while (y <= p2.y - p2.z && in_window(x, y, fdf))
-	{
-		if (in_window(x, y, fdf))
-			mlx_put_pixel(fdf->render, x + fdf->x_offset,
-				y + fdf->y_offset, 0xffffffff);
-		if (d > 0)
-		{
-			if (p1.x < p2.x)
-				x++;
-			else
-				x--;
-			d = d - (dy << 1);
-		}
-		d = d + (dx << 1);
-		y++;
-	}
-}
-
-void	drawline(t_fdf *fdf, t_3dvec a, t_3dvec b)
-{
-	int	dx;
-	int	dy;
-
-	dx = a.x - b.x;
-	dy = (a.y - a.z) - (b.y - b.z);
-	if (ft_abs(dx) > ft_abs(dy))
-	{
-		if (a.x <= b.x)
-			draw_horizontal(fdf, a, b);
-		else
-			draw_horizontal(fdf, b, a);
-	}
-	else
-	{
-		if (a.y <= b.y)
-			draw_vertical(fdf, a, b);
-		else
-			draw_vertical(fdf, b, a);
-	}
-}
-
 void	fdf_frame(void *param)
 {
 	t_fdf	*fdf;
 	int		x;
 	int		y;
+	t_point	a;
+	t_point	b;
 
 	y = 0;
 	fdf = (t_fdf *)param;
@@ -138,11 +55,21 @@ void	fdf_frame(void *param)
 		while (x < fdf->map_width)
 		{
 			if (x + 1 < fdf->map_width)
-				drawline(fdf, fdf->vecmap[y * fdf->map_width + x],
-					fdf->vecmap[y * fdf->map_width + x + 1]);
+			{
+				a.x = fdf->vecmap[y * fdf->map_width + x].x + fdf->x_offset;
+				a.y = fdf->vecmap[y * fdf->map_width + x].y + fdf->y_offset;
+				b.x = fdf->vecmap[y * fdf->map_width + x + 1].x + fdf->x_offset;
+				b.y = fdf->vecmap[y * fdf->map_width + x + 1].y + fdf->y_offset;
+				drawline(fdf, a, b);
+			}
 			if (y + 1 < fdf->map_height)
-				drawline(fdf, fdf->vecmap[y * fdf->map_width + x],
-					fdf->vecmap[(y + 1) * fdf->map_width + x]);
+			{
+				a.x = fdf->vecmap[y * fdf->map_width + x].x + fdf->x_offset;
+				a.y = fdf->vecmap[y * fdf->map_width + x].y + fdf->y_offset;
+				b.x = fdf->vecmap[(y + 1) * fdf->map_width + x].x + fdf->x_offset;
+				b.y = fdf->vecmap[(y + 1) * fdf->map_width + x].y + fdf->y_offset;
+				drawline(fdf, a, b);
+			}
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/19 14:00:40 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/20 15:59:43 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 # define WINDOW_WIDTH 1980
 # define WINDOW_HEIGHT 1080
 # define SCALE 20
+
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
 
 typedef struct s_3dvec
 {
@@ -64,5 +70,8 @@ t_3dvec	rotate_vec(t_3dvec a, float degrees);
 int		error_check(char *file_name);
 void	error_message(int id);
 void	print_map(t_fdf *fdf);
+
+// Line Drawing
+void	drawline(t_fdf *fdf, t_point a, t_point b);
 
 #endif // FDF_H

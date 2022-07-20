@@ -26,7 +26,8 @@ SRCS	=	main.c \
 			fdf_free.c \
 			fdf_keyhooks.c \
 			map_utils.c \
-			transforms.c
+			transforms.c \
+			drawline.c
 
 INC		= -I ./include
 

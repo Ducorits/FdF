@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 21:30:22 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/09 15:14:39 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/20 16:41:10 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	reset_map(t_fdf *fdf)
 	i = 0;
 	while (i < fdf->map_width * fdf->map_height)
 	{
-		fdf->vecmap[i].x = i % fdf->map_width;
-		fdf->vecmap[i].y = i / fdf->map_width;
+		fdf->vecmap[i].x = (i % fdf->map_width) - (fdf->map_width / 2);
+		fdf->vecmap[i].y = (i / fdf->map_width) - (fdf->map_height / 2);
 		fdf->vecmap[i].z = fdf->map[i];
 		i++;
 	}
