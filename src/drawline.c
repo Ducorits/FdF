@@ -6,12 +6,22 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/20 15:53:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/20 16:50:02 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/21 00:34:26 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 #include "../include/libft.h"
+
+static int	in_window(t_point p)
+{
+	if (p.x < WINDOW_WIDTH
+		&& p.y < WINDOW_HEIGHT
+		&& p.y > 0
+		&& p.x > 0)
+		return (1);
+	return (0);
+}
 
 static int	incre_select(int val, int a, int b)
 {
@@ -35,25 +45,28 @@ void	drawline(t_fdf *fdf, t_point a, t_point b)
 	t_point	cur;
 	int		error;
 
-	draw_setup(a, b, &delta, &incre);
-	error = ((delta.y - delta.x) << 1);
-	cur = b;
-	while (1)
+	if (in_window(a) || in_window(b))
 	{
-		if (cur.x == a.x && cur.y == a.y)
-			break ;
-		if (cur.x > 0 && cur.y > 0 && cur.x < WINDOW_WIDTH
-			&& cur.y < WINDOW_HEIGHT)
-			mlx_put_pixel(fdf->render, cur.x, cur.y, 0xFFFFFFFF);
-		if (error >= 0)
+		draw_setup(a, b, &delta, &incre);
+		error = ((delta.y - delta.x) << 1);
+		cur = b;
+		while (1)
 		{
-			cur.y += incre.y;
-			error -= delta.x << 1;
-		}
-		if (error < 0)
-		{
-			cur.x += incre.x;
-			error += delta.y << 1;
+			if (cur.x == a.x && cur.y == a.y)
+				break ;
+			if (cur.x > 0 && cur.y > 0 && cur.x < WINDOW_WIDTH
+				&& cur.y < WINDOW_HEIGHT)
+				mlx_put_pixel(fdf->render, cur.x, cur.y, 0xFFFFFFFF);
+			if (error >= 0)
+			{
+				cur.y += incre.y;
+				error -= delta.x << 1;
+			}
+			if (error < 0)
+			{
+				cur.x += incre.x;
+				error += delta.y << 1;
+			}
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 21:30:22 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/20 16:41:10 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/20 22:30:41 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	scale_map(t_fdf *fdf, float scale)
 	int	i;
 
 	i = 0;
-	fdf->x_offset -= scale * (fdf->map_width / 2);
-	fdf->y_offset -= scale * (fdf->map_height / 2);
 	while (i < fdf->map_width * fdf->map_height)
 	{
 		fdf->vecmap[i].x *= scale;
@@ -44,8 +42,8 @@ void	reset_map(t_fdf *fdf)
 {
 	int	i;
 
-	fdf->x_offset = (WINDOW_WIDTH / 2) - ((fdf->map_width / 2) * SCALE);
-	fdf->y_offset = (WINDOW_HEIGHT / 2) - ((fdf->map_height / 2) * SCALE);
+	fdf->x_offset = (WINDOW_WIDTH / 2);
+	fdf->y_offset = (WINDOW_HEIGHT / 2);
 	i = 0;
 	while (i < fdf->map_width * fdf->map_height)
 	{
@@ -54,4 +52,17 @@ void	reset_map(t_fdf *fdf)
 		fdf->vecmap[i].z = fdf->map[i];
 		i++;
 	}
+}
+
+// W = 0, S = 1, A = 2, D = 3
+void	move_map(t_fdf *fdf, int dir)
+{
+	if (dir == 0)
+		fdf->y_offset += 10;
+	else if (dir == 1)
+		fdf->y_offset -= 10;
+	else if (dir == 2)
+		fdf->x_offset += 10;
+	else if (dir == 3)
+		fdf->x_offset -= 10;
 }
