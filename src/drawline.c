@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/20 15:53:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/21 00:34:26 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/25 17:56:50 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	drawline(t_fdf *fdf, t_point a, t_point b)
 				break ;
 			if (cur.x > 0 && cur.y > 0 && cur.x < WINDOW_WIDTH
 				&& cur.y < WINDOW_HEIGHT)
-				mlx_put_pixel(fdf->render, cur.x, cur.y, 0xFFFFFFFF);
+				mlx_put_pixel(fdf->image, cur.x, cur.y, 0xFFFFFFFF);
 			if (error >= 0)
 			{
 				cur.y += incre.y;

@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 15:56:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/21 01:10:39 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/25 17:55:47 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	clear_image(t_fdf *fdf)
 	int				*image;
 
 	i = 0;
-	image = (int *)fdf->render->pixels;
-	while (i < fdf->render->height * fdf->render->width)
+	image = (int *)fdf->image->pixels;
+	while (i < fdf->image->height * fdf->image->width)
 	{
 		image[i] = 0;
 		i++;

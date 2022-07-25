@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/21 01:06:17 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/25 18:25:06 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_3dvec
 typedef struct s_fdf
 {
 	mlx_t		*mlx;
-	mlx_image_t	*render;
+	mlx_image_t	*image;
 	int			*map;
 	int			map_width;
 	int			map_height;
@@ -47,6 +47,8 @@ typedef struct s_fdf
 	int			last_mouse_x;
 	int			last_mouse_y;
 	float		z_scaling;
+	float		scale;
+	int			rotating;
 }	t_fdf;
 
 // fdf loop

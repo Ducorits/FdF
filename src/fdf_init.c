@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 13:35:01 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/21 01:11:27 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/25 17:57:20 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ t_fdf	*fdf_init(char *file_name)
 	free(window_name);
 	if (fdf->mlx == 0)
 		fdf_exit("fdf_init", 7);
-	fdf->render = mlx_new_image(fdf->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	if (fdf->render == 0)
+	fdf->image = mlx_new_image(fdf->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (fdf->image == 0)
 		fdf_exit("fdf_init", 8);
-	if (mlx_image_to_window(fdf->mlx, fdf->render, 0, 0) == -1)
+	if (mlx_image_to_window(fdf->mlx, fdf->image, 0, 0) == -1)
 		fdf_exit("fdf_init", 9);
 	fdf->x_offset = (WINDOW_WIDTH / 2);
 	fdf->y_offset = (WINDOW_HEIGHT / 2);
-	fdf->z_scaling = 0.5;
+	fdf->z_scaling = 0.1;
 	return (fdf);
 }
