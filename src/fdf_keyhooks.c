@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 15:02:05 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/21 01:12:40 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/25 17:57:54 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	fdf_keyhook(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_R)
 		reset_map(fdf);
 	if (keydata.key == MLX_KEY_EQUAL && (keydata.action == 1 || keydata.action == 2))
-		fdf->z_scaling -= 0.1;
-	if (keydata.key == MLX_KEY_MINUS && (keydata.action == 1 || keydata.action == 2))
 		fdf->z_scaling += 0.1;
+	if (keydata.key == MLX_KEY_MINUS && (keydata.action == 1 || keydata.action == 2))
+		fdf->z_scaling -= 0.1;
 	if (keydata.key == MLX_KEY_Q
 		&& (keydata.action == 1 || keydata.action == 2))
 		rotate_map(fdf, -0.05);
