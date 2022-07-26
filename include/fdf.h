@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/21 01:06:17 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/26 12:06:56 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ typedef struct s_3dvec
 	float	y;
 	float	z;
 }	t_3dvec;
+
+typedef struct s_mat4x4
+{
+	float	m[4][4];
+}	t_mat4x4;
 
 typedef struct s_fdf
 {
