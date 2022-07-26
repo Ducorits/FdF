@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/26 12:19:48 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/26 14:08:23 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,18 @@ typedef struct s_fdf
 	float		z_scaling;
 	float		scale;
 	int			rotating;
+	t_mat4x4	proj;
+	float		fnear;
+	float		ffar;
+	float		ffov;
+	float		faspect_ratio;
+	float		ffov_rad;
 }	t_fdf;
+
+// Inits
+t_fdf	*fdf_init(char *file_name);
+int		map_init(char *file_name, t_fdf *fdf);
+void	perspective_init(t_fdf *fdf);
 
 // fdf loop
 void	fdf_loop(t_fdf *fdf);
@@ -64,13 +75,12 @@ void	fdf_keyhook(mlx_key_data_t keydata, void *param);
 void	fdf_scrollhook(double xdelta, double ydelta, void *param);
 
 // Utils
-t_fdf	*fdf_init(char *file_name);
 void	fdf_free(t_fdf *fdf);
 void	fdf_exit(const char *fname, int error);
 void	clear_image(t_fdf *fdf);
+int		in_window(t_point p);
 
 // Map utils
-int		map_init(char *file_name, t_fdf *fdf);
 void	fill_map(char *str_map, t_fdf *fdf);
 void	rotate_map(t_fdf *fdf, float degrees);
 void	scale_map(t_fdf *fdf, float scale);
@@ -79,6 +89,9 @@ void	move_map(t_fdf *fdf, int dir);
 
 // Transforms
 t_3dvec	rotate_vec(t_3dvec a, float degrees);
+void	multiply_matrix_vec(t_3dvec *i, t_3dvec *o, t_mat4x4 m);
+t_point	transform(t_3dvec p3d, t_fdf *fdf);
+t_point	perspective_transform(t_3dvec p, t_fdf *fdf);
 
 // for debug
 int		error_check(char *file_name);
@@ -86,6 +99,7 @@ void	error_message(int id);
 void	print_map(t_fdf *fdf);
 
 // Line Drawing
+t_3dvec	get_point(int x, int y, t_fdf *fdf);
 void	drawline(t_fdf *fdf, t_point a, t_point b);
 
 #endif // FDF_H

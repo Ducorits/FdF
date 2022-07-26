@@ -6,13 +6,70 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 15:56:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/25 17:55:47 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/26 19:01:12 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "MLX42.h"
 #include "libft.h"
+
+static void	prep_lines(int x, int y, t_fdf *fdf)
+{
+	t_3dvec	a3d;
+	t_3dvec	b3d;
+	t_point	a;
+	t_point	b;
+
+	if (x + 1 < fdf->map_width)
+	{
+		a3d = get_point(x, y, fdf);
+		b3d = get_point(x + 1, y, fdf);
+		a =transform(a3d, fdf);
+		b = transform(b3d, fdf);
+		if (in_window(a) || in_window(b))
+			drawline(fdf, a, b);
+	}
+	if (y + 1 < fdf->map_height)
+	{
+		a3d = get_point(x, y, fdf);
+		b3d = get_point(x, y + 1, fdf);
+		a = transform(a3d, fdf);
+		b = transform(b3d, fdf);
+		if (in_window(a) || in_window(b))
+			drawline(fdf, a, b);
+	}
+}
+
+static void	update_mouse(t_fdf *fdf)
+{
+	fdf->last_mouse_x = fdf->mouse_x;
+	fdf->last_mouse_y = fdf->mouse_y;
+	mlx_get_mouse_pos(fdf->mlx, &fdf->mouse_x, &fdf->mouse_y);
+	if (mlx_is_mouse_down(fdf->mlx, MLX_MOUSE_BUTTON_LEFT))
+	{
+		fdf->x_offset += fdf->mouse_x - fdf->last_mouse_x;
+		fdf->y_offset += fdf->mouse_y - fdf->last_mouse_y;
+	}
+}
+
+static void	draw_image(t_fdf *fdf)
+{
+	int		x;
+	int		y;
+
+	y = 0;
+	while (y < fdf->map_height)
+	{
+		x = 0;
+		while (x < fdf->map_width)
+		{
+			prep_lines(x, y, fdf);
+			x++;
+		}
+		y++;
+	}
+}
 
 void	clear_image(t_fdf *fdf)
 {
@@ -31,47 +88,11 @@ void	clear_image(t_fdf *fdf)
 void	fdf_frame(void *param)
 {
 	t_fdf	*fdf;
-	int		x;
-	int		y;
-	t_point	a;
-	t_point	b;
 
-	y = 0;
 	fdf = (t_fdf *)param;
+	update_mouse(fdf);
 	clear_image(fdf);
-	fdf->last_mouse_x = fdf->mouse_x;
-	fdf->last_mouse_y = fdf->mouse_y;
-	mlx_get_mouse_pos(fdf->mlx, &fdf->mouse_x, &fdf->mouse_y);
-	if (mlx_is_mouse_down(fdf->mlx, MLX_MOUSE_BUTTON_LEFT))
-	{
-		fdf->x_offset += fdf->mouse_x - fdf->last_mouse_x;
-		fdf->y_offset += fdf->mouse_y - fdf->last_mouse_y;
-	}
-	while (y < fdf->map_height)
-	{
-		x = 0;
-		while (x < fdf->map_width)
-		{
-			if (x + 1 < fdf->map_width)
-			{
-				a.x = fdf->vecmap[y * fdf->map_width + x].x + fdf->x_offset;
-				a.y = fdf->vecmap[y * fdf->map_width + x].y + fdf->y_offset - (fdf->vecmap[y * fdf->map_width + x].z * fdf->z_scaling);
-				b.x = fdf->vecmap[y * fdf->map_width + x + 1].x + fdf->x_offset;
-				b.y = fdf->vecmap[y * fdf->map_width + x + 1].y + fdf->y_offset - (fdf->vecmap[y * fdf->map_width + x + 1].z * fdf->z_scaling);
-				drawline(fdf, a, b);
-			}
-			if (y + 1 < fdf->map_height)
-			{
-				a.x = fdf->vecmap[y * fdf->map_width + x].x + fdf->x_offset;
-				a.y = fdf->vecmap[y * fdf->map_width + x].y + fdf->y_offset - (fdf->vecmap[y * fdf->map_width + x].z * fdf->z_scaling);
-				b.x = fdf->vecmap[(y + 1) * fdf->map_width + x].x + fdf->x_offset;
-				b.y = fdf->vecmap[(y + 1) * fdf->map_width + x].y + fdf->y_offset - (fdf->vecmap[(y + 1) * fdf->map_width + x].z * fdf->z_scaling);
-				drawline(fdf, a, b);
-			}
-			x++;
-		}
-		y++;
-	}
+	draw_image(fdf);
 }
 
 void	fdf_loop(t_fdf *fdf)
