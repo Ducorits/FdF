@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/26 14:08:23 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/27 14:20:38 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_fdf
 	float		ffar;
 	float		ffov;
 	float		faspect_ratio;
+	float		y_aratio;
 	float		ffov_rad;
 }	t_fdf;
 
