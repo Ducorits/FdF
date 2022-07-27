@@ -28,7 +28,8 @@ SRCS	=	main.c \
 			map_utils.c \
 			transforms.c \
 			drawline.c \
-			fdf_scrollhook.c
+			fdf_scrollhook.c \
+			perspective.c
 
 INC		= -I ./include
 

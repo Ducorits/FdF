@@ -6,14 +6,24 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/20 15:53:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/25 17:56:50 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/26 13:51:10 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 #include "../include/libft.h"
 
-static int	in_window(t_point p)
+t_3dvec	get_point(int x, int y, t_fdf *fdf)
+{
+	t_3dvec	p;
+
+	p.x = fdf->vecmap[y * fdf->map_width + x].x;
+	p.y = fdf->vecmap[y * fdf->map_width + x].y;
+	p.z = fdf->vecmap[y * fdf->map_width + x].z;
+	return (p);
+}
+
+int	in_window(t_point p)
 {
 	if (p.x < WINDOW_WIDTH
 		&& p.y < WINDOW_HEIGHT
@@ -45,28 +55,22 @@ void	drawline(t_fdf *fdf, t_point a, t_point b)
 	t_point	cur;
 	int		error;
 
-	if (in_window(a) || in_window(b))
+	draw_setup(a, b, &delta, &incre);
+	error = ((delta.y - delta.x) << 1);
+	cur = b;
+	while (cur.x != a.x || cur.y != a.y)
 	{
-		draw_setup(a, b, &delta, &incre);
-		error = ((delta.y - delta.x) << 1);
-		cur = b;
-		while (1)
+		if (in_window(cur))
+			mlx_put_pixel(fdf->image, cur.x, cur.y, 0xFFFFFFFF);
+		if (error >= 0)
 		{
-			if (cur.x == a.x && cur.y == a.y)
-				break ;
-			if (cur.x > 0 && cur.y > 0 && cur.x < WINDOW_WIDTH
-				&& cur.y < WINDOW_HEIGHT)
-				mlx_put_pixel(fdf->image, cur.x, cur.y, 0xFFFFFFFF);
-			if (error >= 0)
-			{
-				cur.y += incre.y;
-				error -= delta.x << 1;
-			}
-			if (error < 0)
-			{
-				cur.x += incre.x;
-				error += delta.y << 1;
-			}
+			cur.y += incre.y;
+			error -= delta.x << 1;
+		}
+		if (error < 0)
+		{
+			cur.x += incre.x;
+			error += delta.y << 1;
 		}
 	}
 }

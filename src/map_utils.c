@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 21:30:22 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/20 22:30:41 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/26 14:38:08 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	reset_map(t_fdf *fdf)
 
 	fdf->x_offset = (WINDOW_WIDTH / 2);
 	fdf->y_offset = (WINDOW_HEIGHT / 2);
+	fdf->z_scaling = 0.1;
+	fdf->scale = 10;
 	i = 0;
 	while (i < fdf->map_width * fdf->map_height)
 	{
@@ -52,6 +54,7 @@ void	reset_map(t_fdf *fdf)
 		fdf->vecmap[i].z = fdf->map[i];
 		i++;
 	}
+	perspective_init(fdf);
 }
 
 // W = 0, S = 1, A = 2, D = 3
