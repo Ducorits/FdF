@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 15:56:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/27 14:21:41 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/27 16:41:50 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,25 @@ static void	prep_lines(int x, int y, t_fdf *fdf)
 	{
 		a3d = get_point(x, y, fdf);
 		b3d = get_point(x + 1, y, fdf);
-		a = perspective_transform(a3d, fdf);
-		b = perspective_transform(b3d, fdf);
-		if (in_window(a) || in_window(b))
-			drawline(fdf, a, b);
+		if (a3d.z >= 0 && b3d.z >= 0)
+		{
+			a = perspective_transform(a3d, fdf);
+			b = perspective_transform(b3d, fdf);
+			if (in_window(a) || in_window(b))
+				drawline(fdf, a, b);
+		}
 	}
 	if (y + 1 < fdf->map_height)
 	{
 		a3d = get_point(x, y, fdf);
 		b3d = get_point(x, y + 1, fdf);
-		a = perspective_transform(a3d, fdf);
-		b = perspective_transform(b3d, fdf);
-		if (in_window(a) || in_window(b))
-			drawline(fdf, a, b);
+		if (a3d.z >= 0 && b3d.z >= 0)
+		{
+			a = perspective_transform(a3d, fdf);
+			b = perspective_transform(b3d, fdf);
+			if (in_window(a) || in_window(b))
+				drawline(fdf, a, b);
+		}
 	}
 }
 
