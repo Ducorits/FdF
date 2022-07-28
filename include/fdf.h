@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/28 15:06:40 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/28 20:37:58 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,15 @@ void	rotate_map(t_fdf *fdf, float degrees);
 void	scale_map(t_fdf *fdf, float scale);
 void	reset_map(t_fdf *fdf);
 void	move_map(t_fdf *fdf, int dir);
+void	rotate_x(t_fdf *fdf, float degrees);
+void	rotate_y(t_fdf *fdf, float degrees);
+void	rotate_z(t_fdf *fdf, float degrees);
 
 // Transforms
 t_3dvec	rotate_vec(t_3dvec a, float degrees);
 t_3dvec	rotate_vecx(t_3dvec a, float degrees);
+t_3dvec	rotate_vecy(t_3dvec a, float degrees);
+t_3dvec	rotate_vecz(t_3dvec a, float degrees);
 void	multiply_matrix_vec(t_3dvec *i, t_3dvec *o, t_mat4x4 m);
 t_point	transform(t_3dvec p3d, t_fdf *fdf);
 t_point	perspective_transform(t_3dvec p, t_fdf *fdf);

@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/09 14:55:24 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/28 15:18:28 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/28 20:40:51 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,6 @@ t_3dvec	scale_vec(t_3dvec a, float scalar)
 	return (a);
 }
 
-t_3dvec	rotate_vec(t_3dvec a, float degrees)
-{
-	t_3dvec	temp;
-
-	temp = a;
-	a.x = (temp.x * cos(degrees)) - (temp.y * sin(degrees));
-	a.y = (temp.x * sin(degrees)) + (temp.y * cos(degrees));
-	return (a);
-}
-
 t_3dvec	rotate_vecx(t_3dvec a, float degrees)
 {
 	t_3dvec	temp;
@@ -55,6 +45,28 @@ t_3dvec	rotate_vecx(t_3dvec a, float degrees)
 	a.x = (temp.x * 1) + (temp.y * 0) + (temp.z * 0);
 	a.y = (temp.x * 0) + (temp.y * cos(degrees)) - (temp.z * sin(degrees));
 	a.z = (temp.x * 0) + (temp.y * sin(degrees)) + (temp.z * cos(degrees));
+	return (a);
+}
+
+t_3dvec	rotate_vecy(t_3dvec a, float degrees)
+{
+	t_3dvec	temp;
+
+	temp = a;
+	a.x = (temp.x * cos(degrees)) + (temp.y * 0) + (temp.z * sin(degrees));
+	a.y = (temp.x * 0) + (temp.y * 1) - (temp.z * 0);
+	a.z = -(temp.x * sin(degrees)) + (temp.y * 0) + (temp.z * cos(degrees));
+	return (a);
+}
+
+t_3dvec	rotate_vecz(t_3dvec a, float degrees)
+{
+	t_3dvec	temp;
+
+	temp = a;
+	a.x = (temp.x * cos(degrees)) - (temp.y * sin(degrees)) + (temp.z * 0);
+	a.y = (temp.x * sin(degrees)) + (temp.y * cos(degrees)) + (temp.z * 0);
+	a.z = (temp.x * 0) + (temp.y * 0) + (temp.z * 1);
 	return (a);
 }
 

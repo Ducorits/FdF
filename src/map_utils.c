@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 21:30:22 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/28 20:28:44 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/28 20:31:44 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,26 @@ void	rotate_x(t_fdf *fdf, float degrees)
 	}
 }
 
-void	rotate_map(t_fdf *fdf, float degrees)
+void	rotate_y(t_fdf *fdf, float degrees)
 {
 	int	i;
 
 	i = 0;
 	while (i < fdf->map_width * fdf->map_height)
 	{
-		fdf->vecmap[i] = rotate_vecx(fdf->vecmap[i], degrees);
+		fdf->vecmap[i] = rotate_vecy(fdf->vecmap[i], degrees);
+		i++;
+	}
+}
+
+void	rotate_z(t_fdf *fdf, float degrees)
+{
+	int	i;
+
+	i = 0;
+	while (i < fdf->map_width * fdf->map_height)
+	{
+		fdf->vecmap[i] = rotate_vecz(fdf->vecmap[i], degrees);
 		i++;
 	}
 }
