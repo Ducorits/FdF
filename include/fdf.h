@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/27 14:20:38 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/28 15:06:40 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	perspective_init(t_fdf *fdf);
 void	fdf_loop(t_fdf *fdf);
 
 // fdf hooks
-void	fdf_keyhook(mlx_key_data_t keydata, void *param);
+void	fdf_keycheck(t_fdf *fdf);
 void	fdf_scrollhook(double xdelta, double ydelta, void *param);
 
 // Utils
@@ -90,6 +90,7 @@ void	move_map(t_fdf *fdf, int dir);
 
 // Transforms
 t_3dvec	rotate_vec(t_3dvec a, float degrees);
+t_3dvec	rotate_vecx(t_3dvec a, float degrees);
 void	multiply_matrix_vec(t_3dvec *i, t_3dvec *o, t_mat4x4 m);
 t_point	transform(t_3dvec p3d, t_fdf *fdf);
 t_point	perspective_transform(t_3dvec p, t_fdf *fdf);

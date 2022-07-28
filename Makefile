@@ -24,7 +24,7 @@ SRCS	=	main.c \
 			fdf_exit.c \
 			fdf_loop.c \
 			fdf_free.c \
-			fdf_keyhooks.c \
+			fdf_keycheck.c \
 			map_utils.c \
 			transforms.c \
 			drawline.c \

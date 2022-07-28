@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/26 12:22:24 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/27 14:45:59 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/28 13:26:36 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ t_point	perspective_transform(t_3dvec p, t_fdf *fdf)
 	new_p.y *= 1000;
 	new_p.x += 1.0f;
 	new_p.y += 1.0f;
-	new_p.x += WINDOW_WIDTH / 2;
-	new_p.y += WINDOW_HEIGHT / 2;
+	new_p.x += WINDOW_WIDTH >> 1;
+	new_p.y += WINDOW_HEIGHT >> 1;
 	p2d.x = new_p.x;
 	p2d.y = new_p.y;
 	return (p2d);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   fdf_keyhooks.c                                     :+:    :+:            */
+/*   fdf_keycheck.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 15:02:05 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/25 17:57:54 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/28 14:59:17 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,29 @@
 // TODO
 //
 
-void	fdf_keyhook(mlx_key_data_t keydata, void *param)
+void	fdf_keycheck(t_fdf *fdf)
 {
-	t_fdf	*fdf;
-
-	fdf = (t_fdf *)param;
-	if (keydata.key == MLX_KEY_ESCAPE)
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_ESCAPE))
 	{
 		fdf_free(fdf);
 		fdf_exit("fdf_keyhook", 0);
 	}
-	if (keydata.key == MLX_KEY_R)
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_R))
 		reset_map(fdf);
-	if (keydata.key == MLX_KEY_EQUAL && (keydata.action == 1 || keydata.action == 2))
-		fdf->z_scaling += 0.1;
-	if (keydata.key == MLX_KEY_MINUS && (keydata.action == 1 || keydata.action == 2))
-		fdf->z_scaling -= 0.1;
-	if (keydata.key == MLX_KEY_Q
-		&& (keydata.action == 1 || keydata.action == 2))
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_EQUAL))
+		fdf->z_scaling += 0.01;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_MINUS))
+		fdf->z_scaling -= 0.01;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_Q))
 		rotate_map(fdf, -0.05);
-	if (keydata.key == MLX_KEY_E
-		&& (keydata.action == 1 || keydata.action == 2))
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_E))
 		rotate_map(fdf, 0.05);
-	if (keydata.key == MLX_KEY_W)
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_W))
 		move_map(fdf, 0);
-	if (keydata.key == MLX_KEY_S)
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_S))
 		move_map(fdf, 1);
-	if (keydata.key == MLX_KEY_A)
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_A))
 		move_map(fdf, 2);
-	if (keydata.key == MLX_KEY_D)
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_D))
 		move_map(fdf, 3);
 }
