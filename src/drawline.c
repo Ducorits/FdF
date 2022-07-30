@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/20 15:53:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/28 13:46:53 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/30 13:47:21 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ t_3dvec	get_point(int x, int y, t_fdf *fdf)
 	return (p);
 }
 
-int	in_window(t_point p)
+int	in_window(t_intvec p)
 {
 	if (p.x < WINDOW_WIDTH
 		&& p.y < WINDOW_HEIGHT
 		&& p.y > 0
-		&& p.x > 0)
+		&& p.x > 0
+		&& p.z > 0
+		&& p.z < 1000)
 		return (1);
 	return (0);
 }
@@ -40,7 +42,7 @@ static int	incre_select(int val, int a, int b)
 	return (b);
 }
 
-static void	draw_setup(t_point a, t_point b, t_point *delta, t_point *incre)
+static void	draw_setup(t_intvec a, t_intvec b, t_point *delta, t_point *incre)
 {
 	delta->x = ft_abs(a.x - b.x);
 	delta->y = ft_abs(a.y - b.y);
@@ -48,12 +50,12 @@ static void	draw_setup(t_point a, t_point b, t_point *delta, t_point *incre)
 	incre->y = incre_select(b.y < a.y, 1, -1);
 }
 
-void	drawline(t_fdf *fdf, t_point a, t_point b)
+void	drawline(t_fdf *fdf, t_intvec a, t_intvec b)
 {
-	t_point	delta;
-	t_point	incre;
-	t_point	cur;
-	int		error;
+	t_point		delta;
+	t_point		incre;
+	t_intvec	cur;
+	int			error;
 
 	draw_setup(a, b, &delta, &incre);
 	error = ((delta.y - delta.x) << 1);

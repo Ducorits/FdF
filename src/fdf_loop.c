@@ -6,44 +6,71 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 15:56:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/28 15:19:41 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/30 17:10:32 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "MLX42.h"
 #include "libft.h"
+#include <math.h>
+
+t_intvec	veci(t_3dvec vecf)
+{
+	t_intvec	veci;
+
+	veci.x = vecf.x;
+	veci.y = vecf.y;
+	veci.z = vecf.z;
+	return (veci);
+}
 
 static void	prep_lines(int x, int y, t_fdf *fdf)
 {
-	t_3dvec	a3d;
-	t_3dvec	b3d;
-	t_point	a;
-	t_point	b;
+	t_3dvec	a;
+	t_3dvec	b;
 
 	if (x + 1 < fdf->map_width)
 	{
-		a3d = get_point(x, y, fdf);
-		b3d = get_point(x + 1, y, fdf);
-		// if (a3d.z >= 0 && b3d.z >= 0)
-		// {
-			a = perspective_transform(a3d, fdf);
-			b = perspective_transform(b3d, fdf);
-			if (in_window(a) || in_window(b))
-				drawline(fdf, a, b);
-		// }
+		a = get_point(x, y, fdf);
+		b = get_point(x + 1, y, fdf);
+		a.z = a.z * fdf->z_scaling;
+		b.z = b.z * fdf->z_scaling;
+		a = rotate_vecx(a, fdf->x_rot);
+		a = rotate_vecy(a, fdf->y_rot);
+		a = rotate_vecz(a, fdf->z_rot);
+		b = rotate_vecx(b, fdf->x_rot);
+		b = rotate_vecy(b, fdf->y_rot);
+		b = rotate_vecz(b, fdf->z_rot);
+		if ((int)a.z + 100 + (fdf->z_offset >> 2) > 0
+			&& (int)b.z + 100 + (fdf->z_offset >> 2) > 0)
+		{
+			a = perspective_transform(a, fdf);
+			b = perspective_transform(b, fdf);
+			if (in_window(veci(a)) || in_window(veci(b)))
+				drawline(fdf, veci(a), veci(b));
+		}
 	}
 	if (y + 1 < fdf->map_height)
 	{
-		a3d = get_point(x, y, fdf);
-		b3d = get_point(x, y + 1, fdf);
-		// if (a3d.z >= 0 && b3d.z >= 0)
-		// {
-			a = perspective_transform(a3d, fdf);
-			b = perspective_transform(b3d, fdf);
-			if (in_window(a) || in_window(b))
-				drawline(fdf, a, b);
-		// }
+		a = get_point(x, y, fdf);
+		b = get_point(x, y + 1, fdf);
+		a.z = a.z * fdf->z_scaling;
+		b.z = b.z * fdf->z_scaling;
+		a = rotate_vecx(a, fdf->x_rot);
+		a = rotate_vecy(a, fdf->y_rot);
+		a = rotate_vecz(a, fdf->z_rot);
+		b = rotate_vecx(b, fdf->x_rot);
+		b = rotate_vecy(b, fdf->y_rot);
+		b = rotate_vecz(b, fdf->z_rot);
+		if ((int)a.z + 100 + (fdf->z_offset >> 2) > 0
+			&& (int)b.z + 100 + (fdf->z_offset >> 2) > 0)
+		{
+			a = perspective_transform(a, fdf);
+			b = perspective_transform(b, fdf);
+			if (in_window(veci(a)) || in_window(veci(b)))
+				drawline(fdf, veci(a), veci(b));
+		}
 	}
 }
 

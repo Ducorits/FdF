@@ -51,6 +51,12 @@ else
 CFLAGS	= -Wall -Wextra -Werror
 endif
 
+ifeq ($(OPTIMIZE), 1)
+CFLAGS	= -Wall -Wextra -Werror -o3
+else
+CFLAGS	= -Wall -Wextra -Werror
+endif
+
 NAME	= fdf
 
 OBJS	= $(patsubst %.c, obj/%.o, $(SRCS))
