@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/30 16:48:48 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/31 18:45:03 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_fdf
 }	t_fdf;
 
 // Inits
-t_fdf		*fdf_init(char *file_name);
+t_fdf		fdf_init(char *file_name);
 int			map_init(char *file_name, t_fdf *fdf);
 void		perspective_init(t_fdf *fdf);
 

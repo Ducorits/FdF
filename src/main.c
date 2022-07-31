@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:44:57 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/07 22:15:05 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/31 18:59:56 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_fdf	*fdf;
+	t_fdf	fdf;
 
 	if (argc > 2)
 		fdf_exit("main", 6);
@@ -27,9 +27,8 @@ int	main(int argc, char **argv)
 	{
 		error_check(argv[1]);
 		fdf = fdf_init(argv[1]);
-		fdf_loop(fdf);
-		// clear_image(fdf);
-		fdf_free(fdf);
+		fdf_loop(&fdf);
+		fdf_free(&fdf);
 	}
 	return (0);
 }

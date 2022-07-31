@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 16:03:36 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/25 17:56:36 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/31 18:45:48 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	fdf_free(t_fdf *fdf)
 		mlx_delete_image(fdf->mlx, fdf->image);
 	if (fdf->mlx)
 		mlx_terminate(fdf->mlx);
-	if (fdf)
-		free(fdf);
+	// if (fdf)
+	// 	free(fdf);
 }

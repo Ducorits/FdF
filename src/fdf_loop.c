@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 15:56:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/30 17:10:32 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/07/31 18:20:40 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ static void	prep_lines(int x, int y, t_fdf *fdf)
 		b = rotate_vecy(b, fdf->y_rot);
 		b = rotate_vecz(b, fdf->z_rot);
 		if ((int)a.z + 100 + (fdf->z_offset >> 2) > 0
-			&& (int)b.z + 100 + (fdf->z_offset >> 2) > 0)
+			&& (int)b.z + 100 + (fdf->z_offset >> 2) > 0
+			&& (int)a.z + 100 + (fdf->z_offset >> 2) < fdf->ffar
+			&& (int)b.z + 100 + (fdf->z_offset >> 2) < fdf->ffar)
 		{
 			a = perspective_transform(a, fdf);
 			b = perspective_transform(b, fdf);
@@ -64,7 +66,9 @@ static void	prep_lines(int x, int y, t_fdf *fdf)
 		b = rotate_vecy(b, fdf->y_rot);
 		b = rotate_vecz(b, fdf->z_rot);
 		if ((int)a.z + 100 + (fdf->z_offset >> 2) > 0
-			&& (int)b.z + 100 + (fdf->z_offset >> 2) > 0)
+			&& (int)b.z + 100 + (fdf->z_offset >> 2) > 0
+			&& (int)a.z + 100 + (fdf->z_offset >> 2) < fdf->ffar
+			&& (int)b.z + 100 + (fdf->z_offset >> 2) < fdf->ffar)
 		{
 			a = perspective_transform(a, fdf);
 			b = perspective_transform(b, fdf);
