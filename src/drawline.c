@@ -6,12 +6,13 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/20 15:53:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/01 17:44:45 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/02 02:27:27 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 #include "../include/libft.h"
+#include <stdio.h>
 
 t_3dvec	get_point(int x, int y, t_fdf *fdf)
 {
@@ -59,43 +60,70 @@ int	ft_max(int a, int b)
 	return (b);
 }
 
+// static int	get_step_count(t_intvec delta)
+// {
+
+// }
+
 void	drawline(t_fdf *fdf, t_intvec a, t_intvec b)
 {
 	t_intvec	delta;
 	t_intvec	incre;
 	t_intvec	cur;
 	t_intvec	error;
+	float		step;
+	// float		step_count;
+	int			color;
 
 	draw_setup(a, b, &delta, &incre);
-	error.x = (delta.x >= delta.y) + (delta.x >= delta.z);
-	error.y = (delta.y >= delta.z) + (delta.y > delta.x);
-	error.z = (delta.z > delta.x) + (delta.z > delta.y);
-	if (delta.x == 0)
-		error.x = -2000000;
-	if (delta.y == 0)
-		error.y = -2000000;
-	if (delta.z == 0)
-		error.z = -2000000;
+	// error.x = (delta.x >= delta.y) + (delta.x >= delta.z);
+	// error.y = (delta.y >= delta.z) + (delta.y > delta.x);
+	// error.z = (delta.z > delta.x) + (delta.z > delta.y);
+	// if (delta.x == 0)
+	error.x = delta.x;
+	// if (delta.y == 0)
+	error.y = delta.y;
+	// if (delta.z == 0)
+	// 	error.z = -2000000;
 	cur = b;
+	step = 1;
+	// step_count = delta.x + delta.y;
 	while (cur.x != a.x || cur.y != a.y)
 	{
+		// color = ((((float)delta.z / step_count) * step) + a.z) / 1000 * 255;
+		color = (float)a.z / 1000 * 255;
+		// if (delta.z != 0)
+		// 	printf("delta.z: %i\n", delta.z);
+		// printf("delta.z: %i, step: %f, step_count: %f, color: %i\n", delta.z, step, step_count, color);
 		if (in_window(cur))
-			((int *)fdf->image->pixels)
-			[(cur.y * fdf->image->width + cur.x)] = 0xFF00FFFF;
-		if (error.x >= error.y && error.x >= error.z)
+		{
+			(fdf->image->pixels)
+			[(cur.y * fdf->image->width + cur.x) * 4] = color;
+			(fdf->image->pixels)
+			[(cur.y * fdf->image->width + cur.x) * 4 + 1] = color;
+			(fdf->image->pixels)
+			[(cur.y * fdf->image->width + cur.x) * 4 + 2] = color;
+			(fdf->image->pixels)
+			[(cur.y * fdf->image->width + cur.x) * 4 + 3] = color;
+		}
+		if (error.x >= error.y)
 		{
 			cur.x += incre.x;
-			error.x -= ft_max(delta.y, 1) * ft_max(delta.z, 1) * 3;
+			error.x -= delta.y;
+			step++;
+			// error.x -= ft_max(delta.y, 1) * ft_max(delta.z, 1) * 3;
 		}
-		if (error.y >= error.x && error.y >= error.z)
+		else if (error.y > error.x)
 		{
 			cur.y += incre.y;
-			error.y -= ft_max(delta.x, 1) * ft_max(delta.z, 1) * 3;
+			error.y -= delta.x;
+			step++;
+			// error.y -= ft_max(delta.x, 1) * ft_max(delta.z, 1) * 3;
 		}
-		if (error.z >= error.x && error.z >= error.y)
-		{
-			cur.z += incre.z;
-			error.z -= ft_max(delta.y, 1) * ft_max(delta.x, 1) * 3;
-		}
+		// if (error.z >= error.x && error.z >= error.y)
+		// {
+		// 	cur.z += incre.z;
+		// 	// error.z -= ft_max(delta.y, 1) * ft_max(delta.x, 1) * 3;
+		// }
 	}
 }

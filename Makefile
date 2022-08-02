@@ -46,15 +46,13 @@ endif
 MATHLIB	= -lm
 
 ifeq ($(TESTFLAGS), 1)
-CFLAGS	= -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -g
 else
 CFLAGS	= -Wall -Wextra -Werror
 endif
 
 ifeq ($(OPTIMIZE), 1)
-CFLAGS	= -Wall -Wextra -Werror -o3
-else
-CFLAGS	= -Wall -Wextra -Werror
+CFLAGS	= $(CFLAGS) -o3
 endif
 
 NAME	= fdf
