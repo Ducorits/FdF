@@ -31,6 +31,20 @@ SRCS	=	main.c \
 			fdf_scrollhook.c \
 			perspective.c
 
+TEST_SRC=	error_check.c \
+			debug.c \
+			fdf_init.c \
+			map_init.c \
+			fdf_exit.c \
+			fdf_loop.c \
+			fdf_free.c \
+			fdf_keycheck.c \
+			map_utils.c \
+			transforms.c \
+			drawline.c \
+			fdf_scrollhook.c \
+			perspective.c
+
 INC		= -I ./include
 
 LIBFT	= libft/libft.a
@@ -58,10 +72,11 @@ endif
 NAME	= fdf
 
 OBJS	= $(patsubst %.c, obj/%.o, $(SRCS))
+TEST_OBJ= $(patsubst %.c, obj/%.o, $(TEST_SRC))
 
 all: heading comp
 
-.PHONY: heading comp re rere
+.PHONY: heading comp re rere test
 
 comp: $(NAME)
 
@@ -84,7 +99,11 @@ $(LIBFT):
 $(MLX):
 	@make -C MLX42/
 
-run_test:
+test: test/test.c $(MLX) $(LIBFT) $(TEST_OBJ)
+	@printf "$(INSET)$(ORANGE)Running Tests:\n"
+	@$(CC) $(CFLAGS) $(INC) -c test/test.c -o test/test.o
+	@$(CC) $(CFLAGS) $(TEST_OBJ) test/test.o $(INC) $(LIBFT) $(MLX) $(GLFW) $(MATHLIB) -o test.out
+	@./test.out
 
 clean:
 	@rm -rf obj
@@ -97,6 +116,10 @@ fclean: clean
 depclean:
 	@make -C libft/ fclean
 	@make -C MLX42/ fclean
+
+testclean:fclean depclean
+	@rm -rf test/test.o
+	@rm -rf test.out
 
 re: heading fclean comp
 
