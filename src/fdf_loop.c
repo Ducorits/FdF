@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 15:56:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/31 18:20:40 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/02 14:24:40 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ static void	prep_lines(int x, int y, t_fdf *fdf)
 		{
 			a = perspective_transform(a, fdf);
 			b = perspective_transform(b, fdf);
-			if (in_window(veci(a)) || in_window(veci(b)))
-				drawline(fdf, veci(a), veci(b));
+			if (in_window(veci(a)))
+				drawline(fdf, veci(b), veci(a), b, a);
+			else if (in_window(veci(b)))
+				drawline(fdf, veci(a), veci(b), a, b);
 		}
 	}
 	if (y + 1 < fdf->map_height)
@@ -72,8 +74,10 @@ static void	prep_lines(int x, int y, t_fdf *fdf)
 		{
 			a = perspective_transform(a, fdf);
 			b = perspective_transform(b, fdf);
-			if (in_window(veci(a)) || in_window(veci(b)))
-				drawline(fdf, veci(a), veci(b));
+			if (in_window(veci(a)))
+				drawline(fdf, veci(b), veci(a), b, a);
+			else if (in_window(veci(b)))
+				drawline(fdf, veci(a), veci(b), a, b);
 		}
 	}
 }

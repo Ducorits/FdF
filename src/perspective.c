@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/26 12:22:24 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/02 02:22:32 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/02 14:43:48 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ t_3dvec	perspective_transform(t_3dvec p, t_fdf *fdf)
 	multiply_matrix_vec(&p, &new_p, fdf->proj);
 	// new_p.x += 1.0f;
 	// new_p.y += 1.0f;
-	// new_p.z += 1.0f;
+	new_p.z = (new_p.z + 1.0f) * .5;
 	new_p.x *= 1000;
 	new_p.y *= 1000;
-	new_p.z *= 1000;
+	new_p.z *= 100;
+	// new_p.z += 0.4;
 	new_p.x += WINDOW_WIDTH >> 1;
 	new_p.y += WINDOW_HEIGHT >> 1;
-	// new_p.z -= 500;
+	// new_p.z += 500;
 	return (new_p);
 }
 

@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/31 18:45:03 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/02 14:24:10 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,6 @@ void		print_map(t_fdf *fdf);
 
 // Line Drawing
 t_3dvec		get_point(int x, int y, t_fdf *fdf);
-void		drawline(t_fdf *fdf, t_intvec a, t_intvec b);
+void	drawline(t_fdf *fdf, t_intvec a, t_intvec b, t_3dvec af, t_3dvec bf);
 
 #endif // FDF_H
