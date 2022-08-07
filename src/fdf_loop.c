@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 15:56:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/02 14:24:40 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/07 19:48:30 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,55 +29,49 @@ static void	prep_lines(int x, int y, t_fdf *fdf)
 {
 	t_3dvec	a;
 	t_3dvec	b;
+	t_3dvec	pa;
+	t_3dvec	pb;
 
 	if (x + 1 < fdf->map_width)
 	{
 		a = get_point(x, y, fdf);
 		b = get_point(x + 1, y, fdf);
-		a.z = a.z * fdf->z_scaling;
-		b.z = b.z * fdf->z_scaling;
-		a = rotate_vecx(a, fdf->x_rot);
-		a = rotate_vecy(a, fdf->y_rot);
-		a = rotate_vecz(a, fdf->z_rot);
-		b = rotate_vecx(b, fdf->x_rot);
-		b = rotate_vecy(b, fdf->y_rot);
-		b = rotate_vecz(b, fdf->z_rot);
-		if ((int)a.z + 100 + (fdf->z_offset >> 2) > 0
-			&& (int)b.z + 100 + (fdf->z_offset >> 2) > 0
-			&& (int)a.z + 100 + (fdf->z_offset >> 2) < fdf->ffar
-			&& (int)b.z + 100 + (fdf->z_offset >> 2) < fdf->ffar)
+		a = transform_point(a, fdf);
+		b = transform_point(b, fdf);
+		if ((int)a.z + (fdf->z_offset >> 2) > 0
+			&& (int)b.z + (fdf->z_offset >> 2) > 0
+			&& (int)a.z + (fdf->z_offset >> 2) < fdf->ffar
+			&& (int)b.z + (fdf->z_offset >> 2) < fdf->ffar)
 		{
+			pa = a;
+			pb = b;
 			a = perspective_transform(a, fdf);
 			b = perspective_transform(b, fdf);
 			if (in_window(veci(a)))
-				drawline(fdf, veci(b), veci(a), b, a);
+				drawline(fdf, veci(b), veci(a), pb, pa);
 			else if (in_window(veci(b)))
-				drawline(fdf, veci(a), veci(b), a, b);
+				drawline(fdf, veci(a), veci(b), pa, pb);
 		}
 	}
 	if (y + 1 < fdf->map_height)
 	{
 		a = get_point(x, y, fdf);
 		b = get_point(x, y + 1, fdf);
-		a.z = a.z * fdf->z_scaling;
-		b.z = b.z * fdf->z_scaling;
-		a = rotate_vecx(a, fdf->x_rot);
-		a = rotate_vecy(a, fdf->y_rot);
-		a = rotate_vecz(a, fdf->z_rot);
-		b = rotate_vecx(b, fdf->x_rot);
-		b = rotate_vecy(b, fdf->y_rot);
-		b = rotate_vecz(b, fdf->z_rot);
-		if ((int)a.z + 100 + (fdf->z_offset >> 2) > 0
-			&& (int)b.z + 100 + (fdf->z_offset >> 2) > 0
-			&& (int)a.z + 100 + (fdf->z_offset >> 2) < fdf->ffar
-			&& (int)b.z + 100 + (fdf->z_offset >> 2) < fdf->ffar)
+		a = transform_point(a, fdf);
+		b = transform_point(b, fdf);
+		if ((int)a.z + (fdf->z_offset >> 2) > 0
+			&& (int)b.z + (fdf->z_offset >> 2) > 0
+			&& (int)a.z + (fdf->z_offset >> 2) < fdf->ffar
+			&& (int)b.z + (fdf->z_offset >> 2) < fdf->ffar)
 		{
+			pa = a;
+			pb = b;
 			a = perspective_transform(a, fdf);
 			b = perspective_transform(b, fdf);
 			if (in_window(veci(a)))
-				drawline(fdf, veci(b), veci(a), b, a);
+				drawline(fdf, veci(b), veci(a), pb, pa);
 			else if (in_window(veci(b)))
-				drawline(fdf, veci(a), veci(b), a, b);
+				drawline(fdf, veci(a), veci(b), pa, pb);
 		}
 	}
 }
@@ -89,8 +83,8 @@ static void	update_mouse(t_fdf *fdf)
 	mlx_get_mouse_pos(fdf->mlx, &fdf->mouse_x, &fdf->mouse_y);
 	if (mlx_is_mouse_down(fdf->mlx, MLX_MOUSE_BUTTON_LEFT))
 	{
-		fdf->x_offset += fdf->mouse_x - fdf->last_mouse_x;
-		fdf->y_offset += fdf->mouse_y - fdf->last_mouse_y;
+		fdf->x_offset += (fdf->mouse_x - fdf->last_mouse_x) * fdf->zoom;
+		fdf->y_offset += (fdf->mouse_y - fdf->last_mouse_y) * fdf->zoom;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/20 15:53:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/02 14:37:35 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/07 19:42:23 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	in_window(t_intvec p)
 		&& p.y < WINDOW_HEIGHT
 		&& p.y > 0
 		&& p.x > 0
-		&& p.z > 0
+		&& p.z > 0.1
 		&& p.z < 1000)
 		return (1);
 	return (0);
@@ -77,16 +77,10 @@ void	drawline(t_fdf *fdf, t_intvec a, t_intvec b, t_3dvec af, t_3dvec bf)
 	int			color;
 
 	draw_setup(a, b, &delta, &incre);
-	// error.x = (delta.x >= delta.y) + (delta.x >= delta.z);
-	// error.y = (delta.y >= delta.z) + (delta.y > delta.x);
-	// error.z = (delta.z > delta.x) + (delta.z > delta.y);
-	// if (delta.x == 0)
 	error.x = delta.x << 1;
-	// if (delta.y == 0)
 	error.y = delta.y << 1;
-	// if (delta.z == 0)
-	// 	error.z = -2000000;
 	cur = b;
+	// bf = bf;
 	step = 1;
 	step_count = delta.x + delta.y;
 	while ((cur.x != a.x || cur.y != a.y) && in_window(cur))
@@ -96,8 +90,8 @@ void	drawline(t_fdf *fdf, t_intvec a, t_intvec b, t_3dvec af, t_3dvec bf)
 		// printf("delta.z: %i, step: %f, step_count: %f, color: %i\n", delta.z, step, step_count, color);
 		if (in_window(cur))
 		{
-			color = (float)(1 / (((bf.z - af.z / step_count) * step) + af.z) * 255);
-			color = (float)((af.z / 100) * 255);
+			color = (float)((fdf->ffar - (((ft_abs(bf.z - af.z) / step_count) * step) + af.z + (fdf->z_offset >> 2))) / fdf->ffar) * 255;
+			// color = (float)(((fdf->ffar - (af.z + (fdf->z_offset >> 2))) / fdf->ffar) * 255);
 			// color = step / step_count * 255;
 			// color = (float)(af.z * 255);
 			(fdf->image->pixels)

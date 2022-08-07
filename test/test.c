@@ -6,13 +6,14 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/02 15:38:03 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/02 16:59:40 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/07 14:53:52 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft.h"
 #include <math.h>
+#include <stdio.h>
 
 static t_3dvec	fill_vec(int x, int y, int z)
 {
@@ -94,7 +95,7 @@ static void	test_init(t_fdf *fdf)
 	fdf->y_rot = 0;
 	fdf->z_rot = 0;
 	fdf->scale = 10;
-	perspective_init(fdf);
+	new_perspective_init(fdf);
 }
 
 static int	compare_vecs(t_3dvec a, t_3dvec b)
@@ -121,33 +122,40 @@ int	main(void)
 	pa = fill_vec(1, 1, 1);
 	multiply_matrix_vec(&pa, &temp, fdf.proj);
 	if (compare_vecs(pa, temp))
-		ft_printf("1, 1, 1 bad\n");
+		printf("1, 1, 1 bad, result: %f %f %f\n", temp.x, temp.y, temp.z);
 
 	pb = fill_vec(-1, 1, 1);
+	multiply_matrix_vec(&pb, &temp, fdf.proj);
 	if (compare_vecs(pb, temp))
-		ft_printf("-1, 1, 1 bad\n");
+		printf("-1, 1, 1 bad, result: %f %f %f\n", temp.x, temp.y, temp.z);
 
 	pc = fill_vec(-1, 1, -1);
+	multiply_matrix_vec(&pc, &temp, fdf.proj);
 	if (compare_vecs(pc, temp))
-		ft_printf("-1, 1, -1 bad\n");
+		printf("-1, 1, -1 bad, result: %f %f %f\n", temp.x, temp.y, temp.z);
 
 	pd = fill_vec(1, 1, -1);
+	multiply_matrix_vec(&pd, &temp, fdf.proj);
 	if (compare_vecs(pd, temp))
-		ft_printf("1, 1, -1 bad\n");
+		printf("1, 1, -1 bad, result: %f %f %f\n", temp.x, temp.y, temp.z);
 
 	pe = fill_vec(1, -1, 1);
+	multiply_matrix_vec(&pe, &temp, fdf.proj);
 	if (compare_vecs(pe, temp))
-		ft_printf("1, 1, -1 bad\n");
+		printf("1, 1, -1 bad, result: %f %f %f\n", temp.x, temp.y, temp.z);
 
 	pf = fill_vec(-1, -1, 1);
+	multiply_matrix_vec(&pf, &temp, fdf.proj);
 	if (compare_vecs(pf, temp))
-		ft_printf("1, 1, -1 bad\n");
+		printf("1, 1, -1 bad, result: %f %f %f\n", temp.x, temp.y, temp.z);
 
 	pg = fill_vec(-1, -1, -1);
+	multiply_matrix_vec(&pg, &temp, fdf.proj);
 	if (compare_vecs(pg, temp))
-		ft_printf("1, 1, -1 bad\n");
+		printf("1, 1, -1 bad, result: %f %f %f\n", temp.x, temp.y, temp.z);
 
 	ph = fill_vec(1, -1, -1);
+	multiply_matrix_vec(&ph, &temp, fdf.proj);
 	if (compare_vecs(ph, temp))
-		ft_printf("1, 1, -1 bad\n");
+		printf("1, 1, -1 bad, result: %f %f %f\n", temp.x, temp.y, temp.z);
 }

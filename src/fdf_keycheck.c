@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 15:02:05 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/30 17:11:34 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/07 15:17:33 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	fdf_keycheck(t_fdf *fdf)
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_1))
 	{
 		fdf->ffov += 1;
-		perspective_update(fdf);
+		new_perspective_update(fdf);
 	}
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_2))
 	{
 		fdf->ffov -= 1;
-		perspective_update(fdf);
+		new_perspective_update(fdf);
 	}
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_MINUS))
 	{

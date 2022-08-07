@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/09 14:55:24 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/28 20:40:51 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/07 20:18:10 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	multiply_matrix_vec(t_3dvec *i, t_3dvec *o, t_mat4x4 m)
 	o->y = i->x * m.m[0][1] + i->y * m.m[1][1] + i->z * m.m[2][1] + m.m[3][1];
 	o->z = i->x * m.m[0][2] + i->y * m.m[1][2] + i->z * m.m[2][2] + m.m[3][2];
 	w = i->x * m.m[0][3] + i->y * m.m[1][3] + i->z * m.m[2][3] + m.m[3][3];
-	if (w != 0)
+	if (w != 1)
 	{
 		o->x /= w;
 		o->y /= w;
@@ -70,12 +70,13 @@ t_3dvec	rotate_vecz(t_3dvec a, float degrees)
 	return (a);
 }
 
-t_point	transform(t_3dvec p3d, t_fdf *fdf)
+t_3dvec	transform_point(t_3dvec p, t_fdf *fdf)
 {
-	t_point	p;
-
-	p3d = scale_vec(p3d, fdf->scale);
-	p.x = p3d.x + fdf->x_offset;
-	p.y = p3d.y + fdf->y_offset - (p3d.z * fdf->z_scaling);
+	p.z = p.z * fdf->z_scaling;
+	p.x *= fdf->scale;
+	p.y *= fdf->scale;
+	p = rotate_vecx(p, fdf->x_rot);
+	p = rotate_vecy(p, fdf->y_rot);
+	p = rotate_vecz(p, fdf->z_rot);
 	return (p);
 }

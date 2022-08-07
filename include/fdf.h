@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/02 16:13:34 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/07 20:09:12 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ typedef struct s_mat4x4
 	float	m[4][4];
 }	t_mat4x4;
 
+typedef struct s_mat3x3
+{
+	float	m[3][3];
+}	t_mat3x3;
+
 typedef struct s_fdf
 {
 	mlx_t		*mlx;
@@ -65,12 +70,14 @@ typedef struct s_fdf
 	float		y_rot;
 	float		z_rot;
 	t_mat4x4	proj;
+	t_mat3x3	rotation;
 	float		fnear;
 	float		ffar;
 	float		ffov;
 	float		faspect_ratio;
 	float		y_aratio;
 	float		ffov_rad;
+	float		zoom;
 }	t_fdf;
 
 // Inits
@@ -109,7 +116,7 @@ t_3dvec		rotate_vecx(t_3dvec a, float degrees);
 t_3dvec		rotate_vecy(t_3dvec a, float degrees);
 t_3dvec		rotate_vecz(t_3dvec a, float degrees);
 void		multiply_matrix_vec(t_3dvec *i, t_3dvec *o, t_mat4x4 m);
-t_point		transform(t_3dvec p3d, t_fdf *fdf);
+t_3dvec		transform_point(t_3dvec p, t_fdf *fdf);
 t_3dvec		perspective_transform(t_3dvec p, t_fdf *fdf);
 
 // for debug
@@ -120,5 +127,9 @@ void		print_map(t_fdf *fdf);
 // Line Drawing
 t_3dvec		get_point(int x, int y, t_fdf *fdf);
 void		drawline(t_fdf *fdf, t_intvec a, t_intvec b, t_3dvec af, t_3dvec bf);
+
+// Perspective stuff
+void		new_perspective_update(t_fdf *fdf);
+void		new_perspective_init(t_fdf *fdf);
 
 #endif // FDF_H
