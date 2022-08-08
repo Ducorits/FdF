@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/07 20:09:12 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/08 14:28:18 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void		rotate_y(t_fdf *fdf, float degrees);
 void		rotate_z(t_fdf *fdf, float degrees);
 
 // Transforms
-t_3dvec		rotate_vec(t_3dvec a, float degrees);
+// t_3dvec		rotate_vec(t_3dvec a, float degrees);
 t_3dvec		rotate_vecx(t_3dvec a, float degrees);
 t_3dvec		rotate_vecy(t_3dvec a, float degrees);
 t_3dvec		rotate_vecz(t_3dvec a, float degrees);
@@ -131,5 +131,11 @@ void		drawline(t_fdf *fdf, t_intvec a, t_intvec b, t_3dvec af, t_3dvec bf);
 // Perspective stuff
 void		new_perspective_update(t_fdf *fdf);
 void		new_perspective_init(t_fdf *fdf);
+
+// Rotation
+t_3dvec		rotate_vec(t_fdf *fdf, t_3dvec i);
+void		rotate_around_x(t_fdf *fdf, float deg);
+void		rotate_around_y(t_fdf *fdf, float deg);
+void		rotate_around_z(t_fdf *fdf, float deg);
 
 #endif // FDF_H

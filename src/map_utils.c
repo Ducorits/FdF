@@ -6,47 +6,47 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 21:30:22 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/07 20:02:32 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/08 14:32:02 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	rotate_x(t_fdf *fdf, float degrees)
-{
-	int	i;
+// void	rotate_x(t_fdf *fdf, float degrees)
+// {
+// 	int	i;
 
-	i = 0;
-	while (i < fdf->map_width * fdf->map_height)
-	{
-		fdf->vecmap[i] = rotate_vecx(fdf->vecmap[i], degrees);
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < fdf->map_width * fdf->map_height)
+// 	{
+// 		fdf->vecmap[i] = rotate_vecx(fdf->vecmap[i], degrees);
+// 		i++;
+// 	}
+// }
 
-void	rotate_y(t_fdf *fdf, float degrees)
-{
-	int	i;
+// void	rotate_y(t_fdf *fdf, float degrees)
+// {
+// 	int	i;
 
-	i = 0;
-	while (i < fdf->map_width * fdf->map_height)
-	{
-		fdf->vecmap[i] = rotate_vecy(fdf->vecmap[i], degrees);
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < fdf->map_width * fdf->map_height)
+// 	{
+// 		fdf->vecmap[i] = rotate_vecy(fdf->vecmap[i], degrees);
+// 		i++;
+// 	}
+// }
 
-void	rotate_z(t_fdf *fdf, float degrees)
-{
-	int	i;
+// void	rotate_z(t_fdf *fdf, float degrees)
+// {
+// 	int	i;
 
-	i = 0;
-	while (i < fdf->map_width * fdf->map_height)
-	{
-		fdf->vecmap[i] = rotate_vecz(fdf->vecmap[i], degrees);
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < fdf->map_width * fdf->map_height)
+// 	{
+// 		fdf->vecmap[i] = rotate_vecz(fdf->vecmap[i], degrees);
+// 		i++;
+// 	}
+// }
 
 void	scale_map(t_fdf *fdf, float scale)
 {

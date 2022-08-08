@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/20 15:53:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/07 19:42:23 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/08 14:27:01 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,6 @@ void	drawline(t_fdf *fdf, t_intvec a, t_intvec b, t_3dvec af, t_3dvec bf)
 	step_count = delta.x + delta.y;
 	while ((cur.x != a.x || cur.y != a.y) && in_window(cur))
 	{
-		// if (delta.z != 0)
-		// 	printf("delta.z: %i\n", delta.z);
-		// printf("delta.z: %i, step: %f, step_count: %f, color: %i\n", delta.z, step, step_count, color);
 		if (in_window(cur))
 		{
 			color = (float)((fdf->ffar - (((ft_abs(bf.z - af.z) / step_count) * step) + af.z + (fdf->z_offset >> 2))) / fdf->ffar) * 255;
@@ -110,19 +107,12 @@ void	drawline(t_fdf *fdf, t_intvec a, t_intvec b, t_3dvec af, t_3dvec bf)
 			cur.x += incre.x;
 			error.x -= delta.y << 1;
 			step++;
-			// error.x -= ft_max(delta.y, 1) * ft_max(delta.z, 1) * 3;
 		}
 		else
 		{
 			cur.y += incre.y;
 			error.y -= delta.x << 1;
 			step++;
-			// error.y -= ft_max(delta.x, 1) * ft_max(delta.z, 1) * 3;
 		}
-		// if (error.z >= error.x && error.z >= error.y)
-		// {
-		// 	cur.z += incre.z;
-		// 	// error.z -= ft_max(delta.y, 1) * ft_max(delta.x, 1) * 3;
-		// }
 	}
 }

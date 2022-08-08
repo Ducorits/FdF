@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 15:02:05 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/07 15:17:33 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/08 14:37:34 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ void	fdf_keycheck(t_fdf *fdf)
 		fdf->z_scaling += 0.01;
 	}
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_Q))
-		fdf->z_rot -= 0.05;
+		rotate_around_z(fdf, 0.05);
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_E))
-		fdf->z_rot += 0.05;
+		rotate_around_z(fdf, -0.05);
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_W))
-		fdf->x_rot += 0.05;
+		rotate_around_x(fdf, -0.05);
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_S))
-		fdf->x_rot -= 0.05;
+		rotate_around_x(fdf, 0.05);
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_A))
-		fdf->y_rot -= 0.05;
+		rotate_around_y(fdf, 0.05);
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_D))
-		fdf->y_rot += 0.05;
+		rotate_around_y(fdf, -0.05);
 }
