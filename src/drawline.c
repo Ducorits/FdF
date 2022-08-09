@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/20 15:53:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/08 14:27:01 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/09 14:52:24 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,9 @@ void	drawline(t_fdf *fdf, t_intvec a, t_intvec b, t_3dvec af, t_3dvec bf)
 	t_intvec	cur;
 	t_intvec	error;
 	float		step;
+	float		step_size;
 	float		step_count;
+	float		base_z;
 	int			color;
 
 	draw_setup(a, b, &delta, &incre);
@@ -83,11 +85,14 @@ void	drawline(t_fdf *fdf, t_intvec a, t_intvec b, t_3dvec af, t_3dvec bf)
 	// bf = bf;
 	step = 1;
 	step_count = delta.x + delta.y;
+	step_size = ft_abs(bf.z - af.z) / step_count;
+	base_z = af.z + (fdf->z_offset >> 2);
 	while ((cur.x != a.x || cur.y != a.y) && in_window(cur))
 	{
 		if (in_window(cur))
 		{
-			color = (float)((fdf->ffar - (((ft_abs(bf.z - af.z) / step_count) * step) + af.z + (fdf->z_offset >> 2))) / fdf->ffar) * 255;
+			color = (float)((fdf->ffar - ((step_size * step) + base_z)) / fdf->ffar) * 255;
+			// color = fdf->far - (step_size * step);
 			// color = (float)(((fdf->ffar - (af.z + (fdf->z_offset >> 2))) / fdf->ffar) * 255);
 			// color = step / step_count * 255;
 			// color = (float)(af.z * 255);
