@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 15:02:05 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/08 14:37:34 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/11 15:08:06 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ void	fdf_keycheck(t_fdf *fdf)
 		fdf->z_scaling += 0.01;
 	}
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_Q))
-		rotate_around_z(fdf, 0.05);
+		fdf->rotation = rotate_around_z(fdf->rotation, 0.05);
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_E))
-		rotate_around_z(fdf, -0.05);
+		fdf->rotation = rotate_around_z(fdf->rotation, -0.05);
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_W))
-		rotate_around_x(fdf, -0.05);
+		fdf->rotation = rotate_around_x(fdf->rotation, -0.05);
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_S))
-		rotate_around_x(fdf, 0.05);
+		fdf->rotation = rotate_around_x(fdf->rotation, 0.05);
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_A))
-		rotate_around_y(fdf, 0.05);
+		fdf->rotation = rotate_around_y(fdf->rotation, 0.05);
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_D))
-		rotate_around_y(fdf, -0.05);
+		fdf->rotation = rotate_around_y(fdf->rotation, -0.05);
 }

@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/02 15:38:03 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/07 14:53:52 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/11 17:27:07 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include <math.h>
 #include <stdio.h>
 
-static t_3dvec	fill_vec(int x, int y, int z)
+static t_point3d	fill_vec(int x, int y, int z)
 {
-	t_3dvec	vec;
+	t_point3d	vec;
 
 	vec.x = x;
 	vec.y = y;
@@ -65,9 +65,9 @@ static t_3dvec	fill_vec(int x, int y, int z)
 // 	return (0);
 // }
 
-// t_3dvec	perspective_transform(t_3dvec p, t_fdf *fdf)
+// t_point3d	perspective_transform(t_point3d p, t_fdf *fdf)
 // {
-// 	t_3dvec	new_p;
+// 	t_point3d	new_p;
 
 // 	p.z += 100;
 // 	p.z += fdf->z_offset >> 2;
@@ -98,7 +98,7 @@ static void	test_init(t_fdf *fdf)
 	new_perspective_init(fdf);
 }
 
-static int	compare_vecs(t_3dvec a, t_3dvec b)
+static int	compare_vecs(t_point3d a, t_point3d b)
 {
 	if (a.x == b.x && a.y == b.y && a.z == b.z)
 		return (0);
@@ -108,15 +108,15 @@ static int	compare_vecs(t_3dvec a, t_3dvec b)
 int	main(void)
 {
 	t_fdf	fdf;
-	t_3dvec	temp;
-	t_3dvec	pa;
-	t_3dvec	pb;
-	t_3dvec	pc;
-	t_3dvec	pd;
-	t_3dvec	pe;
-	t_3dvec	pf;
-	t_3dvec	pg;
-	t_3dvec	ph;
+	t_point3d	temp;
+	t_point3d	pa;
+	t_point3d	pb;
+	t_point3d	pc;
+	t_point3d	pd;
+	t_point3d	pe;
+	t_point3d	pf;
+	t_point3d	pg;
+	t_point3d	ph;
 
 	test_init(&fdf);
 	pa = fill_vec(1, 1, 1);
@@ -158,4 +158,6 @@ int	main(void)
 	multiply_matrix_vec(&ph, &temp, fdf.proj);
 	if (compare_vecs(ph, temp))
 		printf("1, 1, -1 bad, result: %f %f %f\n", temp.x, temp.y, temp.z);
+
+	printf("0xFF = %i, 0xFF = %i\n", ft_hextoi("FF"), 0xFF);
 }

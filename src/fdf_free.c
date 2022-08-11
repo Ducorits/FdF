@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 16:03:36 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/31 18:45:48 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/11 14:41:56 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ void	fdf_free(t_fdf *fdf)
 {
 	if (fdf->map)
 		free(fdf->map);
-	if (fdf->vecmap)
-		free(fdf->vecmap);
+	if (fdf->depth_buffer)
+		free(fdf->depth_buffer);
+	if (fdf->map3d)
+		free(fdf->map3d);
 	if (fdf->image)
 		mlx_delete_image(fdf->mlx, fdf->image);
 	if (fdf->mlx)

@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 13:26:01 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/20 16:30:01 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/11 17:20:10 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,21 +63,27 @@ void	fill_map(char *str_map, t_fdf *fdf)
 
 	get_map_size(str_map, fdf);
 	fdf->map = malloc(sizeof(int) * (fdf->map_width * fdf->map_height));
-	fdf->vecmap = malloc(sizeof(t_3dvec) * (fdf->map_width * fdf->map_height));
+	fdf->map3d = malloc(sizeof(t_point3d) * (fdf->map_width * fdf->map_height));
 	i = 0;
 	j = 0;
 	while (str_map[i] && j < (fdf->map_width * fdf->map_height))
 	{
 		num = ft_atoi(&str_map[i]);
 		fdf->map[j] = num;
-		fdf->vecmap[j].x = (j % fdf->map_width) - (fdf->map_width / 2);
-		fdf->vecmap[j].y = (j / fdf->map_width) - (fdf->map_height / 2);
-		fdf->vecmap[j].z = num;
-		j++;
+		fdf->map3d[j].x = (j % fdf->map_width) - (fdf->map_width / 2);
+		fdf->map3d[j].y = (j / fdf->map_width) - (fdf->map_height / 2);
+		fdf->map3d[j].z = num;
 		numlen = ft_numlen(num);
 		i += numlen;
 		if (str_map[i] == ',')
+		{
+			i++;
+			fdf->map3d[j].color = ft_hextoi(&str_map[i]);
 			i += skip_hex(&str_map[i]);
+		}
+		else
+			fdf->map3d[j].color = 0xFFFFFFFF;
+		j++;
 		while (ft_iswhitespace(str_map[i]))
 			i++;
 	}

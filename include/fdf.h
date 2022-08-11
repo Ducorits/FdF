@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/09 14:47:59 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/11 17:19:23 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,26 @@ typedef struct s_point
 	int	y;
 }	t_point;
 
-typedef struct s_intvec
+typedef struct s_ivec
 {
 	int	x;
 	int	y;
 	int	z;
-}	t_intvec;
-typedef struct s_3dvec
+}	t_ivec;
+typedef struct s_fvec
 {
 	float	x;
 	float	y;
 	float	z;
-}	t_3dvec;
+}	t_fvec;
+
+typedef struct s_point3d
+{
+	float			x;
+	float			y;
+	float			z;
+	unsigned int	color;
+}	t_point3d;
 
 typedef struct s_mat4x4
 {
@@ -52,10 +60,12 @@ typedef struct s_fdf
 {
 	mlx_t		*mlx;
 	mlx_image_t	*image;
+	int			*depth_buffer;
 	int			*map;
 	int			map_width;
 	int			map_height;
-	t_3dvec		*vecmap;
+	// t_fvec		*vecmap;
+	t_point3d	*map3d;
 	int			x_offset;
 	int			y_offset;
 	int			z_offset;
@@ -78,6 +88,8 @@ typedef struct s_fdf
 	float		y_aratio;
 	float		ffov_rad;
 	float		zoom;
+	int			lowest_p;
+	int			highest_p;
 }	t_fdf;
 
 // Inits
@@ -97,8 +109,8 @@ void		fdf_scrollhook(double xdelta, double ydelta, void *param);
 void		fdf_free(t_fdf *fdf);
 void		fdf_exit(const char *fname, int error);
 void		clear_image(t_fdf *fdf);
-int			in_window(t_intvec p);
-t_intvec	veci(t_3dvec vecf);
+int			in_window(t_ivec p);
+t_ivec		veci(t_point3d p);
 
 // Map utils
 void		fill_map(char *str_map, t_fdf *fdf);
@@ -111,13 +123,13 @@ void		rotate_y(t_fdf *fdf, float degrees);
 void		rotate_z(t_fdf *fdf, float degrees);
 
 // Transforms
-// t_3dvec		rotate_vec(t_3dvec a, float degrees);
-t_3dvec		rotate_vecx(t_3dvec a, float degrees);
-t_3dvec		rotate_vecy(t_3dvec a, float degrees);
-t_3dvec		rotate_vecz(t_3dvec a, float degrees);
-void		multiply_matrix_vec(t_3dvec *i, t_3dvec *o, t_mat4x4 m);
-t_3dvec		transform_point(t_3dvec p, t_fdf *fdf);
-t_3dvec		perspective_transform(t_3dvec p, t_fdf *fdf);
+// t_fvec		rotate_vec(t_fvec a, float degrees);
+t_point3d	rotate_vecx(t_point3d a, float degrees);
+t_point3d	rotate_vecy(t_point3d a, float degrees);
+t_point3d	rotate_vecz(t_point3d a, float degrees);
+void		multiply_matrix_vec(t_point3d *i, t_point3d *o, t_mat4x4 m);
+t_point3d	transform_point(t_point3d p, t_fdf *fdf);
+t_point3d	perspective_transform(t_point3d p, t_fdf *fdf);
 
 // for debug
 int			error_check(char *file_name);
@@ -125,17 +137,17 @@ void		error_message(int id);
 void		print_map(t_fdf *fdf);
 
 // Line Drawing
-t_3dvec		get_point(int x, int y, t_fdf *fdf);
-void		drawline(t_fdf *fdf, t_intvec a, t_intvec b, t_3dvec af, t_3dvec bf);
+t_point3d	get_point(int x, int y, t_fdf *fdf);
+void		drawline(t_fdf *fdf, t_ivec a, t_ivec b, t_point3d af, t_point3d bf);
 
 // Perspective stuff
 void		new_perspective_update(t_fdf *fdf);
 void		new_perspective_init(t_fdf *fdf);
 
 // Rotation
-t_3dvec		rotate_vec(t_fdf *fdf, t_3dvec i);
-void		rotate_around_x(t_fdf *fdf, float deg);
-void		rotate_around_y(t_fdf *fdf, float deg);
-void		rotate_around_z(t_fdf *fdf, float deg);
+t_point3d	rotate_vec(t_fdf *fdf, t_point3d i);
+t_mat3x3	rotate_around_x(t_mat3x3 r, float deg);
+t_mat3x3	rotate_around_y(t_mat3x3 r, float deg);
+t_mat3x3	rotate_around_z(t_mat3x3 r, float deg);
 
 #endif // FDF_H

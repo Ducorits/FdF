@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/20 15:53:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/09 14:52:24 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/11 22:49:33 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 #include <stdio.h>
 #include <math.h>
 
-t_3dvec	get_point(int x, int y, t_fdf *fdf)
+t_point3d	get_point(int x, int y, t_fdf *fdf)
 {
-	t_3dvec	p;
+	t_point3d	p;
 
-	p.x = fdf->vecmap[y * fdf->map_width + x].x;
-	p.y = fdf->vecmap[y * fdf->map_width + x].y;
-	p.z = fdf->vecmap[y * fdf->map_width + x].z;
+	p.x = fdf->map3d[y * fdf->map_width + x].x;
+	p.y = fdf->map3d[y * fdf->map_width + x].y;
+	p.z = fdf->map3d[y * fdf->map_width + x].z;
 	return (p);
 }
 
-int	in_window(t_intvec p)
+int	in_window(t_ivec p)
 {
 	if (p.x < WINDOW_WIDTH
 		&& p.y < WINDOW_HEIGHT
@@ -44,7 +44,7 @@ static int	incre_select(int val, int a, int b)
 	return (b);
 }
 
-static void	draw_setup(t_intvec a, t_intvec b, t_intvec *delta, t_intvec *incre)
+static void	draw_setup(t_ivec a, t_ivec b, t_ivec *delta, t_ivec *incre)
 {
 	delta->x = ft_abs(a.x - b.x);
 	delta->y = ft_abs(a.y - b.y);
@@ -61,22 +61,23 @@ int	ft_max(int a, int b)
 	return (b);
 }
 
-// static int	get_step_count(t_intvec delta)
+// static int	get_step_count(t_ivec delta)
 // {
 
 // }
 
-void	drawline(t_fdf *fdf, t_intvec a, t_intvec b, t_3dvec af, t_3dvec bf)
+void	drawline(t_fdf *fdf, t_ivec a, t_ivec b, t_point3d af, t_point3d bf)
 {
-	t_intvec	delta;
-	t_intvec	incre;
-	t_intvec	cur;
-	t_intvec	error;
+	t_ivec		delta;
+	t_ivec		incre;
+	t_ivec		cur;
+	t_ivec		error;
 	float		step;
 	float		step_size;
 	float		step_count;
 	float		base_z;
-	int			color;
+	// int			color;
+	int			depth;
 
 	draw_setup(a, b, &delta, &incre);
 	error.x = delta.x << 1;
@@ -91,21 +92,25 @@ void	drawline(t_fdf *fdf, t_intvec a, t_intvec b, t_3dvec af, t_3dvec bf)
 	{
 		if (in_window(cur))
 		{
-			color = (float)((fdf->ffar - ((step_size * step) + base_z)) / fdf->ffar) * 255;
+			depth = (float)((fdf->ffar - ((step_size * step) + base_z)) / fdf->ffar) * 255;
 			// color = fdf->far - (step_size * step);
 			// color = (float)(((fdf->ffar - (af.z + (fdf->z_offset >> 2))) / fdf->ffar) * 255);
 			// color = step / step_count * 255;
 			// color = (float)(af.z * 255);
-			(fdf->image->pixels)
-			[((cur.y * fdf->image->width + cur.x) << 2)] = color;
-			(fdf->image->pixels)
-			[((cur.y * fdf->image->width + cur.x) << 2) + 1] = color;
-			(fdf->image->pixels)
-			[((cur.y * fdf->image->width + cur.x) << 2) + 2] = color;
-			(fdf->image->pixels)
-			[((cur.y * fdf->image->width + cur.x) << 2) + 3] = 0xFF;
-			// ((int *)fdf->image->pixels)
-			// [(cur.y * fdf->image->width + cur.x)] = 0xFFFFFFFF;
+			if (depth >= fdf->depth_buffer[cur.y * fdf->image->width + cur.x])
+			{
+			// (fdf->image->pixels)
+			// [((cur.y * fdf->image->width + cur.x) << 2)] = 0xFF;
+			// (fdf->image->pixels)
+			// [((cur.y * fdf->image->width + cur.x) << 2) + 1] = depth;
+			// (fdf->image->pixels)
+			// [((cur.y * fdf->image->width + cur.x) << 2) + 2] = 0xFF;
+			// (fdf->image->pixels)
+			// [((cur.y * fdf->image->width + cur.x) << 2) + 3] = depth;
+			// fdf->depth_buffer[cur.y * fdf->image->width + cur.x] = depth;
+			((int *)fdf->image->pixels)
+			[(cur.y * fdf->image->width + cur.x)] = (af.color << 2) & 0xFF;
+			}
 		}
 		if (error.x >= error.y)
 		{

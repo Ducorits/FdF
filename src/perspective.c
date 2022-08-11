@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/26 12:22:24 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/07 20:12:14 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/11 15:04:13 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include "MLX42.h"
 #include <math.h>
 
-// t_3dvec	perspective_transform(t_3dvec p, t_fdf *fdf)
+// t_point3d	perspective_transform(t_point3d p, t_fdf *fdf)
 // {
-// 	t_3dvec	new_p;
+// 	t_point3d	new_p;
 
 // 	p.z += 100;
 // 	p.z += fdf->z_offset >> 2;
@@ -73,9 +73,9 @@ void	perspective_init(t_fdf *fdf)
 	perspective_update(fdf);
 }
 
-t_3dvec	perspective_transform(t_3dvec p, t_fdf *fdf)
+t_point3d	perspective_transform(t_point3d p, t_fdf *fdf)
 {
-	t_3dvec	new_p;
+	t_point3d	new_p;
 
 	p.z += fdf->z_offset >> 2;
 	p.x -= (fdf->x_offset >> 4);

@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 21:30:22 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/08 14:32:02 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/11 14:44:55 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // 	i = 0;
 // 	while (i < fdf->map_width * fdf->map_height)
 // 	{
-// 		fdf->vecmap[i] = rotate_vecx(fdf->vecmap[i], degrees);
+// 		fdf->map3d[i] = rotate_vecx(fdf->map3d[i], degrees);
 // 		i++;
 // 	}
 // }
@@ -31,7 +31,7 @@
 // 	i = 0;
 // 	while (i < fdf->map_width * fdf->map_height)
 // 	{
-// 		fdf->vecmap[i] = rotate_vecy(fdf->vecmap[i], degrees);
+// 		fdf->map3d[i] = rotate_vecy(fdf->map3d[i], degrees);
 // 		i++;
 // 	}
 // }
@@ -43,7 +43,7 @@
 // 	i = 0;
 // 	while (i < fdf->map_width * fdf->map_height)
 // 	{
-// 		fdf->vecmap[i] = rotate_vecz(fdf->vecmap[i], degrees);
+// 		fdf->map3d[i] = rotate_vecz(fdf->map3d[i], degrees);
 // 		i++;
 // 	}
 // }
@@ -55,9 +55,9 @@ void	scale_map(t_fdf *fdf, float scale)
 	i = 0;
 	while (i < fdf->map_width * fdf->map_height)
 	{
-		fdf->vecmap[i].x *= scale;
-		fdf->vecmap[i].y *= scale;
-		fdf->vecmap[i].z *= scale;
+		fdf->map3d[i].x *= scale;
+		fdf->map3d[i].y *= scale;
+		fdf->map3d[i].z *= scale;
 		i++;
 	}
 }
@@ -78,9 +78,9 @@ void	reset_map(t_fdf *fdf)
 	i = 0;
 	while (i < fdf->map_width * fdf->map_height)
 	{
-		fdf->vecmap[i].x = (i % fdf->map_width) - (fdf->map_width >> 1);
-		fdf->vecmap[i].y = (i / fdf->map_width) - (fdf->map_height >> 1);
-		fdf->vecmap[i].z = fdf->map[i];
+		fdf->map3d[i].x = (i % fdf->map_width) - (fdf->map_width >> 1);
+		fdf->map3d[i].y = (i / fdf->map_width) - (fdf->map_height >> 1);
+		fdf->map3d[i].z = fdf->map[i];
 		i++;
 	}
 	new_perspective_init(fdf);

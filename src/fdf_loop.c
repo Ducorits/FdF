@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 15:56:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/07 19:48:30 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/11 14:47:48 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 #include "libft.h"
 #include <math.h>
 
-t_intvec	veci(t_3dvec vecf)
+t_ivec	veci(t_point3d p)
 {
-	t_intvec	veci;
+	t_ivec	veci;
 
-	veci.x = vecf.x;
-	veci.y = vecf.y;
-	veci.z = vecf.z;
+	veci.x = p.x;
+	veci.y = p.y;
+	veci.z = p.z;
 	return (veci);
 }
 
 static void	prep_lines(int x, int y, t_fdf *fdf)
 {
-	t_3dvec	a;
-	t_3dvec	b;
-	t_3dvec	pa;
-	t_3dvec	pb;
+	t_point3d	a;
+	t_point3d	b;
+	t_point3d	pa;
+	t_point3d	pb;
 
 	if (x + 1 < fdf->map_width)
 	{
@@ -116,6 +116,7 @@ void	clear_image(t_fdf *fdf)
 	while (i < fdf->image->height * fdf->image->width)
 	{
 		image[i] = 0;
+		fdf->depth_buffer[i] = 0;
 		i++;
 	}
 }

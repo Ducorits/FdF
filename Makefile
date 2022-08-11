@@ -76,9 +76,15 @@ TEST_OBJ= $(patsubst %.c, obj/%.o, $(TEST_SRC))
 
 all: heading comp
 
-.PHONY: heading comp re rere test
+.PHONY: heading comp re rere test libft mlx
 
 comp: $(NAME)
+
+libft:
+	@make -C libft/ SILENT=1
+	@cp libft/include/libft.h include/libft.h
+
+mlx: $(MLX)
 
 heading:
 	@printf "$(CYAN)----< $(ORANGE)Duco's FdF $(CYAN)>----\n"; \
