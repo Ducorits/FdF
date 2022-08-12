@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/20 15:53:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/11 22:49:33 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/12 22:13:35 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	drawline(t_fdf *fdf, t_ivec a, t_ivec b, t_point3d af, t_point3d bf)
 	float		base_z;
 	// int			color;
 	int			depth;
+	int			pixel;
 
 	draw_setup(a, b, &delta, &incre);
 	error.x = delta.x << 1;
@@ -99,17 +100,17 @@ void	drawline(t_fdf *fdf, t_ivec a, t_ivec b, t_point3d af, t_point3d bf)
 			// color = (float)(af.z * 255);
 			if (depth >= fdf->depth_buffer[cur.y * fdf->image->width + cur.x])
 			{
-			// (fdf->image->pixels)
-			// [((cur.y * fdf->image->width + cur.x) << 2)] = 0xFF;
-			// (fdf->image->pixels)
-			// [((cur.y * fdf->image->width + cur.x) << 2) + 1] = depth;
-			// (fdf->image->pixels)
-			// [((cur.y * fdf->image->width + cur.x) << 2) + 2] = 0xFF;
-			// (fdf->image->pixels)
-			// [((cur.y * fdf->image->width + cur.x) << 2) + 3] = depth;
-			// fdf->depth_buffer[cur.y * fdf->image->width + cur.x] = depth;
-			((int *)fdf->image->pixels)
-			[(cur.y * fdf->image->width + cur.x)] = (af.color << 2) & 0xFF;
+				pixel = (fdf->image->pixels)
+				[((cur.y * fdf->image->width + cur.x) << 2)];
+				pixel = pixel | (0xFF0000 & af.color);
+				pixel = pixel | (0x00FF00 & af.color);
+				pixel = pixel | (0x0000FF & af.color);
+				(fdf->image->pixels)
+				[((cur.y * fdf->image->width + cur.x) << 2) + 3] = depth;
+				// pixel = (0x000000FF & depth);
+				fdf->depth_buffer[cur.y * fdf->image->width + cur.x] = depth;
+				// ((int *)fdf->image->pixels)
+				// [(cur.y * fdf->image->width + cur.x)] = af.color;
 			}
 		}
 		if (error.x >= error.y)

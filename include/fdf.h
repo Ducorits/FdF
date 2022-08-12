@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/11 17:19:23 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/12 14:40:08 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ typedef struct s_fvec
 
 typedef struct s_point3d
 {
-	float			x;
-	float			y;
-	float			z;
-	unsigned int	color;
+	float	x;
+	float	y;
+	float	z;
+	int		color;
 }	t_point3d;
 
 typedef struct s_mat4x4
