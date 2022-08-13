@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/20 15:53:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/12 22:13:35 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/14 00:13:59 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,31 @@
 #include <stdio.h>
 #include <math.h>
 
+int	get_color(t_point3d a, t_point3d b, int step_count, int step)
+{
+	int	r_delta;
+	int	g_delta;
+	int	b_delta;
+	int	color;
+
+	r_delta = ft_abs(b.r - a.r);
+	g_delta = ft_abs(b.g - a.g);
+	b_delta = ft_abs(b.b - a.b);
+	color = a.
+	color = (((r_delta / step_count) * step) & 0xFF) << 16;
+	color = color | (((g_delta / step_count) * step) & 0xFF) << 8;
+	color = color | (((b_delta / step_count) * step) & 0xFF);
+	return (color);
+}
+
 t_point3d	get_point(int x, int y, t_fdf *fdf)
 {
 	t_point3d	p;
 
-	p.x = fdf->map3d[y * fdf->map_width + x].x;
-	p.y = fdf->map3d[y * fdf->map_width + x].y;
-	p.z = fdf->map3d[y * fdf->map_width + x].z;
+	// p.x = fdf->map3d[y * fdf->map_width + x].x;
+	// p.y = fdf->map3d[y * fdf->map_width + x].y;
+	// p.z = fdf->map3d[y * fdf->map_width + x].z;
+	p = fdf->map3d[y * fdf->map_width + x];
 	return (p);
 }
 
@@ -68,23 +86,22 @@ int	ft_max(int a, int b)
 
 void	drawline(t_fdf *fdf, t_ivec a, t_ivec b, t_point3d af, t_point3d bf)
 {
-	t_ivec		delta;
-	t_ivec		incre;
-	t_ivec		cur;
-	t_ivec		error;
-	float		step;
-	float		step_size;
-	float		step_count;
-	float		base_z;
-	// int			color;
-	int			depth;
-	int			pixel;
+	t_ivec			delta;
+	t_ivec			incre;
+	t_ivec			cur;
+	t_ivec			error;
+	float			step;
+	float			step_size;
+	float			step_count;
+	float			base_z;
+	// int				color;
+	int				depth;
+	// unsigned int	pixel;
 
 	draw_setup(a, b, &delta, &incre);
 	error.x = delta.x << 1;
 	error.y = delta.y << 1;
 	cur = b;
-	// bf = bf;
 	step = 1;
 	step_count = delta.x + delta.y;
 	step_size = ft_abs(bf.z - af.z) / step_count;
@@ -100,17 +117,24 @@ void	drawline(t_fdf *fdf, t_ivec a, t_ivec b, t_point3d af, t_point3d bf)
 			// color = (float)(af.z * 255);
 			if (depth >= fdf->depth_buffer[cur.y * fdf->image->width + cur.x])
 			{
-				pixel = (fdf->image->pixels)
-				[((cur.y * fdf->image->width + cur.x) << 2)];
-				pixel = pixel | (0xFF0000 & af.color);
-				pixel = pixel | (0x00FF00 & af.color);
-				pixel = pixel | (0x0000FF & af.color);
+				// color = get_color(af, bf, step_count, step);
+				// pixel = ((int *)fdf->image->pixels)
+				// [(cur.y * fdf->image->width + cur.x)];
+				// pixel = pixel | (0xFF000000 & af.color);
+				// pixel = pixel | (0x00FF0000 & af.color);
+				// pixel = pixel | (0x0000FF00 & af.color);
+				// pixel = af.color;
+				// mlx_put_pixel(fdf->image, cur.x, cur.y, af.color);
 				(fdf->image->pixels)
-				[((cur.y * fdf->image->width + cur.x) << 2) + 3] = depth;
+				[((cur.y * fdf->image->width + cur.x) << 2)] = af.color & 0xFF;
+				(fdf->image->pixels)
+				[((cur.y * fdf->image->width + cur.x) << 2) + 1] = (af.color >> 8) & 0xFF;
+				(fdf->image->pixels)
+				[((cur.y * fdf->image->width + cur.x) << 2) + 2] = (af.color >> 16) & 0xFF;
+				(fdf->image->pixels)
+				[((cur.y * fdf->image->width + cur.x) << 2) + 3] = depth & 0xFF;
 				// pixel = (0x000000FF & depth);
 				fdf->depth_buffer[cur.y * fdf->image->width + cur.x] = depth;
-				// ((int *)fdf->image->pixels)
-				// [(cur.y * fdf->image->width + cur.x)] = af.color;
 			}
 		}
 		if (error.x >= error.y)

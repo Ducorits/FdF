@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 13:26:01 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/11 17:20:10 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/13 15:33:53 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ int	skip_hex(char *str_map)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
+	if (*str_map == ',')
+		i++;
 	while (ft_isalnum(str_map[i]))
 		i++;
 	return (i);
@@ -41,7 +43,7 @@ void	get_map_size(char *str_map, t_fdf *fdf)
 			while (ft_isdigit(str_map[i]) || str_map[i] == '-'
 				|| str_map[i] == '+')
 				i++;
-			fdf->map_width += 1;
+			fdf->map_width++;
 		}
 		if (str_map[i] == ',')
 			i += skip_hex(&str_map[i]);
@@ -49,7 +51,7 @@ void	get_map_size(char *str_map, t_fdf *fdf)
 	while (str_map[i])
 	{
 		if (str_map[i] == '\n')
-			fdf->map_height += 1;
+			fdf->map_height++;
 		i++;
 	}
 }
@@ -78,11 +80,19 @@ void	fill_map(char *str_map, t_fdf *fdf)
 		if (str_map[i] == ',')
 		{
 			i++;
+			fdf->map3d[j].r = ft_hextoi(&str_map[i]);
+			fdf->map3d[j].g = ft_hextoi(&str_map[i]) >> 8;
+			fdf->map3d[j].b = ft_hextoi(&str_map[i]) >> 16;
 			fdf->map3d[j].color = ft_hextoi(&str_map[i]);
 			i += skip_hex(&str_map[i]);
 		}
 		else
+		{
+			fdf->map3d[j].r = 0xFF;
+			fdf->map3d[j].g = 0xFF;
+			fdf->map3d[j].b = 0xFF;
 			fdf->map3d[j].color = 0xFFFFFFFF;
+		}
 		j++;
 		while (ft_iswhitespace(str_map[i]))
 			i++;

@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/12 14:40:08 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/14 01:33:45 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,27 @@
 # define WINDOW_HEIGHT 1080
 # define SCALE 20
 
+typedef struct s_rgb
+{
+	float	r;
+	float	g;
+	float	b;
+}	t_rgb;
+typedef struct s_hsv
+{
+	float	h;
+	float	s;
+	float	v;
+}	t_hsv;
+
+typedef struct s_hsv_vars
+{
+	int		hi;
+	float	p;
+	float	q;
+	float	t;
+	float	f;
+}	t_hsv_vars;
 typedef struct s_point
 {
 	int	x;
@@ -43,7 +64,10 @@ typedef struct s_point3d
 	float	x;
 	float	y;
 	float	z;
-	int		color;
+	unsigned int		color;
+	char	r;
+	char	g;
+	char	b;
 }	t_point3d;
 
 typedef struct s_mat4x4
@@ -149,5 +173,10 @@ t_point3d	rotate_vec(t_fdf *fdf, t_point3d i);
 t_mat3x3	rotate_around_x(t_mat3x3 r, float deg);
 t_mat3x3	rotate_around_y(t_mat3x3 r, float deg);
 t_mat3x3	rotate_around_z(t_mat3x3 r, float deg);
+
+// Color functions
+t_hsv		rgb_to_hsv(t_rgb rgb);
+t_rgb		hsv_to_rgb(t_hsv hsv);
+t_rgb		set_rgb(float r, float g, float b);
 
 #endif // FDF_H

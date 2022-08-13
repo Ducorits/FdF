@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/02 15:38:03 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/11 17:27:07 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/14 01:36:42 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,4 +160,16 @@ int	main(void)
 		printf("1, 1, -1 bad, result: %f %f %f\n", temp.x, temp.y, temp.z);
 
 	printf("0xFF = %i, 0xFF = %i\n", ft_hextoi("FF"), 0xFF);
+	t_rgb	rgb;
+	t_hsv	hsv;
+
+	rgb = set_rgb(1, 0, 0);
+	hsv = rgb_to_hsv(rgb);
+	printf("Red: h: %f, s: %f, v: %f\n", hsv.h, hsv.s, hsv.v);
+	rgb = set_rgb(0, 1, 0);
+	hsv = rgb_to_hsv(rgb);
+	printf("Green: h: %f, s: %f, v: %f\n", hsv.h, hsv.s, hsv.v);
+	rgb = set_rgb(0, 0, 1);
+	hsv = rgb_to_hsv(rgb);
+	printf("Blue: h: %f, s: %f, v: %f\n", hsv.h, hsv.s, hsv.v);
 }
