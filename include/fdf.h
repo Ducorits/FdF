@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/14 01:33:45 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/14 16:17:51 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ typedef struct s_point3d
 	float	y;
 	float	z;
 	unsigned int		color;
-	char	r;
-	char	g;
-	char	b;
+	int		r;
+	int		g;
+	int		b;
 }	t_point3d;
 
 typedef struct s_mat4x4
@@ -178,5 +178,6 @@ t_mat3x3	rotate_around_z(t_mat3x3 r, float deg);
 t_hsv		rgb_to_hsv(t_rgb rgb);
 t_rgb		hsv_to_rgb(t_hsv hsv);
 t_rgb		set_rgb(float r, float g, float b);
+int			rgb_to_int(int r, int g, int b);
 
 #endif // FDF_H

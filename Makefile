@@ -30,7 +30,8 @@ SRCS	=	main.c \
 			drawline.c \
 			fdf_scrollhook.c \
 			perspective.c \
-			hsv.c
+			hsv.c \
+			color.c
 
 TEST_SRC=	error_check.c \
 			debug.c \
@@ -45,7 +46,8 @@ TEST_SRC=	error_check.c \
 			drawline.c \
 			fdf_scrollhook.c \
 			perspective.c \
-			hsv.c
+			hsv.c \
+			color.c
 
 INC		= -I ./include
 

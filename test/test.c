@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/02 15:38:03 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/14 01:36:42 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/14 20:12:50 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,68 +24,6 @@ static t_point3d	fill_vec(int x, int y, int z)
 	vec.z = z;
 	return (vec);
 }
-
-// static t_mat4x4	make_pers_matrix(void)
-// {
-// 	int			i;
-// 	int			j;
-
-// 	float		ffov_rad;
-// 	float		fnear = 0.4;
-// 	float		ffar = 1000;
-// 	float		ffov = 90;
-// 	float		faspect_ratio = WINDOW_WIDTH / WINDOW_HEIGHT;
-// 	t_mat4x4	proj;
-// 	i = 0;
-// 	while (i < 4)
-// 	{
-// 		j = 0;
-// 		while (j < 4)
-// 		{
-// 			proj.m[i][j] = 0.0f;
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	ffov_rad = 1 / tanf(ffov * .5 / 180 * 3.14159);
-// 	proj.m[0][0] = faspect_ratio * ffov_rad;
-// 	proj.m[1][1] = ffov_rad;
-// 	proj.m[2][2] = ffar / (ffar - fnear);
-// 	proj.m[3][2] = (-ffar * fnear) / (ffar - fnear);
-// 	proj.m[2][3] = 1;
-// 	proj.m[3][3] = 0;
-// 	return (proj);
-// }
-
-// static int	check_pers_matrix()
-// {
-// 	t_mat4x4	proj;
-
-// 	proj = make_pers_matrix();
-// 	return (0);
-// }
-
-// t_point3d	perspective_transform(t_point3d p, t_fdf *fdf)
-// {
-// 	t_point3d	new_p;
-
-// 	p.z += 100;
-// 	p.z += fdf->z_offset >> 2;
-// 	p.x += (fdf->x_offset >> 2);
-// 	p.y += (fdf->y_offset >> 2);
-// 	multiply_matrix_vec(&p, &new_p, fdf->proj);
-// 	// new_p.x += 1.0f;
-// 	// new_p.y += 1.0f;
-// 	new_p.z = (new_p.z + 1.0f) * .5;
-// 	new_p.x *= 1000;
-// 	new_p.y *= 1000;
-// 	new_p.z *= 100;
-// 	// new_p.z += 0.4;
-// 	new_p.x += WINDOW_WIDTH >> 1;
-// 	new_p.y += WINDOW_HEIGHT >> 1;
-// 	// new_p.z += 500;
-// 	return (new_p);
-// }
 
 static void	test_init(t_fdf *fdf)
 {
@@ -159,17 +97,23 @@ int	main(void)
 	if (compare_vecs(ph, temp))
 		printf("1, 1, -1 bad, result: %f %f %f\n", temp.x, temp.y, temp.z);
 
-	printf("0xFF = %i, 0xFF = %i\n", ft_hextoi("FF"), 0xFF);
+	printf("\nHextoi:     Printf:\n0xFF = %i, 0xFF = %i\n\n", ft_hextoi("FF"), 0xFF);
 	t_rgb	rgb;
 	t_hsv	hsv;
 
 	rgb = set_rgb(1, 0, 0);
 	hsv = rgb_to_hsv(rgb);
-	printf("Red: h: %f, s: %f, v: %f\n", hsv.h, hsv.s, hsv.v);
+	printf("RGB to HSV. Red:   h: %-10f, s: %f, v: %f\n", hsv.h, hsv.s, hsv.v);
+	rgb = hsv_to_rgb(hsv);
+	printf("HSV to RGB, Red:   r: %-10f, g: %f, b: %f\n", rgb.r, rgb.g, rgb.b);
 	rgb = set_rgb(0, 1, 0);
 	hsv = rgb_to_hsv(rgb);
-	printf("Green: h: %f, s: %f, v: %f\n", hsv.h, hsv.s, hsv.v);
+	printf("RGB to HSV. Green: h: %-10f, s: %f, v: %f\n", hsv.h, hsv.s, hsv.v);
+	rgb = hsv_to_rgb(hsv);
+	printf("HSV to RGB, Green: r: %-10f, g: %f, b: %f\n", rgb.r, rgb.g, rgb.b);
 	rgb = set_rgb(0, 0, 1);
 	hsv = rgb_to_hsv(rgb);
-	printf("Blue: h: %f, s: %f, v: %f\n", hsv.h, hsv.s, hsv.v);
+	printf("RGB to HSV. Blue:  h: %-10f, s: %f, v: %f\n", hsv.h, hsv.s, hsv.v);
+	rgb = hsv_to_rgb(hsv);
+	printf("HSV to RGB. Blue:  r: %-10f, g: %f, b: %f\n", rgb.r, rgb.g, rgb.b);
 }

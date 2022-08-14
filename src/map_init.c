@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 13:26:01 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/13 15:33:53 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/14 18:54:14 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,15 @@ void	get_map_size(char *str_map, t_fdf *fdf)
 	i = 0;
 	fdf->map_height = 0;
 	fdf->map_width = 0;
-	while (str_map[i] != '\n' && str_map[i] != 0)
+	while (str_map[i] != '\n' && str_map[i])
 	{
-		while (ft_iswhitespace(str_map[i]))
+		while (str_map[i] == ' ')
 			i++;
 		if (ft_isdigit(str_map[i]) || str_map[i] == '-' || str_map[i] == '+')
-		{
-			while (ft_isdigit(str_map[i]) || str_map[i] == '-'
-				|| str_map[i] == '+')
-				i++;
 			fdf->map_width++;
-		}
+		while (ft_isdigit(str_map[i]) || str_map[i] == '-'
+			|| str_map[i] == '+')
+			i++;
 		if (str_map[i] == ',')
 			i += skip_hex(&str_map[i]);
 	}
@@ -70,6 +68,8 @@ void	fill_map(char *str_map, t_fdf *fdf)
 	j = 0;
 	while (str_map[i] && j < (fdf->map_width * fdf->map_height))
 	{
+		while (ft_iswhitespace(str_map[i]))
+			i++;
 		num = ft_atoi(&str_map[i]);
 		fdf->map[j] = num;
 		fdf->map3d[j].x = (j % fdf->map_width) - (fdf->map_width / 2);
@@ -80,10 +80,10 @@ void	fill_map(char *str_map, t_fdf *fdf)
 		if (str_map[i] == ',')
 		{
 			i++;
-			fdf->map3d[j].r = ft_hextoi(&str_map[i]);
-			fdf->map3d[j].g = ft_hextoi(&str_map[i]) >> 8;
-			fdf->map3d[j].b = ft_hextoi(&str_map[i]) >> 16;
-			fdf->map3d[j].color = ft_hextoi(&str_map[i]);
+			fdf->map3d[j].r = (ft_hextoi(&str_map[i]) >> 16) & 0xFF;
+			fdf->map3d[j].g = (ft_hextoi(&str_map[i]) >> 8) & 0xFF;
+			fdf->map3d[j].b = ft_hextoi(&str_map[i]) & 0xFF;
+			fdf->map3d[j].color = rgb_to_int(fdf->map3d[j].r, fdf->map3d[j].g, fdf->map3d[j].b);
 			i += skip_hex(&str_map[i]);
 		}
 		else
@@ -94,8 +94,6 @@ void	fill_map(char *str_map, t_fdf *fdf)
 			fdf->map3d[j].color = 0xFFFFFFFF;
 		}
 		j++;
-		while (ft_iswhitespace(str_map[i]))
-			i++;
 	}
 }
 
