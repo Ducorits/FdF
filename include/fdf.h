@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/14 16:17:51 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/15 21:33:51 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,11 @@
 
 typedef struct s_rgb
 {
-	float	r;
-	float	g;
-	float	b;
+	int	r;
+	int	g;
+	int	b;
 }	t_rgb;
-typedef struct s_hsv
-{
-	float	h;
-	float	s;
-	float	v;
-}	t_hsv;
 
-typedef struct s_hsv_vars
-{
-	int		hi;
-	float	p;
-	float	q;
-	float	t;
-	float	f;
-}	t_hsv_vars;
 typedef struct s_point
 {
 	int	x;
@@ -61,13 +47,13 @@ typedef struct s_fvec
 
 typedef struct s_point3d
 {
-	float	x;
-	float	y;
-	float	z;
-	unsigned int		color;
-	int		r;
-	int		g;
-	int		b;
+	float			x;
+	float			y;
+	float			z;
+	int				r;
+	int				g;
+	int				b;
+	unsigned int	color;
 }	t_point3d;
 
 typedef struct s_mat4x4
@@ -88,7 +74,6 @@ typedef struct s_fdf
 	int			*map;
 	int			map_width;
 	int			map_height;
-	// t_fvec		*vecmap;
 	t_point3d	*map3d;
 	int			x_offset;
 	int			y_offset;
@@ -99,31 +84,24 @@ typedef struct s_fdf
 	int			last_mouse_y;
 	float		z_scaling;
 	float		scale;
-	int			rotating;
-	float		x_rot;
-	float		y_rot;
-	float		z_rot;
 	t_mat4x4	proj;
 	t_mat3x3	rotation;
 	float		fnear;
 	float		ffar;
 	float		ffov;
 	float		faspect_ratio;
-	float		y_aratio;
 	float		ffov_rad;
 	float		zoom;
-	int			lowest_p;
-	int			highest_p;
+	int			lowest_z;
+	int			highest_z;
 }	t_fdf;
 
 // Inits
 t_fdf		fdf_init(char *file_name);
 int			map_init(char *file_name, t_fdf *fdf);
-void		perspective_init(t_fdf *fdf);
 
 // fdf loop
 void		fdf_loop(t_fdf *fdf);
-void		perspective_update(t_fdf *fdf);
 
 // fdf hooks
 void		fdf_keycheck(t_fdf *fdf);
@@ -136,48 +114,46 @@ void		clear_image(t_fdf *fdf);
 int			in_window(t_ivec p);
 t_ivec		veci(t_point3d p);
 
+// Matrix Utilities
+t_mat3x3	set_mat3x3_0(t_mat3x3 m);
+t_mat4x4	set_mat4x4_0(t_mat4x4 m);
+
 // Map utils
-void		fill_map(char *str_map, t_fdf *fdf);
-void		rotate_map(t_fdf *fdf, float degrees);
+void		set_maps(char *str_map, t_fdf *fdf);
 void		scale_map(t_fdf *fdf, float scale);
 void		reset_map(t_fdf *fdf);
 void		move_map(t_fdf *fdf, int dir);
-void		rotate_x(t_fdf *fdf, float degrees);
-void		rotate_y(t_fdf *fdf, float degrees);
-void		rotate_z(t_fdf *fdf, float degrees);
+int			skip_hex(char *str_map);
 
 // Transforms
-// t_fvec		rotate_vec(t_fvec a, float degrees);
-t_point3d	rotate_vecx(t_point3d a, float degrees);
-t_point3d	rotate_vecy(t_point3d a, float degrees);
-t_point3d	rotate_vecz(t_point3d a, float degrees);
 void		multiply_matrix_vec(t_point3d *i, t_point3d *o, t_mat4x4 m);
 t_point3d	transform_point(t_point3d p, t_fdf *fdf);
-t_point3d	perspective_transform(t_point3d p, t_fdf *fdf);
 
 // for debug
 int			error_check(char *file_name);
 void		error_message(int id);
-void		print_map(t_fdf *fdf);
 
 // Line Drawing
 t_point3d	get_point(int x, int y, t_fdf *fdf);
 void		drawline(t_fdf *fdf, t_ivec a, t_ivec b, t_point3d af, t_point3d bf);
 
 // Perspective stuff
-void		new_perspective_update(t_fdf *fdf);
-void		new_perspective_init(t_fdf *fdf);
+void		perspective_update(t_fdf *fdf);
+void		perspective_init(t_fdf *fdf);
+t_point3d	perspective_transform(t_point3d p, t_fdf *fdf);
 
 // Rotation
-t_point3d	rotate_vec(t_fdf *fdf, t_point3d i);
+t_point3d	rotate_point(t_fdf *fdf, t_point3d i);
 t_mat3x3	rotate_around_x(t_mat3x3 r, float deg);
 t_mat3x3	rotate_around_y(t_mat3x3 r, float deg);
 t_mat3x3	rotate_around_z(t_mat3x3 r, float deg);
 
 // Color functions
-t_hsv		rgb_to_hsv(t_rgb rgb);
-t_rgb		hsv_to_rgb(t_hsv hsv);
+t_point3d	set_height_color(t_point3d p, t_fdf *fdf);
+t_point3d	get_point_color(t_point3d p, char *str_map);
 t_rgb		set_rgb(float r, float g, float b);
 int			rgb_to_int(int r, int g, int b);
+int			rgb_interpolate(int c1, int c2,
+				int step_count, int step);
 
 #endif // FDF_H

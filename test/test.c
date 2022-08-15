@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/02 15:38:03 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/14 20:12:50 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/15 20:26:06 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,25 @@
 #include "libft.h"
 #include <math.h>
 #include <stdio.h>
+
+void	print_map(t_fdf *fdf)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < fdf->map_height)
+	{
+		j = 0;
+		while (j < fdf->map_width)
+		{
+			ft_printf("%i ", fdf->map[(i * fdf->map_width) + j]);
+			j++;
+		}
+		ft_printf("\n");
+		i++;
+	}
+}
 
 static t_point3d	fill_vec(int x, int y, int z)
 {

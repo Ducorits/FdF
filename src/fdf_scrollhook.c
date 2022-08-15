@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/21 00:01:21 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/07 15:36:55 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/15 17:41:10 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,11 @@ void	fdf_scrollhook(double xdelta, double ydelta, void *param)
 	{
 		fdf->z_offset += 10;
 		fdf->zoom *= 1.01;
-		// scale_map(fdf, 1.5);
-		// fdf->x_offset += (WINDOW_WIDTH / 2 - fdf->mouse_x);
-		// fdf->y_offset += (WINDOW_HEIGHT / 2 - fdf->mouse_y);
 	}
 	else if (ydelta < 0)
 	{
 		fdf->z_offset -= 10;
 		fdf->zoom *= .99;
-		// scale_map(fdf, 0.75);
-		// fdf->x_offset += (WINDOW_WIDTH / 2 - fdf->x_offset) / 2;
-		// fdf->y_offset += (WINDOW_HEIGHT / 2 - fdf->y_offset) / 2;
 	}
 	if (xdelta > 0)
 		fdf->x_offset += 10;

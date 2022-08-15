@@ -26,12 +26,13 @@ SRCS	=	main.c \
 			fdf_free.c \
 			fdf_keycheck.c \
 			map_utils.c \
-			transforms.c \
+			transform.c \
 			drawline.c \
 			fdf_scrollhook.c \
 			perspective.c \
-			hsv.c \
-			color.c
+			color.c \
+			rotate.c \
+			set_maps.c
 
 TEST_SRC=	error_check.c \
 			debug.c \
@@ -46,8 +47,9 @@ TEST_SRC=	error_check.c \
 			drawline.c \
 			fdf_scrollhook.c \
 			perspective.c \
-			hsv.c \
-			color.c
+			color.c \
+			rotate.c \
+			set_maps.c
 
 INC		= -I ./include
 
