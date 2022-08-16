@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   transforms.c                                       :+:    :+:            */
+/*   transform.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/09 14:55:24 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/15 18:04:54 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/16 20:20:33 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ t_point3d	scale_vec(t_point3d a, float scalar)
 t_point3d	transform_point(t_point3d p, t_fdf *fdf)
 {
 	p.z = p.z * fdf->z_scaling;
-	p.x *= fdf->scale;
-	p.y *= fdf->scale;
+	p.x *= 2;
+	p.y *= 2;
 	p = rotate_point(fdf, p);
 	return (p);
 }

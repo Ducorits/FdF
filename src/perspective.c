@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/26 12:22:24 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/15 20:24:46 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/16 20:39:40 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ t_point3d	perspective_transform(t_point3d p, t_fdf *fdf)
 	p.z += fdf->z_offset >> 2;
 	p.x -= (fdf->x_offset >> 4);
 	p.y -= (fdf->y_offset >> 4);
-	multiply_matrix_vec(&p, &new_p, fdf->proj);
-	new_p.x *= WINDOW_WIDTH >> 2;
-	new_p.y *= WINDOW_HEIGHT >> 2;
-	new_p.x += WINDOW_WIDTH >> 1;
-	new_p.y += WINDOW_HEIGHT >> 1;
+	multiply_matrix_vec(&p, &new_p, fdf->pers);
+	new_p.x *= fdf->image->width >> 2;
+	new_p.y *= fdf->image->height >> 2;
+	new_p.x += fdf->image->width >> 1;
+	new_p.y += fdf->image->height >> 1;
 	return (new_p);
 }
 
@@ -74,30 +74,33 @@ void	perspective_update(t_fdf *fdf)
 	float	l;
 	float	t;
 	float	b;
-	float	scale;
 
-	scale = tanf(fdf->ffov * .5 / 180 * 3.14159265359) * fdf->fnear;
-	r = fdf->faspect_ratio * scale;
+	r = fdf->faspect_ratio * fdf->scale;
 	l = -r;
-	t = scale;
+	t = fdf->scale;
 	b = -t;
-	fdf->proj.m[0][0] = 2 * fdf->fnear / (r - l);
-	fdf->proj.m[1][1] = 2 * fdf->fnear / (t - b);
-	fdf->proj.m[2][0] = (r + l) / (r - l);
-	fdf->proj.m[2][1] = (t + b) / (t - b);
-	fdf->proj.m[2][2] = -(fdf->ffar + fdf->fnear) / (fdf->ffar - fdf->fnear);
-	fdf->proj.m[2][3] = -1;
-	fdf->proj.m[3][2] = -2 * fdf->ffar * fdf->fnear / (fdf->ffar - fdf->fnear);
+	fdf->pers.m[0][0] = -2 * fdf->fnear / (r - l);
+	fdf->pers.m[1][1] = 2 * fdf->fnear / (t - b);
+	fdf->pers.m[2][0] = (r + l) / (r - l);
+	fdf->pers.m[2][1] = (t + b) / (t - b);
+	fdf->pers.m[2][2] = -(fdf->ffar + fdf->fnear) / (fdf->ffar - fdf->fnear);
+	fdf->pers.m[2][3] = -1;
+	fdf->pers.m[3][2] = -2 * fdf->ffar * fdf->fnear / (fdf->ffar - fdf->fnear);
 }
 
 void	perspective_init(t_fdf *fdf)
 {
+	fdf->rotation = set_mat3x3_0(fdf->rotation);
+	fdf->rotation.m[0][0] = 1;
+	fdf->rotation.m[1][1] = 1;
+	fdf->rotation.m[2][2] = 1;
 	fdf->x_offset = 0;
-	fdf->y_offset = 100;
-	fdf->fnear = 0.1;
+	fdf->y_offset = 0;
+	fdf->z_offset = 500;
+	// fdf->fnear = 0.1;
 	fdf->ffar = 500;
 	fdf->ffov = 60;
-	fdf->faspect_ratio = WINDOW_WIDTH / (float)WINDOW_HEIGHT;
-	fdf->proj = set_mat4x4_0(fdf->proj);
+	fdf->rotation = rotate_around_x(fdf->rotation, -4.7);
+	fdf->pers = set_mat4x4_0(fdf->pers);
 	perspective_update(fdf);
 }

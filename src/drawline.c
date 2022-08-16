@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/20 15:53:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/15 20:23:01 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/16 20:51:42 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,24 @@ t_point3d	get_point(int x, int y, t_fdf *fdf)
 	return (p);
 }
 
-int	in_window(t_ivec p)
+int	in_window(t_ivec p, t_fdf *fdf)
 {
-	if (p.x < WINDOW_WIDTH
-		&& p.y < WINDOW_HEIGHT
-		&& p.y > 0
-		&& p.x > 0
-		&& p.z > 0.1
-		&& p.z < 1000)
-		return (1);
+	if (fdf->render_mode == 0)
+	{
+		if (p.y > 0
+			&& p.x > 0
+			&& (unsigned int)p.x < fdf->image->width
+			&& (unsigned int)p.y < fdf->image->height
+			&& p.z > fdf->fnear
+			&& p.z < fdf->ffar)
+			return (1);
+	}
+	else
+		if (p.y > 0
+			&& p.x > 0
+			&& (unsigned int)p.x < fdf->image->width
+			&& (unsigned int)p.y < fdf->image->height)
+			return (1);
 	return (0);
 }
 
@@ -72,32 +81,28 @@ void	drawline(t_fdf *fdf, t_ivec a, t_ivec b, t_point3d af, t_point3d bf)
 	step = 1;
 	step_count = delta.x + delta.y;
 	step_size = ft_abs(bf.z - af.z) / step_count;
-	base_z = af.z + (fdf->z_offset >> 2);
-	while ((cur.x != a.x || cur.y != a.y) && in_window(cur))
+	base_z = af.z + fdf->z_offset;
+	while ((cur.x != a.x || cur.y != a.y) && in_window(cur, fdf))
 	{
-		if (in_window(cur))
+		depth = (float)((fdf->ffar - ((step_size * step) + base_z)) / fdf->ffar) * 255;
+		if (depth >= fdf->depth_buffer[cur.y * fdf->image->width + cur.x])
 		{
-			depth = (float)((fdf->ffar - ((step_size * step) + base_z)) / fdf->ffar) * 255;
-			if (depth >= fdf->depth_buffer[cur.y * fdf->image->width + cur.x])
-			{
-				color = rgb_interpolate(af.color, bf.color, step_count, step);
-				mlx_put_pixel(fdf->image, cur.x, cur.y, color);
-				(fdf->image->pixels)
-				[((cur.y * fdf->image->width + cur.x) << 2) + 3] = depth & 0xFF;
-				fdf->depth_buffer[cur.y * fdf->image->width + cur.x] = depth;
-			}
+			color = rgb_interpolate(af.color, bf.color, step_count, step);
+			mlx_put_pixel(fdf->image, cur.x, cur.y, color);
+			(fdf->image->pixels)
+			[((cur.y * fdf->image->width + cur.x) << 2) + 3] = depth & 0xFF;
+			fdf->depth_buffer[cur.y * fdf->image->width + cur.x] = depth;
 		}
 		if (error.x >= error.y)
 		{
 			cur.x += incre.x;
 			error.x -= delta.y << 1;
-			step++;
 		}
 		else
 		{
 			cur.y += incre.y;
 			error.y -= delta.x << 1;
-			step++;
 		}
+		step++;
 	}
 }

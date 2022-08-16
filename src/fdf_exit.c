@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 14:14:32 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/07/05 18:52:29 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/16 11:25:04 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,7 @@ void	fdf_exit(const char *fname, int error)
 		ft_printf("Error: MLX failed to create image.\n %s", fname);
 	else if (error == 9)
 		ft_printf("Error: MLX failed to put image to window.\n %s", fname);
-	exit(EXIT_FAILURE);
+	else if (error == 10)
+		ft_printf("Error: Map allocation Failed.\n %s", fname);
+	exit(EXIT_SUCCESS);
 }

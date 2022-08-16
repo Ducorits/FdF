@@ -6,34 +6,22 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/14 16:07:07 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/15 21:32:32 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/16 13:34:56 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft.h"
 
-int	get_color_height(t_point3d p, t_fdf *fdf)
+float	get_color_height(t_point3d p, t_fdf *fdf)
 {
-	int	i;
-	int	current;
-	int	highest;
-	int	lowest;
+	float	current;
+	float	highest;
 
-	i = 0;
-	highest = 0;
-	lowest = 0;
-	while (i < fdf->map_width * fdf->map_height)
-	{
-		if (fdf->map[i] > highest)
-			highest = fdf->map[i];
-		if (fdf->map[i] < lowest)
-			lowest = fdf->map[i];
-		i++;
-	}
-	highest += ft_abs(lowest);
-	current = p.z + ft_abs(lowest);
-	return ((float)(current / highest * 255));
+	highest = fdf->highest_z;
+	highest += ft_abs(fdf->lowest_z);
+	current = p.z + ft_abs(fdf->lowest_z);
+	return (((current / fdf->highest_z) * 255));
 }
 
 t_point3d	set_height_color(t_point3d p, t_fdf *fdf)
@@ -41,9 +29,9 @@ t_point3d	set_height_color(t_point3d p, t_fdf *fdf)
 	int	height;
 
 	height = get_color_height(p, fdf);
-	p.r = (height >> 24) & 0xFF;
-	p.g = (height >> 16) & 0xFF;
-	p.b = (height >> 8) & 0xFF;
+	p.r = height;
+	p.g = 0x77;
+	p.b = 0xFF - height;
 	p.color = rgb_to_int(p.r, p.g, p.b);
 	return (p);
 }
@@ -61,9 +49,9 @@ int	rgb_interpolate(int c1, int c2, int step_count, int step)
 {
 	t_rgb	rgb1;
 	t_rgb	rgb2;
-	int		r_delta;
-	int		g_delta;
-	int		b_delta;
+	float	r_delta;
+	float	g_delta;
+	float	b_delta;
 
 	rgb1.r = ((c1 >> 24) & 0xFF);
 	rgb1.g = ((c1 >> 16) & 0xFF);

@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 13:35:01 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/11 14:23:15 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/16 16:27:05 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@ t_fdf	fdf_init(char *file_name)
 	if (fdf.mlx == 0)
 		fdf_exit("fdf_init", 7);
 	fdf.image = mlx_new_image(fdf.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	fdf.depth_buffer = malloc((WINDOW_HEIGHT * WINDOW_WIDTH) * sizeof(int));
+	fdf.depth_buffer = malloc((fdf.image->height * fdf.image->width)
+			* sizeof(int));
 	if (fdf.image == 0 || fdf.depth_buffer == 0)
 		fdf_exit("fdf_init", 8);
 	if (mlx_image_to_window(fdf.mlx, fdf.image, 0, 0) == -1)
 		fdf_exit("fdf_init", 9);
-	reset_map(&fdf);
+	fdf.render_mode = 1;
+	render_init(&fdf);
 	return (fdf);
 }

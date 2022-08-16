@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 15:56:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/11 14:47:48 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/16 20:48:38 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 #include "MLX42.h"
 #include "libft.h"
 #include <math.h>
+
+int	check_z(t_point3d p, t_fdf *fdf)
+{
+	if (fdf->render_mode == 0)
+	{
+		if ((int)p.z + (fdf->z_offset >> 2) > 0
+			&& (int)p.z + (fdf->z_offset >> 2) < fdf->ffar)
+			return (1);
+		return (0);
+	}
+	return (1);
+}
 
 t_ivec	veci(t_point3d p)
 {
@@ -38,18 +50,15 @@ static void	prep_lines(int x, int y, t_fdf *fdf)
 		b = get_point(x + 1, y, fdf);
 		a = transform_point(a, fdf);
 		b = transform_point(b, fdf);
-		if ((int)a.z + (fdf->z_offset >> 2) > 0
-			&& (int)b.z + (fdf->z_offset >> 2) > 0
-			&& (int)a.z + (fdf->z_offset >> 2) < fdf->ffar
-			&& (int)b.z + (fdf->z_offset >> 2) < fdf->ffar)
+		if (check_z(a, fdf) && check_z(b, fdf))
 		{
 			pa = a;
 			pb = b;
-			a = perspective_transform(a, fdf);
-			b = perspective_transform(b, fdf);
-			if (in_window(veci(a)))
+			a = projection_transform(a, fdf);
+			b = projection_transform(b, fdf);
+			if (in_window(veci(a), fdf))
 				drawline(fdf, veci(b), veci(a), pb, pa);
-			else if (in_window(veci(b)))
+			else if (in_window(veci(b), fdf))
 				drawline(fdf, veci(a), veci(b), pa, pb);
 		}
 	}
@@ -59,18 +68,15 @@ static void	prep_lines(int x, int y, t_fdf *fdf)
 		b = get_point(x, y + 1, fdf);
 		a = transform_point(a, fdf);
 		b = transform_point(b, fdf);
-		if ((int)a.z + (fdf->z_offset >> 2) > 0
-			&& (int)b.z + (fdf->z_offset >> 2) > 0
-			&& (int)a.z + (fdf->z_offset >> 2) < fdf->ffar
-			&& (int)b.z + (fdf->z_offset >> 2) < fdf->ffar)
+		if (check_z(a, fdf) && check_z(b, fdf))
 		{
 			pa = a;
 			pb = b;
-			a = perspective_transform(a, fdf);
-			b = perspective_transform(b, fdf);
-			if (in_window(veci(a)))
+			a = projection_transform(a, fdf);
+			b = projection_transform(b, fdf);
+			if (in_window(veci(a), fdf))
 				drawline(fdf, veci(b), veci(a), pb, pa);
-			else if (in_window(veci(b)))
+			else if (in_window(veci(b), fdf))
 				drawline(fdf, veci(a), veci(b), pa, pb);
 		}
 	}
@@ -83,8 +89,8 @@ static void	update_mouse(t_fdf *fdf)
 	mlx_get_mouse_pos(fdf->mlx, &fdf->mouse_x, &fdf->mouse_y);
 	if (mlx_is_mouse_down(fdf->mlx, MLX_MOUSE_BUTTON_LEFT))
 	{
-		fdf->x_offset += (fdf->mouse_x - fdf->last_mouse_x) * fdf->zoom;
-		fdf->y_offset += (fdf->mouse_y - fdf->last_mouse_y) * fdf->zoom;
+		fdf->x_offset -= (fdf->mouse_x - fdf->last_mouse_x);
+		fdf->y_offset += (fdf->mouse_y - fdf->last_mouse_y);
 	}
 }
 
@@ -126,6 +132,7 @@ void	fdf_frame(void *param)
 	t_fdf	*fdf;
 
 	fdf = (t_fdf *)param;
+	update_image(fdf);
 	update_mouse(fdf);
 	fdf_keycheck(fdf);
 	clear_image(fdf);

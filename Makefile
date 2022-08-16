@@ -32,7 +32,11 @@ SRCS	=	main.c \
 			perspective.c \
 			color.c \
 			rotate.c \
-			set_maps.c
+			set_maps.c \
+			render_init.c \
+			update_image.c \
+			orthographic.c \
+			isometric.c
 
 TEST_SRC=	error_check.c \
 			debug.c \
@@ -49,7 +53,11 @@ TEST_SRC=	error_check.c \
 			perspective.c \
 			color.c \
 			rotate.c \
-			set_maps.c
+			set_maps.c \
+			render_init.c \
+			update_image.c \
+			orthographic.c \
+			isometric.c
 
 INC		= -I ./include
 
