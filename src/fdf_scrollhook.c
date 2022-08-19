@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/21 00:01:21 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/19 13:34:12 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/19 16:36:28 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ void	fdf_scrollhook(double xdelta, double ydelta, void *param)
 	fdf = param;
 	if (ydelta > 0)
 	{
-		fdf->persz_off += 10;
+		if (fdf->render_mode == 0)
+			fdf->persz_off += 5;
 	}
 	else if (ydelta < 0)
 	{
-		fdf->persz_off -= 10;
+		if (fdf->render_mode == 0)
+			fdf->persz_off -= 5;
 	}
 	(void)xdelta;
 }

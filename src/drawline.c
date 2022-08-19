@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/20 15:53:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/19 13:49:09 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/19 16:52:19 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	in_window(t_ivec p, t_fdf *fdf)
 		if (p.y > 0
 			&& p.x > 0
 			&& (unsigned int)p.x < fdf->image->width
-			&& (unsigned int)p.y < fdf->image->height)
+			&& (unsigned int)p.y < fdf->image->height
+			&& p.z < fdf->ffar)
 			return (1);
 	return (0);
 }
