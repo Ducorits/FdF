@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/15 20:29:46 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/16 20:40:37 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/19 14:15:02 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ void	get_height_extremes(t_fdf *fdf)
 
 void	render_update(t_fdf *fdf)
 {
+	fdf->faspect_ratio = fdf->image->width / (float)(fdf->image->height);
+	fdf->scale = tanf(fdf->ffov * .5 / 180 * 3.14159265359) * fdf->fnear;
+	fdf->ffar = (fdf->map_width) / fdf->scale * 2;
 	if (fdf->render_mode == 0)
 		perspective_update(fdf);
 	else if (fdf->render_mode == 1)
@@ -53,16 +56,18 @@ void	render_update(t_fdf *fdf)
 
 void	render_init(t_fdf *fdf)
 {
-	fdf->faspect_ratio = fdf->image->width / (float)(fdf->image->height);
 	fdf->z_scaling = 0.1;
-	fdf->ffar = 500;
-	fdf->fnear = 0.2;
+	fdf->fnear = 0.1;
 	fdf->rotation = set_mat3x3_0(fdf->rotation);
 	fdf->rotation.m[0][0] = 1;
 	fdf->rotation.m[1][1] = 1;
 	fdf->rotation.m[2][2] = 1;
-	fdf->scale = tanf(fdf->ffov * .5 / 180 * 3.14159265359) * fdf->fnear;
-	fdf->zoom = 10000 / (fdf->map_height);
+	fdf->ffov = 60;
+	fdf->persz_off = 0;
+	fdf->x_offset = 0;
+	fdf->y_offset = 0;
+	fdf->z_offset = fmax(fdf->map_width, fdf->map_height)
+		+ fmax(fdf->map_width, fdf->map_height) / 2;
 	if (fdf->render_mode == 0)
 		perspective_init(fdf);
 	else if (fdf->render_mode == 1)

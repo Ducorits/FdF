@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/16 18:45:08 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/19 13:31:28 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_fdf
 	int			x_offset;
 	int			y_offset;
 	int			z_offset;
+	int			persz_off;
 	int			mouse_x;
 	int			mouse_y;
 	int			last_mouse_x;

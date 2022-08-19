@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/16 11:38:27 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/16 12:22:35 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/19 13:27:56 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void	update_image(t_fdf *fdf)
 			fdf_exit("fdf_init", 8);
 		if (mlx_image_to_window(fdf->mlx, fdf->image, 0, 0) == -1)
 			fdf_exit("fdf_init", 9);
-		perspective_update(fdf);
+		render_update(fdf);
 	}
 }

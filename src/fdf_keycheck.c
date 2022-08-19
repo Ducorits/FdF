@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 15:02:05 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/16 16:26:26 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/19 12:53:27 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	render_keycheck(t_fdf *fdf)
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_I))
 	{
 		fdf->render_mode = 2;
-		render_update(fdf);
+		isometric_init(fdf);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/20 15:53:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/16 20:51:42 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/19 13:49:09 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ void	drawline(t_fdf *fdf, t_ivec a, t_ivec b, t_point3d af, t_point3d bf)
 	step = 1;
 	step_count = delta.x + delta.y;
 	step_size = ft_abs(bf.z - af.z) / step_count;
-	base_z = af.z + fdf->z_offset;
+	if (fdf->render_mode == 0)
+		base_z = af.z + fdf->z_offset + fdf->persz_off;
+	else
+		base_z = af.z + fdf->z_offset;
 	while ((cur.x != a.x || cur.y != a.y) && in_window(cur, fdf))
 	{
 		depth = (float)((fdf->ffar - ((step_size * step) + base_z)) / fdf->ffar) * 255;

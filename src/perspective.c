@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/26 12:22:24 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/16 20:39:40 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/19 13:46:57 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_point3d	perspective_transform(t_point3d p, t_fdf *fdf)
 {
 	t_point3d	new_p;
 
-	p.z += fdf->z_offset >> 2;
+	p.z += fdf->z_offset + fdf->persz_off;
 	p.x -= (fdf->x_offset >> 4);
 	p.y -= (fdf->y_offset >> 4);
 	multiply_matrix_vec(&p, &new_p, fdf->pers);
@@ -90,16 +90,6 @@ void	perspective_update(t_fdf *fdf)
 
 void	perspective_init(t_fdf *fdf)
 {
-	fdf->rotation = set_mat3x3_0(fdf->rotation);
-	fdf->rotation.m[0][0] = 1;
-	fdf->rotation.m[1][1] = 1;
-	fdf->rotation.m[2][2] = 1;
-	fdf->x_offset = 0;
-	fdf->y_offset = 0;
-	fdf->z_offset = 500;
-	// fdf->fnear = 0.1;
-	fdf->ffar = 500;
-	fdf->ffov = 60;
 	fdf->rotation = rotate_around_x(fdf->rotation, -4.7);
 	fdf->pers = set_mat4x4_0(fdf->pers);
 	perspective_update(fdf);
