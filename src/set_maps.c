@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/15 20:32:52 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/16 13:07:06 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/20 14:49:31 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,10 @@ void	set_maps(char *str_map, t_fdf *fdf)
 	get_map_size(str_map, fdf);
 	fdf->map = malloc(sizeof(int) * (fdf->map_width * fdf->map_height));
 	fdf->map3d = malloc(sizeof(t_point3d) * (fdf->map_width * fdf->map_height));
-	if (fdf->map == 0 || fdf->map3d == 0)
+	fdf->transformed_map = malloc(sizeof(t_point3d)
+			* (fdf->map_width * fdf->map_height));
+	if (fdf->map == 0 || fdf->map3d == 0
+		|| fdf->transformed_map == 0)
 		fdf_exit("set_maps\n", 10);
 	set_map(str_map, fdf);
 	set_map3d(fdf);

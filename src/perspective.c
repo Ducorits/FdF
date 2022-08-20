@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/26 12:22:24 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/19 13:46:57 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/20 14:02:30 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,5 @@ void	perspective_update(t_fdf *fdf)
 void	perspective_init(t_fdf *fdf)
 {
 	fdf->rotation = rotate_around_x(fdf->rotation, -4.7);
-	fdf->pers = set_mat4x4_0(fdf->pers);
 	perspective_update(fdf);
 }

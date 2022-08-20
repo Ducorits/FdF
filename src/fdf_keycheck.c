@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 15:02:05 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/19 12:53:27 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/20 14:44:30 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,18 @@ static void	render_keycheck(t_fdf *fdf)
 	}
 }
 
+static int	check_rotate_keys(t_fdf *fdf)
+{
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_Q)
+		|| mlx_is_key_down(fdf->mlx, MLX_KEY_E)
+		|| mlx_is_key_down(fdf->mlx, MLX_KEY_W)
+		|| mlx_is_key_down(fdf->mlx, MLX_KEY_S)
+		|| mlx_is_key_down(fdf->mlx, MLX_KEY_A)
+		|| mlx_is_key_down(fdf->mlx, MLX_KEY_D))
+		return (1);
+	return (0);
+}
+
 static void	rotate_keycheck(t_fdf *fdf)
 {
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_Q))
@@ -49,6 +61,7 @@ static void	rotate_keycheck(t_fdf *fdf)
 		fdf->rotation = rotate_around_y(fdf->rotation, -0.05);
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_D))
 		fdf->rotation = rotate_around_y(fdf->rotation, 0.05);
+	update_transformed_map(fdf);
 }
 
 void	fdf_keycheck(t_fdf *fdf)
@@ -70,8 +83,15 @@ void	fdf_keycheck(t_fdf *fdf)
 		render_update(fdf);
 	}
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_MINUS))
+	{
 		fdf->z_scaling -= 0.01;
+		update_transformed_map(fdf);
+	}
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_EQUAL))
+	{
 		fdf->z_scaling += 0.01;
-	rotate_keycheck(fdf);
+		update_transformed_map(fdf);
+	}
+	if (check_rotate_keys(fdf))
+		rotate_keycheck(fdf);
 }

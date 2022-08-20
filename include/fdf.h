@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/19 13:31:28 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/20 14:38:54 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_fdf
 	int			map_width;
 	int			map_height;
 	t_point3d	*map3d;
+	t_point3d	*transformed_map;
 	int			x_offset;
 	int			y_offset;
 	int			z_offset;
@@ -130,6 +131,7 @@ int			skip_hex(char *str_map);
 
 // Transforms
 void		multiply_matrix_vec(t_point3d *i, t_point3d *o, t_mat4x4 m);
+void		update_transformed_map(t_fdf *fdf);
 t_point3d	transform_point(t_point3d p, t_fdf *fdf);
 
 // for debug

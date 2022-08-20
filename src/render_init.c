@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/15 20:29:46 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/19 16:38:32 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/20 14:49:48 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,17 @@ void	render_init(t_fdf *fdf)
 {
 	fdf->z_scaling = 0.1;
 	fdf->fnear = 0.1;
+	fdf->orth = set_mat4x4_0(fdf->orth);
+	fdf->pers = set_mat4x4_0(fdf->pers);
 	fdf->rotation = set_mat3x3_0(fdf->rotation);
 	fdf->rotation.m[0][0] = 1;
 	fdf->rotation.m[1][1] = 1;
 	fdf->rotation.m[2][2] = 1;
 	fdf->ffov = 90;
-	fdf->persz_off = 0;
+	fdf->persz_off = 100;
 	fdf->x_offset = 0;
 	fdf->y_offset = 0;
+	fdf->zoom = 0.1;
 	fdf->z_offset = fmax(fdf->map_width, fdf->map_height)
 		+ fmax(fdf->map_width, fdf->map_height) / 2;
 	if (fdf->render_mode == 0)
@@ -75,4 +78,5 @@ void	render_init(t_fdf *fdf)
 	else if (fdf->render_mode == 2)
 		isometric_init(fdf);
 	render_update(fdf);
+	update_transformed_map(fdf);
 }

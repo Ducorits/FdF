@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 15:56:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/19 16:40:02 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/20 14:37:38 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,14 @@ int	check_z(t_point3d p, t_fdf *fdf)
 {
 	if (fdf->render_mode == 0)
 	{
-		if (fdf->render_mode == 0
-			&& (int)p.z + (fdf->z_offset + fdf->persz_off) > 0
+		if ((int)p.z + (fdf->z_offset + fdf->persz_off) > fdf->fnear
 			&& (int)p.z + (fdf->z_offset + fdf->persz_off) < fdf->ffar)
 			return (1);
-		else if ((int)p.z + (fdf->z_offset) > 0
-			&& (int)p.z + (fdf->z_offset) < fdf->ffar)
-			return (1);
-		return (0);
 	}
-	return (1);
+	else if ((int)p.z + (fdf->z_offset) > 0
+		&& (int)p.z + (fdf->z_offset) < fdf->ffar)
+		return (1);
+	return (0);
 }
 
 t_ivec	veci(t_point3d p)
@@ -52,8 +50,8 @@ static void	prep_lines(int x, int y, t_fdf *fdf)
 	{
 		a = get_point(x, y, fdf);
 		b = get_point(x + 1, y, fdf);
-		a = transform_point(a, fdf);
-		b = transform_point(b, fdf);
+		// a = transform_point(a, fdf);
+		// b = transform_point(b, fdf);
 		if (check_z(a, fdf) && check_z(b, fdf))
 		{
 			pa = a;
@@ -70,8 +68,8 @@ static void	prep_lines(int x, int y, t_fdf *fdf)
 	{
 		a = get_point(x, y, fdf);
 		b = get_point(x, y + 1, fdf);
-		a = transform_point(a, fdf);
-		b = transform_point(b, fdf);
+		// a = transform_point(a, fdf);
+		// b = transform_point(b, fdf);
 		if (check_z(a, fdf) && check_z(b, fdf))
 		{
 			pa = a;

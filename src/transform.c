@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/09 14:55:24 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/16 20:20:33 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/20 14:28:07 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,18 @@ t_point3d	scale_vec(t_point3d a, float scalar)
 	a.y *= scalar;
 	a.z *= scalar;
 	return (a);
+}
+
+void	update_transformed_map(t_fdf *fdf)
+{
+	int	i;
+
+	i = 0;
+	while (i < fdf->map_width * fdf->map_height)
+	{
+		fdf->transformed_map[i] = transform_point(fdf->map3d[i], fdf);
+		i++;
+	}
 }
 
 t_point3d	transform_point(t_point3d p, t_fdf *fdf)
