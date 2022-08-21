@@ -36,7 +36,9 @@ SRCS	=	main.c \
 			render_init.c \
 			update_image.c \
 			orthographic.c \
-			isometric.c
+			isometric.c \
+			prep_lines.c \
+			draw_utils.c
 
 TEST_SRC=	error_check.c \
 			debug.c \
@@ -80,7 +82,7 @@ CFLAGS	= -Wall -Wextra -Werror
 endif
 
 ifeq ($(OPTIMIZE), 1)
-CFLAGS	:= $(CFLAGS) -o3
+CFLAGS	:= $(CFLAGS) -Ofast
 endif
 
 NAME	= fdf

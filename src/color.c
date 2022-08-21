@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/14 16:07:07 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/16 13:34:56 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/21 16:01:04 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	rgb_interpolate(int c1, int c2, int step_count, int step)
 	float	g_delta;
 	float	b_delta;
 
+	if (c1 == c2)
+		return (c1);
 	rgb1.r = ((c1 >> 24) & 0xFF);
 	rgb1.g = ((c1 >> 16) & 0xFF);
 	rgb1.b = ((c1 >> 8) & 0xFF);
@@ -70,5 +72,5 @@ int	rgb_interpolate(int c1, int c2, int step_count, int step)
 
 int	rgb_to_int(int r, int g, int b)
 {
-	return (r << 24 | g << 16 | b << 8 | 0xFF);
+	return (r << 24 | g << 16 | b << 8 | 0x00);
 }

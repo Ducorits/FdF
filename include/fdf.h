@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/20 14:38:54 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/21 18:28:03 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,28 @@ typedef struct s_rgb
 	int	b;
 }	t_rgb;
 
-typedef struct s_point
-{
-	int	x;
-	int	y;
-}	t_point;
-
 typedef struct s_ivec
 {
 	int	x;
 	int	y;
 	int	z;
 }	t_ivec;
-typedef struct s_fvec
+
+typedef struct s_drawline
 {
-	float	x;
-	float	y;
-	float	z;
-}	t_fvec;
+	t_ivec			delta;
+	t_ivec			incre;
+	t_ivec			cur;
+	t_ivec			error;
+	float			step;
+	float			step_size;
+	float			step_count;
+	float			base_z;
+	int				color;
+	int				depth;
+	t_ivec			p1;
+	t_ivec			p2;
+}	t_drawline;
 
 typedef struct s_point3d
 {
@@ -55,6 +59,12 @@ typedef struct s_point3d
 	int				b;
 	unsigned int	color;
 }	t_point3d;
+
+typedef struct s_line
+{
+	t_point3d	a;
+	t_point3d	b;
+}	t_line;
 
 typedef struct s_mat4x4
 {
@@ -140,7 +150,8 @@ void		error_message(int id);
 
 // Line Drawing
 t_point3d	get_point(int x, int y, t_fdf *fdf);
-void		drawline(t_fdf *fdf, t_ivec a, t_ivec b, t_point3d af, t_point3d bf);
+void		drawline(t_fdf *fdf, t_line proj_l,	t_line l);
+void		prep_lines(int x, int y, t_fdf *fdf);
 
 // Perspective stuff
 void		perspective_update(t_fdf *fdf);

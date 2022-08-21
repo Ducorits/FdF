@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 15:02:05 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/20 14:44:30 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/21 16:27:54 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	render_keycheck(t_fdf *fdf)
 	{
 		fdf->render_mode = 2;
 		isometric_init(fdf);
+		update_transformed_map(fdf);
 	}
 }
 
@@ -64,6 +65,20 @@ static void	rotate_keycheck(t_fdf *fdf)
 	update_transformed_map(fdf);
 }
 
+static void	fov_keycheck(t_fdf *fdf)
+{
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_1) && fdf->ffov < 150)
+	{
+		fdf->ffov += 1;
+		render_update(fdf);
+	}
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_2) && fdf->ffov > 1)
+	{
+		fdf->ffov -= 1;
+		render_update(fdf);
+	}
+}
+
 void	fdf_keycheck(t_fdf *fdf)
 {
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_ESCAPE))
@@ -72,16 +87,7 @@ void	fdf_keycheck(t_fdf *fdf)
 		fdf_exit("fdf_keyhook", 0);
 	}
 	render_keycheck(fdf);
-	if (mlx_is_key_down(fdf->mlx, MLX_KEY_1))
-	{
-		fdf->ffov += 1;
-		render_update(fdf);
-	}
-	if (mlx_is_key_down(fdf->mlx, MLX_KEY_2))
-	{
-		fdf->ffov -= 1;
-		render_update(fdf);
-	}
+	fov_keycheck(fdf);
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_MINUS))
 	{
 		fdf->z_scaling -= 0.01;

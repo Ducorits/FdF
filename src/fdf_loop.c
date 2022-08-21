@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 15:56:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/20 14:37:38 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/21 17:27:56 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,75 +14,6 @@
 #include "MLX42.h"
 #include "libft.h"
 #include <math.h>
-
-int	check_z(t_point3d p, t_fdf *fdf)
-{
-	if (fdf->render_mode == 0)
-	{
-		if ((int)p.z + (fdf->z_offset + fdf->persz_off) > fdf->fnear
-			&& (int)p.z + (fdf->z_offset + fdf->persz_off) < fdf->ffar)
-			return (1);
-	}
-	else if ((int)p.z + (fdf->z_offset) > 0
-		&& (int)p.z + (fdf->z_offset) < fdf->ffar)
-		return (1);
-	return (0);
-}
-
-t_ivec	veci(t_point3d p)
-{
-	t_ivec	veci;
-
-	veci.x = p.x;
-	veci.y = p.y;
-	veci.z = p.z;
-	return (veci);
-}
-
-static void	prep_lines(int x, int y, t_fdf *fdf)
-{
-	t_point3d	a;
-	t_point3d	b;
-	t_point3d	pa;
-	t_point3d	pb;
-
-	if (x + 1 < fdf->map_width)
-	{
-		a = get_point(x, y, fdf);
-		b = get_point(x + 1, y, fdf);
-		// a = transform_point(a, fdf);
-		// b = transform_point(b, fdf);
-		if (check_z(a, fdf) && check_z(b, fdf))
-		{
-			pa = a;
-			pb = b;
-			a = projection_transform(a, fdf);
-			b = projection_transform(b, fdf);
-			if (in_window(veci(a), fdf))
-				drawline(fdf, veci(b), veci(a), pb, pa);
-			else if (in_window(veci(b), fdf))
-				drawline(fdf, veci(a), veci(b), pa, pb);
-		}
-	}
-	if (y + 1 < fdf->map_height)
-	{
-		a = get_point(x, y, fdf);
-		b = get_point(x, y + 1, fdf);
-		// a = transform_point(a, fdf);
-		// b = transform_point(b, fdf);
-		if (check_z(a, fdf) && check_z(b, fdf))
-		{
-			pa = a;
-			pb = b;
-			a = projection_transform(a, fdf);
-			b = projection_transform(b, fdf);
-			if (in_window(veci(a), fdf))
-				drawline(fdf, veci(b), veci(a), pb, pa);
-			else if (in_window(veci(b), fdf))
-				drawline(fdf, veci(a), veci(b), pa, pb);
-		}
-	}
-}
 
 static void	update_mouse(t_fdf *fdf)
 {
@@ -98,8 +29,8 @@ static void	update_mouse(t_fdf *fdf)
 
 static void	draw_image(t_fdf *fdf)
 {
-	int		x;
-	int		y;
+	int			x;
+	int			y;
 
 	y = 0;
 	while (y < fdf->map_height)

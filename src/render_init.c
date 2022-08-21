@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/15 20:29:46 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/20 14:49:48 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/21 16:12:12 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ void	render_init(t_fdf *fdf)
 	fdf->rotation.m[1][1] = 1;
 	fdf->rotation.m[2][2] = 1;
 	fdf->ffov = 90;
-	fdf->persz_off = 100;
+	fdf->persz_off = 0;
 	fdf->x_offset = 0;
 	fdf->y_offset = 0;
-	fdf->zoom = 0.1;
+	fdf->zoom = 1000 / fmax(fdf->map_width, fdf->map_height);
 	fdf->z_offset = fmax(fdf->map_width, fdf->map_height)
 		+ fmax(fdf->map_width, fdf->map_height) / 2;
 	if (fdf->render_mode == 0)

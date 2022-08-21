@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/20 15:53:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/20 15:04:51 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/21 18:33:56 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,36 +15,6 @@
 #include <stdio.h>
 #include <math.h>
 
-t_point3d	get_point(int x, int y, t_fdf *fdf)
-{
-	t_point3d	p;
-
-	p = fdf->transformed_map[y * fdf->map_width + x];
-	return (p);
-}
-
-int	in_window(t_ivec p, t_fdf *fdf)
-{
-	if (fdf->render_mode == 0)
-	{
-		if (p.y > 0
-			&& p.x > 0
-			&& (unsigned int)p.x < fdf->image->width
-			&& (unsigned int)p.y < fdf->image->height
-			&& p.z > fdf->fnear
-			&& p.z < fdf->ffar)
-			return (1);
-	}
-	else
-		if (p.y > 0
-			&& p.x > 0
-			&& (unsigned int)p.x < fdf->image->width
-			&& (unsigned int)p.y < fdf->image->height
-			&& p.z < fdf->ffar)
-			return (1);
-	return (0);
-}
-
 static int	incre_select(int val, int a, int b)
 {
 	if (val)
@@ -52,61 +22,57 @@ static int	incre_select(int val, int a, int b)
 	return (b);
 }
 
-static void	draw_setup(t_ivec a, t_ivec b, t_ivec *delta, t_ivec *incre)
+static void	draw_setup(t_drawline *d, t_line l)
 {
-	delta->x = ft_abs(a.x - b.x);
-	delta->y = ft_abs(a.y - b.y);
-	delta->z = ft_abs(a.z - b.z);
-	incre->x = incre_select(b.x < a.x, 1, -1);
-	incre->y = incre_select(b.y < a.y, 1, -1);
-	incre->z = incre_select(b.z < a.z, 1, -1);
+	d->delta.x = ft_abs(d->p1.x - d->p2.x);
+	d->delta.y = ft_abs(d->p1.y - d->p2.y);
+	d->incre.x = incre_select(d->p2.x < d->p1.x, 1, -1);
+	d->incre.y = incre_select(d->p2.y < d->p1.y, 1, -1);
+	d->error.x = d->delta.x << 1;
+	d->error.y = d->delta.y << 1;
+	d->cur = d->p2;
+	d->step = 1;
+	d->step_count = d->delta.x + d->delta.y;
+	d->step_size = ft_abs(l.a.z - l.b.z) / d->step_count;
 }
 
-void	drawline(t_fdf *fdf, t_ivec a, t_ivec b, t_point3d af, t_point3d bf)
+static void	draw_loop(t_drawline d, t_fdf *fdf, t_line l)
 {
-	t_ivec			delta;
-	t_ivec			incre;
-	t_ivec			cur;
-	t_ivec			error;
-	float			step;
-	float			step_size;
-	float			step_count;
-	float			base_z;
-	int				color;
-	int				depth;
-
-	draw_setup(a, b, &delta, &incre);
-	error.x = delta.x << 1;
-	error.y = delta.y << 1;
-	cur = b;
-	step = 1;
-	step_count = delta.x + delta.y;
-	step_size = ft_abs(bf.z - af.z) / step_count;
-	if (fdf->render_mode == 0)
-		base_z = af.z + fdf->z_offset + fdf->persz_off;
-	else
-		base_z = af.z + fdf->z_offset;
-	while ((cur.x != a.x || cur.y != a.y) && in_window(cur, fdf))
+	while ((d.cur.x != d.p1.x || d.cur.y != d.p1.y) && in_window(d.cur, fdf))
 	{
-		depth = (float)((fdf->ffar - ((step_size * step) + base_z)));
-		if (depth > fdf->depth_buffer[cur.y * fdf->image->width + cur.x])
+		d.depth = ((fdf->ffar - ((d.step_size * d.step) + d.base_z)));
+		if (d.depth > fdf->depth_buffer[d.cur.y * fdf->image->width + d.cur.x])
 		{
-			color = rgb_interpolate(af.color, bf.color, step_count, step);
-			mlx_put_pixel(fdf->image, cur.x, cur.y, color);
-			(fdf->image->pixels)
-			[((cur.y * fdf->image->width + cur.x) << 2) + 3] = (int)((float)(depth / fdf->ffar) * 255) & 0xFF;
-			fdf->depth_buffer[cur.y * fdf->image->width + cur.x] = depth;
+			d.color = rgb_interpolate(l.a.color,
+					l.b.color, d.step_count, d.step)
+				| ((int)((float)(d.depth / fdf->ffar) * 255) & 0x000000FF);
+			mlx_put_pixel(fdf->image, d.cur.x, d.cur.y, d.color);
+			fdf->depth_buffer[d.cur.y * fdf->image->width + d.cur.x] = d.depth;
 		}
-		if (error.x >= error.y)
+		if (d.error.x >= d.error.y)
 		{
-			cur.x += incre.x;
-			error.x -= delta.y << 1;
+			d.cur.x += d.incre.x;
+			d.error.x -= d.delta.y << 1;
 		}
 		else
 		{
-			cur.y += incre.y;
-			error.y -= delta.x << 1;
+			d.cur.y += d.incre.y;
+			d.error.y -= d.delta.x << 1;
 		}
-		step++;
+		d.step++;
 	}
+}
+
+void	drawline(t_fdf *fdf, t_line proj_l,	t_line l)
+{
+	t_drawline	d;
+
+	d.p1 = veci(proj_l.a);
+	d.p2 = veci(proj_l.b);
+	draw_setup(&d, l);
+	if (fdf->render_mode == 0)
+		d.base_z = l.a.z + fdf->z_offset + fdf->persz_off;
+	else
+		d.base_z = l.a.z + fdf->z_offset;
+	draw_loop(d, fdf, l);
 }

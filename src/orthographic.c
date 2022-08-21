@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/16 13:57:00 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/20 14:14:18 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/21 11:43:55 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ t_point3d	orthographic_transform(t_point3d p, t_fdf *fdf)
 
 void	orthographic_update(t_fdf *fdf)
 {
-	fdf->orth.m[0][0] = fdf->fnear * fdf->faspect_ratio / (fdf->scale);
-	fdf->orth.m[1][1] = -fdf->fnear * fdf->faspect_ratio / (fdf->scale);
+	fdf->orth.m[0][0] = fdf->fnear * fdf->faspect_ratio;
+	fdf->orth.m[1][1] = -fdf->fnear * fdf->faspect_ratio;
 	fdf->orth.m[2][2] = 1;
 	fdf->orth.m[3][3] = 1;
 }
