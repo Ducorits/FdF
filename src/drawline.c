@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/20 15:53:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/21 18:33:56 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/21 20:40:23 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,25 @@ static void	draw_setup(t_drawline *d, t_line l)
 	d->cur = d->p2;
 	d->step = 1;
 	d->step_count = d->delta.x + d->delta.y;
-	d->step_size = ft_abs(l.a.z - l.b.z) / d->step_count;
+	if (d->step_count == 0)
+		d->step_size = 1;
+	else
+		d->step_size = ft_abs(l.a.z - l.b.z) / d->step_count;
+}
+
+static void	draw_point(t_drawline d, t_fdf *fdf, t_line l)
+{
+	if (in_window(d.cur, fdf))
+	{
+		d.depth = ((fdf->ffar - ((d.step_size * d.step) + d.base_z)));
+		if (d.depth > fdf->depth_buffer[d.cur.y * fdf->image->width + d.cur.x])
+		{
+			d.color = l.b.color | ((int)((float)(d.depth / fdf->ffar) * 255)
+					& 0x000000FF);
+			mlx_put_pixel(fdf->image, d.cur.x, d.cur.y, d.color);
+			fdf->depth_buffer[d.cur.y * fdf->image->width + d.cur.x] = d.depth;
+		}
+	}
 }
 
 static void	draw_loop(t_drawline d, t_fdf *fdf, t_line l)
@@ -70,9 +88,11 @@ void	drawline(t_fdf *fdf, t_line proj_l,	t_line l)
 	d.p1 = veci(proj_l.a);
 	d.p2 = veci(proj_l.b);
 	draw_setup(&d, l);
-	if (fdf->render_mode == 0)
+	if (fdf->projection_mode == 0)
 		d.base_z = l.a.z + fdf->z_offset + fdf->persz_off;
 	else
 		d.base_z = l.a.z + fdf->z_offset;
-	draw_loop(d, fdf, l);
+	if (fdf->render_mode == 0)
+		draw_loop(d, fdf, l);
+	draw_point(d, fdf, l);
 }

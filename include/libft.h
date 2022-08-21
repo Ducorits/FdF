@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/07 12:51:11 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/11 15:36:32 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/21 18:42:15 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -403,7 +403,8 @@ int				ft_strncmp(const char *s1, const char *s2, size_t n);
  * @param needle The 'needle' to find.
  * @param len The length to look through.
  * @return Pointer to the first occurence in haystack. */
-char			*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char			*ft_strnstr(const char *haystack,
+					const char *needle, size_t len);
 /**
  * @brief Locates the first occurrence of c
  * (converted to a char) in the string pointed to by s.

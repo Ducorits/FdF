@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/21 17:26:59 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/21 18:09:48 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/21 19:34:37 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_z(t_point3d p, t_fdf *fdf)
 {
-	if (fdf->render_mode == 0)
+	if (fdf->projection_mode == 0)
 	{
 		if ((int)p.z + (fdf->z_offset + fdf->persz_off) > fdf->fnear
 			&& (int)p.z + (fdf->z_offset + fdf->persz_off) < fdf->ffar)
@@ -73,6 +73,12 @@ void	prep_lines(int x, int y, t_fdf *fdf)
 	{
 		l.a = get_point(x, y, fdf);
 		l.b = get_point(x, y + 1, fdf);
+		prep_line(l, fdf);
+	}
+	if (x == fdf->map_width - 1 && y == fdf->map_height - 1)
+	{
+		l.a = get_point(x, y, fdf);
+		l.b = l.a;
 		prep_line(l, fdf);
 	}
 }

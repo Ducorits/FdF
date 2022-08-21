@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:44:57 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/21 12:03:25 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/21 20:45:13 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,10 @@
 #include "../include/libft.h"
 #include "../include/fdf.h"
 
-// void at_exit(void) // away with this
-// {
-// 	system("leaks fdf");
-// }
-
 int	main(int argc, char **argv)
 {
 	t_fdf	fdf;
 
-	// atexit(at_exit); // away with this
 	if (argc > 2)
 		fdf_exit("main", 6);
 	else if (argc < 2)

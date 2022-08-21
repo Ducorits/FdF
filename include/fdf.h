@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/21 18:28:03 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/21 19:36:09 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,9 @@ typedef struct s_fdf
 	float		zoom;
 	float		lowest_z;
 	float		highest_z;
+	int			projection_mode;
 	int			render_mode;
+	int			key_debounce;
 }	t_fdf;
 
 // Inits

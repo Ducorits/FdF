@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 15:02:05 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/21 16:27:54 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/21 21:01:19 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,27 @@ static void	render_keycheck(t_fdf *fdf)
 		render_init(fdf);
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_P))
 	{
-		fdf->render_mode = 0;
+		fdf->projection_mode = 0;
 		render_update(fdf);
 	}
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_O))
 	{
-		fdf->render_mode = 1;
+		fdf->projection_mode = 1;
 		render_update(fdf);
 	}
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_I))
 	{
-		fdf->render_mode = 2;
+		fdf->projection_mode = 2;
 		isometric_init(fdf);
 		update_transformed_map(fdf);
 	}
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_L) && fdf->key_debounce == 0)
+	{
+		fdf->render_mode = (fdf->render_mode * -fdf->render_mode) + 1;
+		fdf->key_debounce = 1;
+	}
+	else if (!mlx_is_key_down(fdf->mlx, MLX_KEY_L))
+		fdf->key_debounce = 0;
 }
 
 static int	check_rotate_keys(t_fdf *fdf)
@@ -65,7 +72,7 @@ static void	rotate_keycheck(t_fdf *fdf)
 	update_transformed_map(fdf);
 }
 
-static void	fov_keycheck(t_fdf *fdf)
+static void	setting_keycheck(t_fdf *fdf)
 {
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_1) && fdf->ffov < 150)
 	{
@@ -75,6 +82,16 @@ static void	fov_keycheck(t_fdf *fdf)
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_2) && fdf->ffov > 1)
 	{
 		fdf->ffov -= 1;
+		render_update(fdf);
+	}
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_3))
+	{
+		fdf->ffar += 0.05 * fdf->z_offset;
+		render_update(fdf);
+	}
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_4))
+	{
+		fdf->ffar -= 0.05 * fdf->z_offset;
 		render_update(fdf);
 	}
 }
@@ -87,7 +104,7 @@ void	fdf_keycheck(t_fdf *fdf)
 		fdf_exit("fdf_keyhook", 0);
 	}
 	render_keycheck(fdf);
-	fov_keycheck(fdf);
+	setting_keycheck(fdf);
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_MINUS))
 	{
 		fdf->z_scaling -= 0.01;
