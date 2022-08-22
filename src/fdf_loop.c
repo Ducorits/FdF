@@ -6,14 +6,11 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 15:56:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/21 17:27:56 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/22 12:08:30 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "MLX42.h"
-#include "libft.h"
-#include <math.h>
 
 static void	update_mouse(t_fdf *fdf)
 {

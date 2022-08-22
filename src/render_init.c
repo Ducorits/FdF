@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/15 20:29:46 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/21 20:53:21 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/22 13:47:07 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void	render_update(t_fdf *fdf)
 void	render_init(t_fdf *fdf)
 {
 	fdf->z_scaling = 0.1;
-	fdf->fnear = 0.1;
+	fdf->fnear = 0.2;
 	fdf->ffar = fmax(fdf->map_width, fdf->map_height)
-		+ (fdf->image->width >> 1);
+		+ (fdf->map_width << 1);
 	fdf->orth = set_mat4x4_0(fdf->orth);
 	fdf->pers = set_mat4x4_0(fdf->pers);
 	fdf->rotation = set_mat3x3_0(fdf->rotation);

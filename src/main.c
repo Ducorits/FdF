@@ -6,14 +6,11 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:44:57 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/21 20:45:13 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/22 11:52:01 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include "../include/MLX42.h"
-#include "../include/libft.h"
-#include "../include/fdf.h"
+#include "fdf.h"
 
 int	main(int argc, char **argv)
 {

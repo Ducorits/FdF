@@ -1,29 +1,51 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   debug.c                                            :+:    :+:            */
+/*   projection_utils.c                                 :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/06/22 15:00:47 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/15 20:26:07 by dritsema      ########   odam.nl         */
+/*   Created: 2022/08/22 11:38:45 by dritsema      #+#    #+#                 */
+/*   Updated: 2022/08/22 11:38:54 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "libft.h"
-#include <stdio.h>
 
-void	error_message(int id)
+t_mat3x3	set_mat3x3_0(t_mat3x3 m)
 {
-	if (id == -1)
-		ft_printf("Error!\n - Invalid Filepath.\n");
-	else if (id == -2)
-		ft_printf("Error!\n - File reading failed.\n");
-	else if (id == -2)
-		ft_printf("Error!\n - String allocation failed.\n");
-	else if (id == -3)
-		ft_printf("Error!\n - Not a '.fdf' file.\n");
-	else if (id == -4)
-		ft_printf("No argument given. Or incorrect argument count\n");
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < 3)
+	{
+		j = 0;
+		while (j < 3)
+		{
+			m.m[i][j] = 0.0f;
+			j++;
+		}
+		i++;
+	}
+	return (m);
+}
+
+t_mat4x4	set_mat4x4_0(t_mat4x4 m)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < 4)
+	{
+		j = 0;
+		while (j < 4)
+		{
+			m.m[i][j] = 0.0f;
+			j++;
+		}
+		i++;
+	}
+	return (m);
 }

@@ -6,13 +6,13 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/15 20:32:52 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/20 14:49:31 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/22 11:55:16 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
-#include "../include/libft.h"
-#include <unistd.h>
+#include "fdf.h"
+#include "libft.h"
+#include <stdlib.h>
 
 void	get_map_size(char *str_map, t_fdf *fdf)
 {

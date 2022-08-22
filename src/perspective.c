@@ -6,52 +6,11 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/26 12:22:24 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/20 14:02:30 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/22 11:53:50 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
-#include "libft.h"
-#include "MLX42.h"
-#include <math.h>
-
-t_mat3x3	set_mat3x3_0(t_mat3x3 m)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < 3)
-	{
-		j = 0;
-		while (j < 3)
-		{
-			m.m[i][j] = 0.0f;
-			j++;
-		}
-		i++;
-	}
-	return (m);
-}
-
-t_mat4x4	set_mat4x4_0(t_mat4x4 m)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < 4)
-	{
-		j = 0;
-		while (j < 4)
-		{
-			m.m[i][j] = 0.0f;
-			j++;
-		}
-		i++;
-	}
-	return (m);
-}
+#include "fdf.h"
 
 t_point3d	perspective_transform(t_point3d p, t_fdf *fdf)
 {

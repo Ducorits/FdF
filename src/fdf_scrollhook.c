@@ -6,14 +6,11 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/21 00:01:21 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/21 19:08:09 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/22 11:52:23 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "libft.h"
-#include "MLX42.h"
-#include <stdio.h>
 
 void	fdf_scrollhook(double xdelta, double ydelta, void *param)
 {

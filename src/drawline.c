@@ -6,14 +6,12 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/20 15:53:16 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/21 20:40:23 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/22 12:01:56 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
-#include "../include/libft.h"
-#include <stdio.h>
-#include <math.h>
+#include "fdf.h"
+#include "libft.h"
 
 static int	incre_select(int val, int a, int b)
 {

@@ -6,13 +6,13 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 13:35:01 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/21 19:14:52 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/22 11:59:48 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
-#include "../include/libft.h"
-#include <unistd.h>
+#include "fdf.h"
+#include "libft.h"
+#include <stdlib.h>
 
 t_fdf	fdf_init(char *file_name)
 {
