@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   rotate_mat.c                                       :+:    :+:            */
+/*   rotate.c                                           :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/15 18:04:18 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/15 18:04:57 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/22 11:51:13 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "fdf.h"
 #include <math.h>
-#include "../include/fdf.h"
 
 t_point3d	rotate_point(t_fdf *fdf, t_point3d i)
 {

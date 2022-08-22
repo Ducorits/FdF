@@ -6,19 +6,11 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/21 17:59:46 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/21 19:09:04 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/22 11:37:14 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-t_point3d	get_point(int x, int y, t_fdf *fdf)
-{
-	t_point3d	p;
-
-	p = fdf->transformed_map[y * fdf->map_width + x];
-	return (p);
-}
 
 int	in_window(t_ivec p, t_fdf *fdf)
 {

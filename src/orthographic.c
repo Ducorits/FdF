@@ -6,14 +6,11 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/16 13:57:00 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/21 11:43:55 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/22 11:53:36 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
-#include "libft.h"
-#include "MLX42.h"
-#include <math.h>
+#include "fdf.h"
 
 t_point3d	orthographic_transform(t_point3d p, t_fdf *fdf)
 {

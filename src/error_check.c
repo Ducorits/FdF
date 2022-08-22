@@ -6,12 +6,12 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/21 14:36:07 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/06/30 15:02:07 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/22 12:00:59 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "fdf.h"
+#include "libft.h"
 
 int	error_check(char *file_name)
 {

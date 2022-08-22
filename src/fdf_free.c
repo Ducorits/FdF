@@ -6,13 +6,12 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 16:03:36 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/20 14:23:28 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/22 11:59:43 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdlib.h>
-#include "libft.h"
 
 void	fdf_free(t_fdf *fdf)
 {

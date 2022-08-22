@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/21 19:36:09 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/22 11:45:01 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,14 +112,14 @@ typedef struct s_fdf
 	int			key_debounce;
 }	t_fdf;
 
-// Inits
+// Init
 t_fdf		fdf_init(char *file_name);
 int			map_init(char *file_name, t_fdf *fdf);
 
-// fdf loop
+// FdF loop
 void		fdf_loop(t_fdf *fdf);
 
-// fdf hooks
+// FdF hooks
 void		fdf_keycheck(t_fdf *fdf);
 void		fdf_scrollhook(double xdelta, double ydelta, void *param);
 
@@ -127,6 +127,7 @@ void		fdf_scrollhook(double xdelta, double ydelta, void *param);
 void		fdf_free(t_fdf *fdf);
 void		fdf_exit(const char *fname, int error);
 void		clear_image(t_fdf *fdf);
+t_point3d	get_point(int x, int y, t_fdf *fdf);
 int			in_window(t_ivec p, t_fdf *fdf);
 t_ivec		veci(t_point3d p);
 void		get_height_extremes(t_fdf *fdf);
@@ -137,23 +138,18 @@ t_mat4x4	set_mat4x4_0(t_mat4x4 m);
 
 // Map utils
 void		set_maps(char *str_map, t_fdf *fdf);
-void		scale_map(t_fdf *fdf, float scale);
-void		move_map(t_fdf *fdf, int dir);
 int			skip_hex(char *str_map);
 
 // Transforms
 void		multiply_matrix_vec(t_point3d *i, t_point3d *o, t_mat4x4 m);
 void		update_transformed_map(t_fdf *fdf);
-t_point3d	transform_point(t_point3d p, t_fdf *fdf);
 
-// for debug
+// File checking
 int			error_check(char *file_name);
-void		error_message(int id);
 
 // Line Drawing
-t_point3d	get_point(int x, int y, t_fdf *fdf);
-void		drawline(t_fdf *fdf, t_line proj_l,	t_line l);
 void		prep_lines(int x, int y, t_fdf *fdf);
+void		drawline(t_fdf *fdf, t_line proj_l,	t_line l);
 
 // Perspective stuff
 void		perspective_update(t_fdf *fdf);
@@ -177,7 +173,6 @@ t_mat3x3	rotate_around_z(t_mat3x3 r, float deg);
 // Color functions
 t_point3d	set_height_color(t_point3d p, t_fdf *fdf);
 t_point3d	get_point_color(t_point3d p, char *str_map);
-t_rgb		set_rgb(float r, float g, float b);
 int			rgb_to_int(int r, int g, int b);
 int			rgb_interpolate(int c1, int c2,
 				int step_count, int step);

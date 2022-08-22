@@ -6,13 +6,11 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 15:02:05 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/21 21:01:19 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/22 11:57:54 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "libft.h"
-#include <math.h>
 
 static void	render_keycheck(t_fdf *fdf)
 {

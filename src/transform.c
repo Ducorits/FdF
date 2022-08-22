@@ -6,12 +6,11 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/09 14:55:24 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/20 14:28:07 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/08/22 11:54:24 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
-#include "../include/fdf.h"
+#include "fdf.h"
 
 void	multiply_matrix_vec(t_point3d *i, t_point3d *o, t_mat4x4 m)
 {
@@ -29,12 +28,13 @@ void	multiply_matrix_vec(t_point3d *i, t_point3d *o, t_mat4x4 m)
 	}
 }
 
-t_point3d	scale_vec(t_point3d a, float scalar)
+static t_point3d	transform_point(t_point3d p, t_fdf *fdf)
 {
-	a.x *= scalar;
-	a.y *= scalar;
-	a.z *= scalar;
-	return (a);
+	p.z = p.z * fdf->z_scaling;
+	p.x *= 2;
+	p.y *= 2;
+	p = rotate_point(fdf, p);
+	return (p);
 }
 
 void	update_transformed_map(t_fdf *fdf)
@@ -47,13 +47,4 @@ void	update_transformed_map(t_fdf *fdf)
 		fdf->transformed_map[i] = transform_point(fdf->map3d[i], fdf);
 		i++;
 	}
-}
-
-t_point3d	transform_point(t_point3d p, t_fdf *fdf)
-{
-	p.z = p.z * fdf->z_scaling;
-	p.x *= 2;
-	p.y *= 2;
-	p = rotate_point(fdf, p);
-	return (p);
 }
