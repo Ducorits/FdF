@@ -6,7 +6,7 @@
 #    By: dritsema <dritsema@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/08/22 12:14:27 by dritsema      #+#    #+#                  #
-#    Updated: 2022/08/22 12:14:29 by dritsema      ########   odam.nl          #
+#    Updated: 2023/02/28 18:14:43 by dritsema      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,8 @@ SRCS	=	main.c \
 			prep_lines.c \
 			draw_utils.c \
 			matrix_utils.c
+
+INC_SRC	=	./include/fdf.h ./include/libft.h
 
 INC		= -I ./include -I ./MLX42/include/MLX42
 
@@ -99,7 +101,7 @@ obj/%.o: src/%.c
 	@$(CC) $(CFLAGS) $(INC) -c $^ -o $@
 	@printf "$(INSET)$(BLUE)Compiling: $(GREEN)%-29s $(CYAN)%-10s$(RESET)\n" "$^" ""
 
-$(NAME): $(MLX) $(LIBFT) $(OBJS)
+$(NAME): $(MLX) $(LIBFT) $(OBJS) $(INC_SRC)
 	@$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIBFT) $(MLX) $(GLFW) $(MATHLIB) -o $@
 	@printf "$(INSET)Compiling: Program $@\n"
 

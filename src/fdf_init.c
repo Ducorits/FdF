@@ -6,13 +6,14 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 13:35:01 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/22 11:59:48 by dritsema      ########   odam.nl         */
+/*   Updated: 2023/02/28 18:37:31 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "libft.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 t_fdf	fdf_init(char *file_name)
 {
@@ -34,6 +35,11 @@ t_fdf	fdf_init(char *file_name)
 		fdf_exit("fdf_init", 9);
 	fdf.projection_mode = 2;
 	fdf.render_mode = 0;
+	fdf.fps_control = 0;
+	fdf.camera_pos.x = 0;
+	fdf.camera_pos.y = 0;
+	fdf.camera_pos.z = 1000;
+	printf("camx: %f, camy: %f, camz: %f.\n", fdf.camera_pos.x, fdf.camera_pos.y, fdf.camera_pos.z);
 	render_init(&fdf);
 	return (fdf);
 }

@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/16 13:57:00 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/22 11:53:36 by dritsema      ########   odam.nl         */
+/*   Updated: 2023/02/28 17:34:28 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ t_point3d	orthographic_transform(t_point3d p, t_fdf *fdf)
 {
 	t_point3d	new_p;
 
-	p.z += fdf->z_offset;
-	p.x -= (fdf->x_offset >> 4);
-	p.y -= (fdf->y_offset >> 4);
 	multiply_matrix_vec(&p, &new_p, fdf->orth);
 	new_p.x *= fdf->zoom;
 	new_p.y *= fdf->zoom;

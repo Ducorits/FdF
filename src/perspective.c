@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/26 12:22:24 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/22 11:53:50 by dritsema      ########   odam.nl         */
+/*   Updated: 2023/02/28 17:34:21 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@ t_point3d	perspective_transform(t_point3d p, t_fdf *fdf)
 {
 	t_point3d	new_p;
 
-	p.z += fdf->z_offset + fdf->persz_off;
-	p.x -= (fdf->x_offset >> 4);
-	p.y -= (fdf->y_offset >> 4);
+	p.z += fdf->persz_off;
 	multiply_matrix_vec(&p, &new_p, fdf->pers);
-	new_p.x *= fdf->image->width >> 2;
-	new_p.y *= fdf->image->height >> 2;
-	new_p.x += fdf->image->width >> 1;
-	new_p.y += fdf->image->height >> 1;
+	new_p.x *= fdf->image->width / 4;
+	new_p.y *= fdf->image->height / 4;
+	new_p.x += fdf->image->width / 2;
+	new_p.y += fdf->image->height / 2;
 	return (new_p);
 }
 

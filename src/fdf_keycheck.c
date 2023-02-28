@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 15:02:05 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/22 11:57:54 by dritsema      ########   odam.nl         */
+/*   Updated: 2023/02/28 18:36:08 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,13 @@ static void	render_keycheck(t_fdf *fdf)
 		fdf->render_mode = (fdf->render_mode * -fdf->render_mode) + 1;
 		fdf->key_debounce = 1;
 	}
-	else if (!mlx_is_key_down(fdf->mlx, MLX_KEY_L))
+	else if (mlx_is_key_down(fdf->mlx, MLX_KEY_F) && fdf->key_debounce == 0)
+	{
+		fdf->fps_control = (fdf->fps_control * -fdf->fps_control) + 1;
+		fdf->key_debounce = 1;
+		update_transformed_map(fdf);
+	}
+	else if (!mlx_is_key_down(fdf->mlx, MLX_KEY_L) && !mlx_is_key_down(fdf->mlx, MLX_KEY_F))
 		fdf->key_debounce = 0;
 }
 
@@ -53,7 +59,7 @@ static int	check_rotate_keys(t_fdf *fdf)
 	return (0);
 }
 
-static void	rotate_keycheck(t_fdf *fdf)
+static void	rotate_key_action(t_fdf *fdf)
 {
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_Q))
 		fdf->rotation = rotate_around_z(fdf->rotation, -0.05);
@@ -94,6 +100,27 @@ static void	setting_keycheck(t_fdf *fdf)
 	}
 }
 
+void	movement_key_action(t_fdf *fdf)
+{
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_Q))
+		fdf->camera_pos.z -= 2;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_E))
+		fdf->camera_pos.z += 2;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_W))
+		fdf->camera_pos.x -= 2;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_S))
+		fdf->camera_pos.x += 2;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_A))
+		fdf->camera_pos.y -= 2;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_D))
+		fdf->camera_pos.y += 2;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_SPACE))
+		fdf->camera_pos.z -= 2;
+	if (mlx_is_key_down(fdf->mlx, MLX_KEY_LEFT_SHIFT))
+		fdf->camera_pos.z += 2;
+	update_transformed_map(fdf);
+}
+
 void	fdf_keycheck(t_fdf *fdf)
 {
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_ESCAPE))
@@ -114,5 +141,10 @@ void	fdf_keycheck(t_fdf *fdf)
 		update_transformed_map(fdf);
 	}
 	if (check_rotate_keys(fdf))
-		rotate_keycheck(fdf);
+	{
+		if (!fdf->fps_control)
+			rotate_key_action(fdf);
+		else
+			movement_key_action(fdf);
+	}
 }

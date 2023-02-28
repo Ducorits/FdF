@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/15 20:32:52 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/22 11:55:16 by dritsema      ########   odam.nl         */
+/*   Updated: 2023/02/28 17:39:03 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ void	set_map3d(t_fdf *fdf)
 	i = 0;
 	while (i < fdf->map_width * fdf->map_height)
 	{
-		fdf->map3d[i].x = (i % fdf->map_width) - (fdf->map_width >> 1);
-		fdf->map3d[i].y = (i / fdf->map_width) - (fdf->map_height >> 1);
+		fdf->map3d[i].x = (i % fdf->map_width);
+		fdf->map3d[i].y = (i / fdf->map_width);
 		fdf->map3d[i].z = fdf->map[i];
 		i++;
 	}

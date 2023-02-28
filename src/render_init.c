@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/15 20:29:46 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/21 20:53:21 by dritsema      ########   odam.nl         */
+/*   Updated: 2023/02/28 18:31:44 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 t_point3d	projection_transform(t_point3d p, t_fdf *fdf)
 {
+	p.z += fdf->z_offset;
+	p.x -= fdf->x_offset;
+	p.y -= fdf->y_offset;
 	if (fdf->projection_mode == 0)
 		p = perspective_transform(p, fdf);
 	else if (fdf->projection_mode == 1)
@@ -56,7 +59,7 @@ void	render_update(t_fdf *fdf)
 void	render_init(t_fdf *fdf)
 {
 	fdf->z_scaling = 0.1;
-	fdf->fnear = 0.1;
+	fdf->fnear = 0.2;
 	fdf->ffar = fmax(fdf->map_width, fdf->map_height)
 		+ (fdf->image->width >> 1);
 	fdf->orth = set_mat4x4_0(fdf->orth);
