@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   fdf.h                                              :+:    :+:            */
+/*   fdf.h                                             :+:    :+:             */
 /*                                                     +:+                    */
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/15 13:41:06 by dritsema      #+#    #+#                 */
-/*   Updated: 2023/02/28 16:35:13 by dritsema      ########   odam.nl         */
+/*   Updated: 2023/07/27 11:12:30 by duco          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ typedef struct s_fdf
 	int			fps_control;
 	int			key_debounce;
 	t_point3d	camera_pos;
+	t_point3d	camera_dir;
 }	t_fdf;
 
 // Init

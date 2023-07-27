@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   perspective.c                                      :+:    :+:            */
+/*   perspective.c                                     :+:    :+:             */
 /*                                                     +:+                    */
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/26 12:22:24 by dritsema      #+#    #+#                 */
-/*   Updated: 2023/02/28 17:34:21 by dritsema      ########   odam.nl         */
+/*   Updated: 2023/07/27 14:38:41 by duco          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_point3d	perspective_transform(t_point3d p, t_fdf *fdf)
 {
 	t_point3d	new_p;
 
-	p.z += fdf->persz_off;
+	// p.z += fdf->persz_off;
 	multiply_matrix_vec(&p, &new_p, fdf->pers);
 	new_p.x *= fdf->image->width / 4;
 	new_p.y *= fdf->image->height / 4;

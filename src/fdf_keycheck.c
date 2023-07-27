@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   fdf_keycheck.c                                     :+:    :+:            */
+/*   fdf_keycheck.c                                    :+:    :+:             */
 /*                                                     +:+                    */
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/07 15:02:05 by dritsema      #+#    #+#                 */
-/*   Updated: 2023/02/28 18:36:08 by dritsema      ########   odam.nl         */
+/*   Updated: 2023/07/27 14:55:55 by duco          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 static void	render_keycheck(t_fdf *fdf)
 {
@@ -102,22 +103,45 @@ static void	setting_keycheck(t_fdf *fdf)
 
 void	movement_key_action(t_fdf *fdf)
 {
+	t_point3d	dir;
+
+	dir.x = 0;
+	dir.y = 0;
+	dir.z = 0;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_Q))
 		fdf->camera_pos.z -= 2;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_E))
 		fdf->camera_pos.z += 2;
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_W))
-		fdf->camera_pos.x -= 2;
+	{
+		dir.y += 1;
+	}
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_S))
-		fdf->camera_pos.x += 2;
+	{
+		dir.y += -1;
+	}
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_A))
-		fdf->camera_pos.y -= 2;
+	{
+		dir.x += -1;
+	}
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_D))
-		fdf->camera_pos.y += 2;
+	{
+		dir.x += 1;
+	}
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_SPACE))
-		fdf->camera_pos.z -= 2;
+	{
+		dir.z += 1;
+	}
 	if (mlx_is_key_down(fdf->mlx, MLX_KEY_LEFT_SHIFT))
-		fdf->camera_pos.z += 2;
+	{
+		dir.z += -1;
+	}
+	printf("dirx: %f, diry: %f, dirz: %f.\n", dir.x, dir.y, dir.z);
+	dir = rotate_point(fdf, dir);
+	printf("rotated dirx: %f, diry: %f, dirz: %f.\n", dir.x, dir.y, dir.z);
+	fdf->camera_pos.x += 2 * dir.x;
+	fdf->camera_pos.y += 2 * dir.y;
+	fdf->camera_pos.z += 2 * dir.z;
 	update_transformed_map(fdf);
 }
 

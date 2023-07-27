@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
+#    Makefile                                          :+:    :+:              #
 #                                                      +:+                     #
 #    By: dritsema <dritsema@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2022/08/22 12:14:27 by dritsema      #+#    #+#                  #
-#    Updated: 2023/02/28 18:14:43 by dritsema      ########   odam.nl          #
+#    Updated: 2023/07/27 15:11:21 by duco          ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ SRCS	=	main.c \
 			color.c \
 			rotate.c \
 			set_maps.c \
-			render_init.c \
+			render.c \
 			update_image.c \
 			orthographic.c \
 			isometric.c \

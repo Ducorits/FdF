@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   fdf_init.c                                         :+:    :+:            */
+/*   fdf_init.c                                        :+:    :+:             */
 /*                                                     +:+                    */
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/30 13:35:01 by dritsema      #+#    #+#                 */
-/*   Updated: 2023/02/28 18:37:31 by dritsema      ########   odam.nl         */
+/*   Updated: 2023/07/27 13:49:24 by duco          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ t_fdf	fdf_init(char *file_name)
 	fdf.fps_control = 0;
 	fdf.camera_pos.x = 0;
 	fdf.camera_pos.y = 0;
-	fdf.camera_pos.z = 1000;
+	fdf.camera_pos.z = 0;
+	fdf.camera_dir.x = 1;
+	fdf.camera_dir.y = 0;
+	fdf.camera_dir.z = 0;
 	printf("camx: %f, camy: %f, camz: %f.\n", fdf.camera_pos.x, fdf.camera_pos.y, fdf.camera_pos.z);
 	render_init(&fdf);
 	return (fdf);

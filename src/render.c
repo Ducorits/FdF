@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   render_init.c                                      :+:    :+:            */
+/*   render_init.c                                     :+:    :+:             */
 /*                                                     +:+                    */
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/08/15 20:29:46 by dritsema      #+#    #+#                 */
-/*   Updated: 2023/02/28 18:31:44 by dritsema      ########   odam.nl         */
+/*   Updated: 2023/07/27 14:36:41 by duco          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 t_point3d	projection_transform(t_point3d p, t_fdf *fdf)
 {
-	p.z += fdf->z_offset;
-	p.x -= fdf->x_offset;
-	p.y -= fdf->y_offset;
+	// p.z += fdf->z_offset;
+	// p.x -= fdf->x_offset;
+	// p.y -= fdf->y_offset;
 	if (fdf->projection_mode == 0)
 		p = perspective_transform(p, fdf);
 	else if (fdf->projection_mode == 1)

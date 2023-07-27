@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   transform.c                                        :+:    :+:            */
+/*   transform.c                                       :+:    :+:             */
 /*                                                     +:+                    */
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/07/09 14:55:24 by dritsema      #+#    #+#                 */
-/*   Updated: 2023/02/28 18:37:06 by dritsema      ########   odam.nl         */
+/*   Updated: 2023/07/27 14:43:22 by duco          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,20 @@ static t_point3d	transform_point(t_point3d p, t_fdf *fdf)
 	{
 		p.x -= (fdf->map_width / 2);
 		p.y -= (fdf->map_height / 2);
+		p = rotate_point(fdf, p);
 	}
 	// p.z = p.z * fdf->z_scaling;
 	// p.x *= 2;
 	// p.y *= 2;
 	if (fdf->fps_control)
 	{
-		p.x -= (fdf->map_width / 2);
-		p.y -= (fdf->map_height / 2);
-		p.x -= fdf->camera_pos.x;
-		p.y -= fdf->camera_pos.y;
-		p.z -= fdf->camera_pos.z;
+		// p.x -= (fdf->map_width / 2);
+		// p.y -= (fdf->map_height / 2);
+		p.x += fdf->camera_pos.x;
+		p.y += fdf->camera_pos.y;
+		p.z += fdf->camera_pos.z;
+		p = rotate_point(fdf, p);
 	}
-	p = rotate_point(fdf, p);
 	return (p);
 }
 
@@ -55,7 +56,7 @@ void	update_transformed_map(t_fdf *fdf)
 {
 	int	i;
 
-	printf("camx: %f, camy: %f, camz: %f.\n", fdf->camera_pos.x, fdf->camera_pos.y, fdf->camera_pos.z);
+	// printf("camx: %f, camy: %f, camz: %f.\n", fdf->camera_pos.x, fdf->camera_pos.y, fdf->camera_pos.z);
 	i = 0;
 	while (i < fdf->map_width * fdf->map_height)
 	{
