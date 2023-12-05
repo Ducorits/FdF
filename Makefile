@@ -43,10 +43,10 @@ INC		= -I ./include -I ./MLX42/include/MLX42
 
 LIBFT	= libft/libft.a
 
-MLX		= MLX42/libmlx42.a
+MLX		= MLX42/build/libmlx42.a
 
 ifeq ($(UNAME),Linux)
-GLFW	= -lglfw
+GLFW	= -ldl -lglfw -pthread -lm
 else
 GLFW	= libglfw3.a -framework Cocoa -framework OpenGL -framework IOKit
 endif
@@ -96,7 +96,8 @@ $(LIBFT):
 	@cp libft/include/libft.h include/libft.h
 
 $(MLX):
-	@make -C MLX42/
+	@cmake -S MLX42/ -B MLX42/build
+	@make -C MLX42/build
 
 clean:
 	@rm -rf obj
@@ -108,7 +109,7 @@ fclean: clean
 
 depclean:
 	@make -C libft/ fclean
-	@make -C MLX42/ fclean
+	@make -C MLX42/build clean
 
 re: heading fclean comp
 

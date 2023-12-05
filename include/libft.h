@@ -6,7 +6,7 @@
 /*   By: dritsema <dritsema@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/06/07 12:51:11 by dritsema      #+#    #+#                 */
-/*   Updated: 2022/08/21 18:42:15 by dritsema      ########   odam.nl         */
+/*   Updated: 2022/09/16 10:27:07 by dritsema      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,11 @@ void			*ft_memmove(void *dst, const void *src, size_t len);
  * @param len The amount of bytes to write.
  * @return The pointer b. */
 void			*ft_memset(void *b, int c, size_t len);
+
+// ############### Message #################
+
+// @brief Prints "Error" on the screen
+void			ft_error(void);
 
 // ############# Miscellaneous #############
 
